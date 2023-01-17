@@ -1,0 +1,80 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/DatasetExample",
+    "definitions": {
+        "DatasetExample": {
+            "properties": {
+                "dataset_id": {
+                    "type": "string"
+                },
+                "datasetId": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "created": {
+                    "$ref": "#/definitions/ord.RecordEvent",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Dataset Example",
+            "description": "Metadata for an example of using a Dataset. For example, a DatasetExample might include a URL for a colab/jupyter notebook or a blog post showing how to use the Dataset in a downstream machine learning application."
+        },
+        "ord.DateTime": {
+            "properties": {
+                "value": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Date Time"
+        },
+        "ord.Person": {
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "orcid": {
+                    "type": "string"
+                },
+                "organization": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Person"
+        },
+        "ord.RecordEvent": {
+            "properties": {
+                "time": {
+                    "$ref": "#/definitions/ord.DateTime",
+                    "additionalProperties": true
+                },
+                "person": {
+                    "$ref": "#/definitions/ord.Person",
+                    "additionalProperties": true
+                },
+                "details": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Record Event"
+        }
+    }
+}

@@ -1,0 +1,2715 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$ref": "#/definitions/Dataset",
+    "definitions": {
+        "Dataset": {
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "reactions": {
+                    "items": {
+                        "$ref": "#/definitions/ord.Reaction"
+                    },
+                    "type": "array",
+                    "description": "The Dataset is specified by either:   * a list of Reactions   * a list of Reaction IDs from existing datasets Note that these are mutually exclusive. List of Reaction messages that are part of this dataset."
+                },
+                "reaction_ids": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "description": "List of Reaction IDs that are part of this dataset. This is designed for creating Datasets that are composed of subsets of Reactions from existing datasets. For example, a collection of all reactions of a certain type across multiple datasets."
+                },
+                "reactionIds": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "description": "List of Reaction IDs that are part of this dataset. This is designed for creating Datasets that are composed of subsets of Reactions from existing datasets. For example, a collection of all reactions of a certain type across multiple datasets."
+                },
+                "dataset_id": {
+                    "type": "string",
+                    "description": "Dataset ID assigned during the submission process."
+                },
+                "datasetId": {
+                    "type": "string",
+                    "description": "Dataset ID assigned during the submission process."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Dataset",
+            "description": "A Dataset is a collection of Reaction message that is used to group reactions together into a logical unit along with relevant metadata or scripts for understanding and using the data."
+        },
+        "ord.Amount": {
+            "properties": {
+                "mass": {
+                    "$ref": "#/definitions/ord.Mass",
+                    "additionalProperties": true
+                },
+                "moles": {
+                    "$ref": "#/definitions/ord.Moles",
+                    "additionalProperties": true
+                },
+                "volume": {
+                    "$ref": "#/definitions/ord.Volume",
+                    "additionalProperties": true
+                },
+                "unmeasured": {
+                    "$ref": "#/definitions/ord.UnmeasuredAmount",
+                    "additionalProperties": true
+                },
+                "volume_includes_solutes": {
+                    "type": "boolean",
+                    "description": "Whether the volume measurement refers to the pure substance or to the total volume of the reaction input. An example of when this field should be TRUE is when stock solutions are prepared by adding solvent to a volumetric flask already containing solute(s)."
+                },
+                "volumeIncludesSolutes": {
+                    "type": "boolean",
+                    "description": "Whether the volume measurement refers to the pure substance or to the total volume of the reaction input. An example of when this field should be TRUE is when stock solutions are prepared by adding solvent to a volumetric flask already containing solute(s)."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "mass"
+                    ]
+                },
+                {
+                    "required": [
+                        "moles"
+                    ]
+                },
+                {
+                    "required": [
+                        "volume"
+                    ]
+                },
+                {
+                    "required": [
+                        "unmeasured"
+                    ]
+                },
+                {
+                    "required": [
+                        "volume_includes_solutes"
+                    ]
+                }
+            ],
+            "title": "Amount",
+            "description": "* The quantitative amount of a Compound used in a particular reaction. Compounds added in their pure form should have their value defined by mass, moles, or volume. Compounds prepared as solutions should be defined in terms of their volume. Compounds prepared on solid supports should define the total mass/volume including the support."
+        },
+        "ord.Analysis": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "LC",
+                        "GC",
+                        "IR",
+                        "NMR_1H",
+                        "NMR_13C",
+                        "NMR_OTHER",
+                        "MP",
+                        "UV",
+                        "TLC",
+                        "MS",
+                        "HRMS",
+                        "MSMS",
+                        "WEIGHT",
+                        "LCMS",
+                        "GCMS",
+                        "ELSD",
+                        "CD",
+                        "SFC",
+                        "EPR",
+                        "XRD",
+                        "RAMAN",
+                        "ED"
+                    ],
+                    "type": "string",
+                    "title": "Analysis Type",
+                    "description": "TODO(ccoley): Solicit more feedback from experimentalists"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Any details about analysis (e.g., NMR type, columns, gradients)."
+                },
+                "chmo_id": {
+                    "type": "integer",
+                    "description": "Whether this analysis is intended to be of an isolated species. If false RSC Chemical Methods Ontology ID to define the analytical method with greater specificity. Defined at https://github.com/rsc-ontologies/rsc-cmo."
+                },
+                "chmoId": {
+                    "type": "integer",
+                    "description": "Whether this analysis is intended to be of an isolated species. If false RSC Chemical Methods Ontology ID to define the analytical method with greater specificity. Defined at https://github.com/rsc-ontologies/rsc-cmo."
+                },
+                "is_of_isolated_species": {
+                    "type": "boolean",
+                    "description": "or unspecified, the assumption is that it is of a crude product mixture (or a partially worked-up product mixture)."
+                },
+                "isOfIsolatedSpecies": {
+                    "type": "boolean",
+                    "description": "or unspecified, the assumption is that it is of a crude product mixture (or a partially worked-up product mixture)."
+                },
+                "data": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ord.Data",
+                        "additionalProperties": true
+                    },
+                    "type": "object",
+                    "description": "Data values or files (raw, processed, or annotated)."
+                },
+                "instrument_manufacturer": {
+                    "type": "string"
+                },
+                "instrumentManufacturer": {
+                    "type": "string"
+                },
+                "instrument_last_calibrated": {
+                    "$ref": "#/definitions/ord.DateTime",
+                    "additionalProperties": true
+                },
+                "instrumentLastCalibrated": {
+                    "$ref": "#/definitions/ord.DateTime",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "is_of_isolated_species"
+                    ]
+                }
+            ],
+            "title": "Analysis"
+        },
+        "ord.Compound": {
+            "properties": {
+                "identifiers": {
+                    "items": {
+                        "$ref": "#/definitions/ord.CompoundIdentifier"
+                    },
+                    "type": "array",
+                    "description": "Set of identifiers used to uniquely define this compound. Solutions or mixed compounds should use the NAME identifier and list all constituent compounds in the \"components\" field."
+                },
+                "amount": {
+                    "$ref": "#/definitions/ord.Amount",
+                    "additionalProperties": true
+                },
+                "reaction_role": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "REACTANT",
+                        "REAGENT",
+                        "SOLVENT",
+                        "CATALYST",
+                        "WORKUP",
+                        "INTERNAL_STANDARD",
+                        "AUTHENTIC_STANDARD",
+                        "PRODUCT"
+                    ],
+                    "type": "string",
+                    "title": "Reaction Role Type"
+                },
+                "reactionRole": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "REACTANT",
+                        "REAGENT",
+                        "SOLVENT",
+                        "CATALYST",
+                        "WORKUP",
+                        "INTERNAL_STANDARD",
+                        "AUTHENTIC_STANDARD",
+                        "PRODUCT"
+                    ],
+                    "type": "string",
+                    "title": "Reaction Role Type"
+                },
+                "is_limiting": {
+                    "type": "boolean",
+                    "description": "Whether this species is intended to be a limiting reactant."
+                },
+                "isLimiting": {
+                    "type": "boolean",
+                    "description": "Whether this species is intended to be a limiting reactant."
+                },
+                "preparations": {
+                    "items": {
+                        "$ref": "#/definitions/ord.CompoundPreparation"
+                    },
+                    "type": "array"
+                },
+                "source": {
+                    "$ref": "#/definitions/ord.Compound.Source",
+                    "additionalProperties": true
+                },
+                "features": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ord.Data",
+                        "additionalProperties": true
+                    },
+                    "type": "object",
+                    "description": "Compounds can accommodate any number of features. These may include simple properties of the compound (e.g., molecular weight), heuristic estimates of physical properties (e.g., ClogP), optimized geometries (e.g., through DFT), and calculated stereoelectronic descriptors."
+                },
+                "analyses": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ord.Analysis",
+                        "additionalProperties": true
+                    },
+                    "type": "object",
+                    "description": "Compounds may be assayed for quality control; analytical data should be defined in the analyses map."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "is_limiting"
+                    ]
+                }
+            ],
+            "title": "Compound",
+            "description": "* A Compound defines both the identity of a pure species and a quantitative amount (mass, moles, volume). For compounds used in inputs, details can be provided about how it was prepared and from where it was purchased."
+        },
+        "ord.Compound.Source": {
+            "properties": {
+                "vendor": {
+                    "type": "string",
+                    "description": "Name of the vendor or supplier the compound was purchased from."
+                },
+                "catalog_id": {
+                    "type": "string",
+                    "description": "Compound ID in the vendor database or catalog."
+                },
+                "catalogId": {
+                    "type": "string",
+                    "description": "Compound ID in the vendor database or catalog."
+                },
+                "lot": {
+                    "type": "string",
+                    "description": "Batch/lot identification."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Source"
+        },
+        "ord.CompoundIdentifier": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "SMILES",
+                        "INCHI",
+                        "MOLBLOCK",
+                        "IUPAC_NAME",
+                        "NAME",
+                        "CAS_NUMBER",
+                        "PUBCHEM_CID",
+                        "CHEMSPIDER_ID",
+                        "CXSMILES",
+                        "INCHI_KEY",
+                        "XYZ",
+                        "UNIPROT_ID",
+                        "PDB_ID",
+                        "AMINO_ACID_SEQUENCE",
+                        "HELM"
+                    ],
+                    "type": "string",
+                    "title": "Compound Identifier Type"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "Value of the compound identifier; certain types (e.g., PUBCHEM_CID) may cast the string as an integer for downstream processing and validation."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Compound Identifier",
+            "description": "* Compound identifiers uniquely define a single (pure) chemical species. While we encourage the use of SMILES strings, these do not work well in all cases (e.g., handling tautomerism, axial chirality). Multiple identifiers may be specified for a single compound to avoid ambiguity. We discourage chemicals from being defined only by a name. For compounds that are prepared or isolated as salts, the identifier should include specification of which salt."
+        },
+        "ord.CompoundPreparation": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "NONE",
+                        "REPURIFIED",
+                        "SPARGED",
+                        "DRIED",
+                        "SYNTHESIZED"
+                    ],
+                    "type": "string",
+                    "title": "Compound Preparation Type"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Full description of how the received compound was prepared."
+                },
+                "reaction_id": {
+                    "type": "string",
+                    "description": "The ID of the reaction that produced this species. Note that this ID must be defined within the same Dataset; cross-references cannot exist between multiple datasets. Only to be used with the SYNTHESIZED preparation type. The referenced reaction should not merely be the procedure that was followed/reproduced, but the *exact* physical experiment."
+                },
+                "reactionId": {
+                    "type": "string",
+                    "description": "The ID of the reaction that produced this species. Note that this ID must be defined within the same Dataset; cross-references cannot exist between multiple datasets. Only to be used with the SYNTHESIZED preparation type. The referenced reaction should not merely be the procedure that was followed/reproduced, but the *exact* physical experiment."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Compound Preparation",
+            "description": "* Compounds may undergo additional preparation before being used in a reaction after being received from a supplier or vendor. We encourage the use of the 'preparation' enum when possible, even if the description is an oversimplification of the full procedure, which can be described in the 'details' field."
+        },
+        "ord.CrudeComponent": {
+            "properties": {
+                "reaction_id": {
+                    "type": "string",
+                    "description": "The ID of the reaction that produced the crude. Note that this ID must be defined within the same Dataset; cross-references cannot exist between multiple datasets."
+                },
+                "reactionId": {
+                    "type": "string",
+                    "description": "The ID of the reaction that produced the crude. Note that this ID must be defined within the same Dataset; cross-references cannot exist between multiple datasets."
+                },
+                "includes_workup": {
+                    "type": "boolean",
+                    "description": "Whether that reaction's workup and purification steps were performed prior to addition."
+                },
+                "includesWorkup": {
+                    "type": "boolean",
+                    "description": "Whether that reaction's workup and purification steps were performed prior to addition."
+                },
+                "has_derived_amount": {
+                    "type": "boolean",
+                    "description": "Whether the amount added in this reaction should be inferred from the previous step, i.e, if everything was added."
+                },
+                "hasDerivedAmount": {
+                    "type": "boolean",
+                    "description": "Whether the amount added in this reaction should be inferred from the previous step, i.e, if everything was added."
+                },
+                "amount": {
+                    "$ref": "#/definitions/ord.Amount",
+                    "additionalProperties": true,
+                    "description": "If the entire crude mixture was not used, need to specify an amount."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "includes_workup"
+                    ]
+                },
+                {
+                    "required": [
+                        "has_derived_amount"
+                    ]
+                }
+            ],
+            "title": "Crude Component",
+            "description": "* Crude components are used in multi-step or multi-stage reactions (no strong distinction is made here) where one synthetic process must be described by multiple \"Reaction\" messages. In these cases, we often carry the crude product from one step/stage into the next. This message is only to be used when there is not complete isolation of an intermediate molecule; if there is complete isolation, then a regular Compound should be used with the SYNTHESIED preparation type."
+        },
+        "ord.Current": {
+            "properties": {
+                "value": {
+                    "type": "number"
+                },
+                "precision": {
+                    "type": "number",
+                    "description": "Precision of the measurement (with the same units as `value`)."
+                },
+                "units": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "AMPERE",
+                        "MILLIAMPERE"
+                    ],
+                    "type": "string",
+                    "title": "Current Unit"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "value"
+                    ]
+                },
+                {
+                    "required": [
+                        "precision"
+                    ]
+                }
+            ],
+            "title": "Current"
+        },
+        "ord.Data": {
+            "properties": {
+                "float_value": {
+                    "type": "number"
+                },
+                "floatValue": {
+                    "type": "number"
+                },
+                "integer_value": {
+                    "type": "integer"
+                },
+                "integerValue": {
+                    "type": "integer"
+                },
+                "bytes_value": {
+                    "type": "string",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "bytesValue": {
+                    "type": "string",
+                    "format": "binary",
+                    "binaryEncoding": "base64"
+                },
+                "string_value": {
+                    "type": "string"
+                },
+                "stringValue": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string",
+                    "description": "URL for data stored elsewhere."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of these data (but avoid redundancy with map keys)."
+                },
+                "format": {
+                    "type": "string",
+                    "description": "Description of the file format (if applicable); usually the file extension. For example, 'png' or 'tiff' for images. If empty, we assume string data."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "float_value"
+                    ]
+                },
+                {
+                    "required": [
+                        "integer_value"
+                    ]
+                },
+                {
+                    "required": [
+                        "bytes_value"
+                    ]
+                },
+                {
+                    "required": [
+                        "string_value"
+                    ]
+                },
+                {
+                    "required": [
+                        "url"
+                    ]
+                }
+            ],
+            "title": "Data",
+            "description": "Data is a container for arbitrary data."
+        },
+        "ord.DateTime": {
+            "properties": {
+                "value": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Date Time"
+        },
+        "ord.ElectrochemistryConditions": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "CONSTANT_CURRENT",
+                        "CONSTANT_VOLTAGE"
+                    ],
+                    "type": "string",
+                    "title": "Electrochemistry Type"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "current": {
+                    "$ref": "#/definitions/ord.Current",
+                    "additionalProperties": true
+                },
+                "voltage": {
+                    "$ref": "#/definitions/ord.Voltage",
+                    "additionalProperties": true
+                },
+                "anode_material": {
+                    "type": "string"
+                },
+                "anodeMaterial": {
+                    "type": "string"
+                },
+                "cathode_material": {
+                    "type": "string"
+                },
+                "cathodeMaterial": {
+                    "type": "string"
+                },
+                "electrode_separation": {
+                    "$ref": "#/definitions/ord.Length",
+                    "additionalProperties": true
+                },
+                "electrodeSeparation": {
+                    "$ref": "#/definitions/ord.Length",
+                    "additionalProperties": true
+                },
+                "measurements": {
+                    "items": {
+                        "$ref": "#/definitions/ord.ElectrochemistryConditions.ElectrochemistryMeasurement"
+                    },
+                    "type": "array"
+                },
+                "cell": {
+                    "$ref": "#/definitions/ord.ElectrochemistryConditions.ElectrochemistryCell",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Electrochemistry Conditions"
+        },
+        "ord.ElectrochemistryConditions.ElectrochemistryCell": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "DIVIDED_CELL",
+                        "UNDIVIDED_CELL"
+                    ],
+                    "type": "string",
+                    "title": "Electrochemistry Cell Type"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Include electrochemistry reaction-ware specifications, e.g., home-made vs. commercial cell and details."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Electrochemistry Cell"
+        },
+        "ord.ElectrochemistryConditions.ElectrochemistryMeasurement": {
+            "properties": {
+                "time": {
+                    "$ref": "#/definitions/ord.Time",
+                    "additionalProperties": true
+                },
+                "current": {
+                    "$ref": "#/definitions/ord.Current",
+                    "additionalProperties": true
+                },
+                "voltage": {
+                    "$ref": "#/definitions/ord.Voltage",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "current"
+                    ]
+                },
+                {
+                    "required": [
+                        "voltage"
+                    ]
+                }
+            ],
+            "title": "Electrochemistry Measurement"
+        },
+        "ord.FloatValue": {
+            "properties": {
+                "value": {
+                    "type": "number"
+                },
+                "precision": {
+                    "type": "number",
+                    "description": "Precision of the measurement (with the same units as `value`)."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "value"
+                    ]
+                },
+                {
+                    "required": [
+                        "precision"
+                    ]
+                }
+            ],
+            "title": "Float Value",
+            "description": "Wrapper for floats to include a precision."
+        },
+        "ord.FlowConditions": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "PLUG_FLOW_REACTOR",
+                        "CONTINUOUS_STIRRED_TANK_REACTOR",
+                        "PACKED_BED_REACTOR"
+                    ],
+                    "type": "string",
+                    "title": "Flow Type"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "pump_type": {
+                    "type": "string"
+                },
+                "pumpType": {
+                    "type": "string"
+                },
+                "tubing": {
+                    "$ref": "#/definitions/ord.FlowConditions.Tubing",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Flow Conditions"
+        },
+        "ord.FlowConditions.Tubing": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "STEEL",
+                        "COPPER",
+                        "PFA",
+                        "FEP",
+                        "TEFLONAF",
+                        "PTFE",
+                        "GLASS",
+                        "QUARTZ",
+                        "SILICON",
+                        "PDMS"
+                    ],
+                    "type": "string",
+                    "title": "Tubing Type"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "diameter": {
+                    "$ref": "#/definitions/ord.Length",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Tubing"
+        },
+        "ord.FlowRate": {
+            "properties": {
+                "value": {
+                    "type": "number"
+                },
+                "precision": {
+                    "type": "number",
+                    "description": "Precision of the measurement (with the same units as `value`)."
+                },
+                "units": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "MICROLITER_PER_MINUTE",
+                        "MICROLITER_PER_SECOND",
+                        "MILLILITER_PER_MINUTE",
+                        "MILLILITER_PER_SECOND",
+                        "MICROLITER_PER_HOUR"
+                    ],
+                    "type": "string",
+                    "title": "Flow Rate Unit"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "value"
+                    ]
+                },
+                {
+                    "required": [
+                        "precision"
+                    ]
+                }
+            ],
+            "title": "Flow Rate"
+        },
+        "ord.IlluminationConditions": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "AMBIENT",
+                        "DARK",
+                        "LED",
+                        "HALOGEN_LAMP",
+                        "DEUTERIUM_LAMP",
+                        "SOLAR_SIMULATOR",
+                        "BROAD_SPECTRUM"
+                    ],
+                    "type": "string",
+                    "title": "Illumination Type"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "E.g. manufacturer, setup specifications, etc."
+                },
+                "peak_wavelength": {
+                    "$ref": "#/definitions/ord.Wavelength",
+                    "additionalProperties": true
+                },
+                "peakWavelength": {
+                    "$ref": "#/definitions/ord.Wavelength",
+                    "additionalProperties": true
+                },
+                "color": {
+                    "type": "string"
+                },
+                "distance_to_vessel": {
+                    "$ref": "#/definitions/ord.Length",
+                    "additionalProperties": true
+                },
+                "distanceToVessel": {
+                    "$ref": "#/definitions/ord.Length",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Illumination Conditions"
+        },
+        "ord.Length": {
+            "properties": {
+                "value": {
+                    "type": "number"
+                },
+                "precision": {
+                    "type": "number",
+                    "description": "Precision of the measurement (with the same units as `value`)."
+                },
+                "units": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CENTIMETER",
+                        "MILLIMETER",
+                        "METER",
+                        "INCH",
+                        "FOOT"
+                    ],
+                    "type": "string",
+                    "title": "Length Unit"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "value"
+                    ]
+                },
+                {
+                    "required": [
+                        "precision"
+                    ]
+                }
+            ],
+            "title": "Length"
+        },
+        "ord.Mass": {
+            "properties": {
+                "value": {
+                    "type": "number"
+                },
+                "precision": {
+                    "type": "number",
+                    "description": "Precision of the measurement (with the same units as `value`)."
+                },
+                "units": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "KILOGRAM",
+                        "GRAM",
+                        "MILLIGRAM",
+                        "MICROGRAM"
+                    ],
+                    "type": "string",
+                    "title": "Mass Unit"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "value"
+                    ]
+                },
+                {
+                    "required": [
+                        "precision"
+                    ]
+                }
+            ],
+            "title": "Mass"
+        },
+        "ord.Moles": {
+            "properties": {
+                "value": {
+                    "type": "number"
+                },
+                "precision": {
+                    "type": "number",
+                    "description": "Precision of the measurement (with the same units as `value`)."
+                },
+                "units": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "MOLE",
+                        "MILLIMOLE",
+                        "MICROMOLE",
+                        "NANOMOLE"
+                    ],
+                    "type": "string",
+                    "title": "Moles Unit"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "value"
+                    ]
+                },
+                {
+                    "required": [
+                        "precision"
+                    ]
+                }
+            ],
+            "title": "Moles"
+        },
+        "ord.Percentage": {
+            "properties": {
+                "value": {
+                    "type": "number"
+                },
+                "precision": {
+                    "type": "number",
+                    "description": "Precision of the measurement (with the same units as `value`)."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "value"
+                    ]
+                },
+                {
+                    "required": [
+                        "precision"
+                    ]
+                }
+            ],
+            "title": "Percentage",
+            "description": "Used for things like conversion and yield."
+        },
+        "ord.Person": {
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "orcid": {
+                    "type": "string"
+                },
+                "organization": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Person"
+        },
+        "ord.Pressure": {
+            "properties": {
+                "value": {
+                    "type": "number"
+                },
+                "precision": {
+                    "type": "number",
+                    "description": "Precision of the measurement (with the same units as `value`)."
+                },
+                "units": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "BAR",
+                        "ATMOSPHERE",
+                        "PSI",
+                        "KPSI",
+                        "PASCAL",
+                        "KILOPASCAL",
+                        "TORR",
+                        "MM_HG"
+                    ],
+                    "type": "string",
+                    "title": "Pressure Unit"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "value"
+                    ]
+                },
+                {
+                    "required": [
+                        "precision"
+                    ]
+                }
+            ],
+            "title": "Pressure"
+        },
+        "ord.PressureConditions": {
+            "properties": {
+                "control": {
+                    "$ref": "#/definitions/ord.PressureConditions.PressureControl",
+                    "additionalProperties": true
+                },
+                "setpoint": {
+                    "$ref": "#/definitions/ord.Pressure",
+                    "additionalProperties": true
+                },
+                "atmosphere": {
+                    "$ref": "#/definitions/ord.PressureConditions.Atmosphere",
+                    "additionalProperties": true
+                },
+                "measurements": {
+                    "items": {
+                        "$ref": "#/definitions/ord.PressureConditions.PressureMeasurement"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Pressure Conditions"
+        },
+        "ord.PressureConditions.Atmosphere": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "AIR",
+                        "NITROGEN",
+                        "ARGON",
+                        "OXYGEN",
+                        "HYDROGEN",
+                        "CARBON_MONOXIDE",
+                        "CARBON_DIOXIDE",
+                        "METHANE",
+                        "AMMONIA",
+                        "OZONE",
+                        "ETHYLENE",
+                        "ACETYLENE"
+                    ],
+                    "type": "string",
+                    "title": "Atmosphere Type"
+                },
+                "details": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Atmosphere"
+        },
+        "ord.PressureConditions.PressureControl": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "AMBIENT",
+                        "SLIGHT_POSITIVE",
+                        "SEALED",
+                        "PRESSURIZED"
+                    ],
+                    "type": "string",
+                    "title": "Pressure Control Type"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Include means of pressure control in \"Attachment\" when appropriate."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Pressure Control"
+        },
+        "ord.PressureConditions.PressureMeasurement": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "PRESSURE_TRANSDUCER"
+                    ],
+                    "type": "string",
+                    "title": "Pressure Measurement Type",
+                    "description": "TODO(ccoley) get input on how to expand this enum, among others"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "time": {
+                    "$ref": "#/definitions/ord.Time",
+                    "additionalProperties": true
+                },
+                "pressure": {
+                    "$ref": "#/definitions/ord.Pressure",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Pressure Measurement"
+        },
+        "ord.ProductCompound": {
+            "properties": {
+                "identifiers": {
+                    "items": {
+                        "$ref": "#/definitions/ord.CompoundIdentifier"
+                    },
+                    "type": "array",
+                    "description": "The identity of the product compound."
+                },
+                "is_desired_product": {
+                    "type": "boolean"
+                },
+                "isDesiredProduct": {
+                    "type": "boolean"
+                },
+                "measurements": {
+                    "items": {
+                        "$ref": "#/definitions/ord.ProductMeasurement"
+                    },
+                    "type": "array",
+                    "description": "Each ProductMeasurement describes a connection between this product and an Analysis. This includes information about how the identity of the product was confirmed. It also contains quantitative standardized performance metrics like quantitative yield as well as unstandardized (and unnormalized) metrics like an integrated UV peak area."
+                },
+                "isolated_color": {
+                    "type": "string"
+                },
+                "isolatedColor": {
+                    "type": "string"
+                },
+                "texture": {
+                    "$ref": "#/definitions/ord.ProductCompound.Texture",
+                    "additionalProperties": true
+                },
+                "features": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ord.Data",
+                        "additionalProperties": true
+                    },
+                    "type": "object",
+                    "description": "Any features (e.g., calculated descriptors) of the product compound."
+                },
+                "reaction_role": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "REACTANT",
+                        "REAGENT",
+                        "SOLVENT",
+                        "CATALYST",
+                        "WORKUP",
+                        "INTERNAL_STANDARD",
+                        "AUTHENTIC_STANDARD",
+                        "PRODUCT"
+                    ],
+                    "type": "string",
+                    "title": "Reaction Role Type"
+                },
+                "reactionRole": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "REACTANT",
+                        "REAGENT",
+                        "SOLVENT",
+                        "CATALYST",
+                        "WORKUP",
+                        "INTERNAL_STANDARD",
+                        "AUTHENTIC_STANDARD",
+                        "PRODUCT"
+                    ],
+                    "type": "string",
+                    "title": "Reaction Role Type"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "is_desired_product"
+                    ]
+                }
+            ],
+            "title": "Product Compound"
+        },
+        "ord.ProductCompound.Texture": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "POWDER",
+                        "CRYSTAL",
+                        "OIL",
+                        "AMORPHOUS_SOLID",
+                        "FOAM",
+                        "WAX",
+                        "SEMI_SOLID",
+                        "SOLID",
+                        "LIQUID"
+                    ],
+                    "type": "string",
+                    "title": "Texture Type"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Specify texture forms such as \"fine needles\" for CRYSTAL, \"viscous\" for OIL, etc."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Texture"
+        },
+        "ord.ProductMeasurement": {
+            "properties": {
+                "analysis_key": {
+                    "type": "string",
+                    "description": "The key of the analysis used to calculate this product-specific measurement; this should cross-reference the outcome.analyses map."
+                },
+                "analysisKey": {
+                    "type": "string",
+                    "description": "The key of the analysis used to calculate this product-specific measurement; this should cross-reference the outcome.analyses map."
+                },
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "IDENTITY",
+                        "YIELD",
+                        "SELECTIVITY",
+                        "PURITY",
+                        "AREA",
+                        "COUNTS",
+                        "INTENSITY",
+                        "AMOUNT"
+                    ],
+                    "type": "string",
+                    "title": "Product Measurement Type",
+                    "description": "The type of measurement. While each measurement is associated with a specific product compound and is cross-referenced to an analysis through the analysis_key, there is still ambiguity as to what a measurement truly represents. For example, an LCMS analysis can lead to a quantitative YIELD if an authentic standard and internal standard are used to obtain a calibration curve; sometimes, it is only used to obtain an uncalibrated \"yield\" that is better described as an peak AREA or integrated EIC COUNTS. Understanding the fidelity of the approach taken to measure the performance of a reaction is important for downstream learning tasks. Note that this message is intended to capture product-specific data extracted from an analysis. The raw analytical data (e.g., a full NMR spectrum) should be defined in an Analysis message. Even analyses of ostensibly pure compounds (e.g., HRMS) should have their results defined in the Analysis message (with is_of_isolated_species set to True) but with a cross-reference to a product via a ProductMessage (e.g., of type IDENTITY for HRMS)."
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Additional information about the measurement and, in particular, how it was calculated if that is ambiguous given the analysis type."
+                },
+                "uses_internal_standard": {
+                    "type": "boolean",
+                    "description": "Whether an internal standard was used for this measurement to normalize it, e.g., for quantification of yield or relative peak area."
+                },
+                "usesInternalStandard": {
+                    "type": "boolean",
+                    "description": "Whether an internal standard was used for this measurement to normalize it, e.g., for quantification of yield or relative peak area."
+                },
+                "is_normalized": {
+                    "type": "boolean",
+                    "description": "Whether the reported measurement has already been normalized to the internal standard, if an internal standard was used."
+                },
+                "isNormalized": {
+                    "type": "boolean",
+                    "description": "Whether the reported measurement has already been normalized to the internal standard, if an internal standard was used."
+                },
+                "uses_authentic_standard": {
+                    "type": "boolean",
+                    "description": "Whether an authentic sample of a material was used for callibrating an analytical technique, e.g., for product identification by LCMS. \"Authentic\" refers to a sample of a compound whose structure has been proven by the accepted means (1H NMR, 13C NMR, IR, HRMS), and is now being used as a comparison for other analytical methods."
+                },
+                "usesAuthenticStandard": {
+                    "type": "boolean",
+                    "description": "Whether an authentic sample of a material was used for callibrating an analytical technique, e.g., for product identification by LCMS. \"Authentic\" refers to a sample of a compound whose structure has been proven by the accepted means (1H NMR, 13C NMR, IR, HRMS), and is now being used as a comparison for other analytical methods."
+                },
+                "authentic_standard": {
+                    "$ref": "#/definitions/ord.Compound",
+                    "additionalProperties": true,
+                    "description": "Details about the authentic standard used, optionally including information about its precise salt form and source/vendor."
+                },
+                "authenticStandard": {
+                    "$ref": "#/definitions/ord.Compound",
+                    "additionalProperties": true,
+                    "description": "Details about the authentic standard used, optionally including information about its precise salt form and source/vendor."
+                },
+                "percentage": {
+                    "$ref": "#/definitions/ord.Percentage",
+                    "additionalProperties": true,
+                    "description": "A percentage value and its precision, as should be used for yields, purities, and some selectivities like EE. Note that a 50% yield corresponds to a percentage.value of 50 and not 0.5."
+                },
+                "float_value": {
+                    "$ref": "#/definitions/ord.FloatValue",
+                    "additionalProperties": true,
+                    "description": "A float value and its precision, as should be used for areas, counts, intensities, and some selectivities."
+                },
+                "floatValue": {
+                    "$ref": "#/definitions/ord.FloatValue",
+                    "additionalProperties": true,
+                    "description": "A float value and its precision, as should be used for areas, counts, intensities, and some selectivities."
+                },
+                "string_value": {
+                    "type": "string",
+                    "description": "A string value, as should be used for measurements that cannot be captured as floats or percentages. For example, complex selectivities such as \"2:1:1\". Note that in the case of a 2:1:1 selectivity, however, it is preferable to define the 3 distinct products specifically and record the 3 product-specific measurements (e.g., peak areas) that were used to derive the \"2:1:1\" summary statistic."
+                },
+                "stringValue": {
+                    "type": "string",
+                    "description": "A string value, as should be used for measurements that cannot be captured as floats or percentages. For example, complex selectivities such as \"2:1:1\". Note that in the case of a 2:1:1 selectivity, however, it is preferable to define the 3 distinct products specifically and record the 3 product-specific measurements (e.g., peak areas) that were used to derive the \"2:1:1\" summary statistic."
+                },
+                "amount": {
+                    "$ref": "#/definitions/ord.Amount",
+                    "additionalProperties": true,
+                    "description": "Quantitative amount of this product. Measurements of this type should be linked to an analysis of type WEIGHT. Separate ProductMeasurement entries should be used to capture multiple amounts, such as mass and moles. However, since moles is derived from mass, recording just the mass is fine."
+                },
+                "retention_time": {
+                    "$ref": "#/definitions/ord.Time",
+                    "additionalProperties": true,
+                    "description": "A time to be used only when specifying the retention time at which a peak area or intensity was calculated, e.g., as in LC, LCMS, GC, or GCMS."
+                },
+                "retentionTime": {
+                    "$ref": "#/definitions/ord.Time",
+                    "additionalProperties": true,
+                    "description": "A time to be used only when specifying the retention time at which a peak area or intensity was calculated, e.g., as in LC, LCMS, GC, or GCMS."
+                },
+                "mass_spec_details": {
+                    "$ref": "#/definitions/ord.ProductMeasurement.MassSpecMeasurementDetails",
+                    "additionalProperties": true
+                },
+                "massSpecDetails": {
+                    "$ref": "#/definitions/ord.ProductMeasurement.MassSpecMeasurementDetails",
+                    "additionalProperties": true
+                },
+                "selectivity": {
+                    "$ref": "#/definitions/ord.ProductMeasurement.Selectivity",
+                    "additionalProperties": true
+                },
+                "wavelength": {
+                    "$ref": "#/definitions/ord.Wavelength",
+                    "additionalProperties": true,
+                    "description": "The wavelength used for e.g. LC quantification."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "uses_internal_standard"
+                    ]
+                },
+                {
+                    "required": [
+                        "is_normalized"
+                    ]
+                },
+                {
+                    "required": [
+                        "uses_authentic_standard"
+                    ]
+                },
+                {
+                    "required": [
+                        "percentage"
+                    ]
+                },
+                {
+                    "required": [
+                        "float_value"
+                    ]
+                },
+                {
+                    "required": [
+                        "string_value"
+                    ]
+                },
+                {
+                    "required": [
+                        "amount"
+                    ]
+                }
+            ],
+            "title": "Product Measurement"
+        },
+        "ord.ProductMeasurement.MassSpecMeasurementDetails": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "TIC",
+                        "TIC_POSITIVE",
+                        "TIC_NEGATIVE",
+                        "EIC"
+                    ],
+                    "type": "string",
+                    "title": "Mass Spec Measurement Type"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "tic_minimum_mz": {
+                    "type": "number",
+                    "description": "The lower bound of the m/z interval used to calculate the TIC counts."
+                },
+                "ticMinimumMz": {
+                    "type": "number",
+                    "description": "The lower bound of the m/z interval used to calculate the TIC counts."
+                },
+                "tic_maximum_mz": {
+                    "type": "number",
+                    "description": "The upper bound of the m/z interval used to calculate the TIC counts."
+                },
+                "ticMaximumMz": {
+                    "type": "number",
+                    "description": "The upper bound of the m/z interval used to calculate the TIC counts."
+                },
+                "eic_masses": {
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array",
+                    "description": "A list of m/z ratios that were used to calculate the peak area or intensity from an extracted ion chromatogram (EIC), e.g., from an LCMS analysis."
+                },
+                "eicMasses": {
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array",
+                    "description": "A list of m/z ratios that were used to calculate the peak area or intensity from an extracted ion chromatogram (EIC), e.g., from an LCMS analysis."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "tic_minimum_mz"
+                    ]
+                },
+                {
+                    "required": [
+                        "tic_maximum_mz"
+                    ]
+                }
+            ],
+            "title": "Mass Spec Measurement Details",
+            "description": "More details about how a particular performance metric (e.g., counts) was calculated from an analysis using mass spec. This includes distinguishing total ion current (TIC) counts from extracted ion chromatogram (EIC) counts and their corresponding mass ranges or masses."
+        },
+        "ord.ProductMeasurement.Selectivity": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "EE",
+                        "ER",
+                        "DR",
+                        "EZ",
+                        "ZE"
+                    ],
+                    "type": "string",
+                    "title": "Selectivity Type"
+                },
+                "details": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Selectivity",
+            "description": "The more specific type of selectivity that is being reported, e.g., EE, ER, DR, EZ, ZE. EZ, ER, and DR assume that any product labeled as desired is first in the calculation, whereas EZ and ZE ratios are calculated as written. Only to be used when the type is SELECTIVITY."
+        },
+        "ord.Reaction": {
+            "properties": {
+                "identifiers": {
+                    "items": {
+                        "$ref": "#/definitions/ord.ReactionIdentifier"
+                    },
+                    "type": "array"
+                },
+                "inputs": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ord.ReactionInput",
+                        "additionalProperties": true
+                    },
+                    "type": "object",
+                    "description": "List of pure substances or mixtures that were added to the reaction vessel. This is a map instead of a repeated field to simplify reaction templating through the use of keys. String keys are simple descriptions and are present only for convenience."
+                },
+                "setup": {
+                    "$ref": "#/definitions/ord.ReactionSetup",
+                    "additionalProperties": true,
+                    "description": "The reaction setup specifies how the reaction was prepared, e.g., whether it was automated, whether it was run in a glove box."
+                },
+                "conditions": {
+                    "$ref": "#/definitions/ord.ReactionConditions",
+                    "additionalProperties": true,
+                    "description": "Reaction conditions predominantly include temperature, stirring, and pressure conditions, but also allow specification of flow, photochemistry, and electrochemistry conditions."
+                },
+                "notes": {
+                    "$ref": "#/definitions/ord.ReactionNotes",
+                    "additionalProperties": true,
+                    "description": "Reaction notes largely pertain to safety considerations."
+                },
+                "observations": {
+                    "items": {
+                        "$ref": "#/definitions/ord.ReactionObservation"
+                    },
+                    "type": "array"
+                },
+                "workups": {
+                    "items": {
+                        "$ref": "#/definitions/ord.ReactionWorkup"
+                    },
+                    "type": "array",
+                    "description": "Workup steps are listed in the order they are performed."
+                },
+                "outcomes": {
+                    "items": {
+                        "$ref": "#/definitions/ord.ReactionOutcome"
+                    },
+                    "type": "array",
+                    "description": "Each reaction outcome contains all analyses and confirmed/expected product structures at a particular reaction time."
+                },
+                "provenance": {
+                    "$ref": "#/definitions/ord.ReactionProvenance",
+                    "additionalProperties": true,
+                    "description": "Provenance contains details of the experimenter and record writer."
+                },
+                "reaction_id": {
+                    "type": "string",
+                    "description": "Official ID for this reaction in the Open Reaction Database."
+                },
+                "reactionId": {
+                    "type": "string",
+                    "description": "Official ID for this reaction in the Open Reaction Database."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Reaction",
+            "description": "* Throughout this schema, we introduce enums to encourage consistency in nomenclature and to avoid unnecessary downstream data processing that would otherwise be required to consolidate equivalent entries. However, we do not wish to restrict what users are able to specify if their synthesis does not fit cleanly into a pre-existing enum field. For that reason, many enums contain a CUSTOM field, which must be accompanied by setting the 'details' field, where appropriate). NOTE(kearnes): In many places, we deliberately violate the style guide for enums by nesting instead of prefixing; this is not done lightly. The primary consideration is API consistency and the ability to use unqualified strings as enum values. For instance, we want 'CUSTOM' to be a valid value for all enums that support custom types."
+        },
+        "ord.ReactionConditions": {
+            "properties": {
+                "temperature": {
+                    "$ref": "#/definitions/ord.TemperatureConditions",
+                    "additionalProperties": true
+                },
+                "pressure": {
+                    "$ref": "#/definitions/ord.PressureConditions",
+                    "additionalProperties": true
+                },
+                "stirring": {
+                    "$ref": "#/definitions/ord.StirringConditions",
+                    "additionalProperties": true
+                },
+                "illumination": {
+                    "$ref": "#/definitions/ord.IlluminationConditions",
+                    "additionalProperties": true
+                },
+                "electrochemistry": {
+                    "$ref": "#/definitions/ord.ElectrochemistryConditions",
+                    "additionalProperties": true
+                },
+                "flow": {
+                    "$ref": "#/definitions/ord.FlowConditions",
+                    "additionalProperties": true
+                },
+                "reflux": {
+                    "type": "boolean"
+                },
+                "ph": {
+                    "type": "number"
+                },
+                "conditions_are_dynamic": {
+                    "type": "boolean",
+                    "description": "Boolean to describe whether the conditions cannot be represented by the static, single-step schema."
+                },
+                "conditionsAreDynamic": {
+                    "type": "boolean",
+                    "description": "Boolean to describe whether the conditions cannot be represented by the static, single-step schema."
+                },
+                "details": {
+                    "type": "string",
+                    "description": "A catch-all string field for providing more information about the conditions (e.g., multiple stages)"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "reflux"
+                    ]
+                },
+                {
+                    "required": [
+                        "ph"
+                    ]
+                },
+                {
+                    "required": [
+                        "conditions_are_dynamic"
+                    ]
+                }
+            ],
+            "title": "Reaction Conditions"
+        },
+        "ord.ReactionIdentifier": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "REACTION_SMILES",
+                        "REACTION_CXSMILES",
+                        "RDFILE",
+                        "RINCHI",
+                        "NAME"
+                    ],
+                    "type": "string",
+                    "title": "Reaction Identifier Type",
+                    "description": "Possible identifier types are listed in an enum for extensibility"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                },
+                "is_mapped": {
+                    "type": "boolean",
+                    "description": "Whether identifier contains atom-to-atom mapping information. When True, we encourage users to specify how that mapping was obtained in the details field (e.g., manually, using NameRXN, using ChemDraw)."
+                },
+                "isMapped": {
+                    "type": "boolean",
+                    "description": "Whether identifier contains atom-to-atom mapping information. When True, we encourage users to specify how that mapping was obtained in the details field (e.g., manually, using NameRXN, using ChemDraw)."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "is_mapped"
+                    ]
+                }
+            ],
+            "title": "Reaction Identifier",
+            "description": "* Reaction identifiers define descriptions of the overall reaction. While we encourage the use of SMILES strings, these do not work well in all cases. The \u003creaction_smiles\u003e field should be able to be derived from the information present in the ReactionInput and ReactionOutcome fields of any Reaction message."
+        },
+        "ord.ReactionInput": {
+            "properties": {
+                "components": {
+                    "items": {
+                        "$ref": "#/definitions/ord.Compound"
+                    },
+                    "type": "array",
+                    "description": "A component is any pure species that is added to the reaction, whether as a pure substance or in a mixture/solution."
+                },
+                "crude_components": {
+                    "items": {
+                        "$ref": "#/definitions/ord.CrudeComponent"
+                    },
+                    "type": "array",
+                    "description": "A crude component refers to a non-purified, non-isolated compound or mixture that is produced by a preceding reaction step."
+                },
+                "crudeComponents": {
+                    "items": {
+                        "$ref": "#/definitions/ord.CrudeComponent"
+                    },
+                    "type": "array",
+                    "description": "A crude component refers to a non-purified, non-isolated compound or mixture that is produced by a preceding reaction step."
+                },
+                "addition_order": {
+                    "type": "integer",
+                    "description": "The addition order is 1-indexed. Inputs with the same addition_order are assumed to be added simultaneously. One input with a lower addition_order than another was added earlier in the procedure."
+                },
+                "additionOrder": {
+                    "type": "integer",
+                    "description": "The addition order is 1-indexed. Inputs with the same addition_order are assumed to be added simultaneously. One input with a lower addition_order than another was added earlier in the procedure."
+                },
+                "addition_time": {
+                    "$ref": "#/definitions/ord.Time",
+                    "additionalProperties": true,
+                    "description": "When the addition event took place in terms of the reaction time (or, in the case of flow chemistry, the residence time)."
+                },
+                "additionTime": {
+                    "$ref": "#/definitions/ord.Time",
+                    "additionalProperties": true,
+                    "description": "When the addition event took place in terms of the reaction time (or, in the case of flow chemistry, the residence time)."
+                },
+                "addition_speed": {
+                    "$ref": "#/definitions/ord.ReactionInput.AdditionSpeed",
+                    "additionalProperties": true,
+                    "description": "The qualitative rate of addition."
+                },
+                "additionSpeed": {
+                    "$ref": "#/definitions/ord.ReactionInput.AdditionSpeed",
+                    "additionalProperties": true,
+                    "description": "The qualitative rate of addition."
+                },
+                "addition_duration": {
+                    "$ref": "#/definitions/ord.Time",
+                    "additionalProperties": true,
+                    "description": "Quantitatively, how long addition took"
+                },
+                "additionDuration": {
+                    "$ref": "#/definitions/ord.Time",
+                    "additionalProperties": true,
+                    "description": "Quantitatively, how long addition took"
+                },
+                "flow_rate": {
+                    "$ref": "#/definitions/ord.FlowRate",
+                    "additionalProperties": true,
+                    "description": "For continuous synthesis, we instead specify a flow rate."
+                },
+                "flowRate": {
+                    "$ref": "#/definitions/ord.FlowRate",
+                    "additionalProperties": true,
+                    "description": "For continuous synthesis, we instead specify a flow rate."
+                },
+                "addition_device": {
+                    "$ref": "#/definitions/ord.ReactionInput.AdditionDevice",
+                    "additionalProperties": true,
+                    "description": "The device used for addition."
+                },
+                "additionDevice": {
+                    "$ref": "#/definitions/ord.ReactionInput.AdditionDevice",
+                    "additionalProperties": true,
+                    "description": "The device used for addition."
+                },
+                "addition_temperature": {
+                    "$ref": "#/definitions/ord.Temperature",
+                    "additionalProperties": true,
+                    "description": "Specify the temperature of the material being added. E.g., a cooled flask of a stock solution to be added at low temperature."
+                },
+                "additionTemperature": {
+                    "$ref": "#/definitions/ord.Temperature",
+                    "additionalProperties": true,
+                    "description": "Specify the temperature of the material being added. E.g., a cooled flask of a stock solution to be added at low temperature."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Reaction Input",
+            "description": "* A reaction input is any pure substance, mixture, or solution that is added to the reaction vessel. For example, suppose we are adding 3 mL of a 4 M solution of NaOH in water. We would define one component for the solvent and one component for the solute with the correct respective amounts. input {   components: {     identifiers: {type: IDENTIFIER_SMILES, value: \"O\"}     identifiers: {type: IDENTIFIER_NAME, value: \"water\"}     volume: {value: 3, units: MILLILITER}     volume_includes_solutes: true   }   components: {     identifiers: {type: IDENTIFIER_SMILES, value: \"[Na+].[OH-]\"}     identifiers: {type: IDENTIFIER_NAME, value: \"sodium hydroxide\"}     moles: {value: 12, units: MILLIMOLES}   } }"
+        },
+        "ord.ReactionInput.AdditionDevice": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "NONE",
+                        "SYRINGE",
+                        "CANNULA",
+                        "ADDITION_FUNNEL"
+                    ],
+                    "type": "string",
+                    "title": "Addition Device Type"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Specify, e.g., \"gas-tight\" for SYRINGE or cannula material."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Addition Device"
+        },
+        "ord.ReactionInput.AdditionSpeed": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "ALL_AT_ONCE",
+                        "FAST",
+                        "SLOW",
+                        "DROPWISE",
+                        "CONTINUOUS",
+                        "PORTIONWISE"
+                    ],
+                    "type": "string",
+                    "title": "Addition Speed Type"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Specify, e.g., portion sizes and intervals for PORTIONWISE."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Addition Speed"
+        },
+        "ord.ReactionNotes": {
+            "properties": {
+                "is_heterogeneous": {
+                    "type": "boolean",
+                    "description": "Equivalent to \"not single phase\"."
+                },
+                "isHeterogeneous": {
+                    "type": "boolean",
+                    "description": "Equivalent to \"not single phase\"."
+                },
+                "forms_precipitate": {
+                    "type": "boolean",
+                    "description": "Qualitative precipitation. Could be desired or by-product."
+                },
+                "formsPrecipitate": {
+                    "type": "boolean",
+                    "description": "Qualitative precipitation. Could be desired or by-product."
+                },
+                "is_exothermic": {
+                    "type": "boolean",
+                    "description": "Qualitative exothermicity (primarily for safety)."
+                },
+                "isExothermic": {
+                    "type": "boolean",
+                    "description": "Qualitative exothermicity (primarily for safety)."
+                },
+                "offgasses": {
+                    "type": "boolean",
+                    "description": "Qualitative offgassing (primarily for safety)."
+                },
+                "is_sensitive_to_moisture": {
+                    "type": "boolean"
+                },
+                "isSensitiveToMoisture": {
+                    "type": "boolean"
+                },
+                "is_sensitive_to_oxygen": {
+                    "type": "boolean"
+                },
+                "isSensitiveToOxygen": {
+                    "type": "boolean"
+                },
+                "is_sensitive_to_light": {
+                    "type": "boolean"
+                },
+                "isSensitiveToLight": {
+                    "type": "boolean"
+                },
+                "safety_notes": {
+                    "type": "string",
+                    "description": "Include additional sensitivity issues, e.g., shock or heat. Include toxicity and other safety warnings."
+                },
+                "safetyNotes": {
+                    "type": "string",
+                    "description": "Include additional sensitivity issues, e.g., shock or heat. Include toxicity and other safety warnings."
+                },
+                "procedure_details": {
+                    "type": "string",
+                    "description": "Overflow field for full procedure details"
+                },
+                "procedureDetails": {
+                    "type": "string",
+                    "description": "Overflow field for full procedure details"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "is_heterogeneous"
+                    ]
+                },
+                {
+                    "required": [
+                        "forms_precipitate"
+                    ]
+                },
+                {
+                    "required": [
+                        "is_exothermic"
+                    ]
+                },
+                {
+                    "required": [
+                        "offgasses"
+                    ]
+                },
+                {
+                    "required": [
+                        "is_sensitive_to_moisture"
+                    ]
+                },
+                {
+                    "required": [
+                        "is_sensitive_to_oxygen"
+                    ]
+                },
+                {
+                    "required": [
+                        "is_sensitive_to_light"
+                    ]
+                }
+            ],
+            "title": "Reaction Notes"
+        },
+        "ord.ReactionObservation": {
+            "properties": {
+                "time": {
+                    "$ref": "#/definitions/ord.Time",
+                    "additionalProperties": true,
+                    "description": "The reaction time at which the observation was made."
+                },
+                "comment": {
+                    "type": "string",
+                    "description": "e.g. what color is the reaction?"
+                },
+                "image": {
+                    "$ref": "#/definitions/ord.Data",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Reaction Observation"
+        },
+        "ord.ReactionOutcome": {
+            "properties": {
+                "reaction_time": {
+                    "$ref": "#/definitions/ord.Time",
+                    "additionalProperties": true,
+                    "description": "Reaction time (for flow, equivalent to residence time or spacetime)."
+                },
+                "reactionTime": {
+                    "$ref": "#/definitions/ord.Time",
+                    "additionalProperties": true,
+                    "description": "Reaction time (for flow, equivalent to residence time or spacetime)."
+                },
+                "conversion": {
+                    "$ref": "#/definitions/ord.Percentage",
+                    "additionalProperties": true,
+                    "description": "Conversion with respect to the sole limiting reactant. If there is ambiguity in which species the conversion is defined with respect to, the quantification of leftover starting materials should be defined as the quantification of multiple products, where the compound identity of those products matches the starting materials."
+                },
+                "products": {
+                    "items": {
+                        "$ref": "#/definitions/ord.ProductCompound"
+                    },
+                    "type": "array",
+                    "description": "The products observed in this reaction, including product-specific data defined in submessages. If the quantities of leftover starting materials are measured, these starting materials may also be defined as product species."
+                },
+                "analyses": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ord.Analysis",
+                        "additionalProperties": true
+                    },
+                    "type": "object",
+                    "description": "Analyses are stored in a map to associate each with a unique key. The key is cross-referenced in ProductCompound's ProductMeasurement messages to indicate which analyses were used to derive which performance values/metrics. The string used for the key carries no meaning outside of this cross-referencing."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Reaction Outcome",
+            "description": "* The outcomes of a reaction describe the conversion, yield, and/or other analyses of the resulting product mixture after workup step(s). Each outcome is associated with a reaction/residence time. To allow for one Reaction message to contain the results of a full kinetic profiling experiment, this is a repeated field of the Reaction message. It is the parent message for product characterization and any analytical data."
+        },
+        "ord.ReactionProvenance": {
+            "properties": {
+                "experimenter": {
+                    "$ref": "#/definitions/ord.Person",
+                    "additionalProperties": true
+                },
+                "city": {
+                    "type": "string"
+                },
+                "experiment_start": {
+                    "$ref": "#/definitions/ord.DateTime",
+                    "additionalProperties": true
+                },
+                "experimentStart": {
+                    "$ref": "#/definitions/ord.DateTime",
+                    "additionalProperties": true
+                },
+                "doi": {
+                    "type": "string"
+                },
+                "patent": {
+                    "type": "string"
+                },
+                "publication_url": {
+                    "type": "string"
+                },
+                "publicationUrl": {
+                    "type": "string"
+                },
+                "record_created": {
+                    "$ref": "#/definitions/ord.RecordEvent",
+                    "additionalProperties": true
+                },
+                "recordCreated": {
+                    "$ref": "#/definitions/ord.RecordEvent",
+                    "additionalProperties": true
+                },
+                "record_modified": {
+                    "items": {
+                        "$ref": "#/definitions/ord.RecordEvent"
+                    },
+                    "type": "array"
+                },
+                "recordModified": {
+                    "items": {
+                        "$ref": "#/definitions/ord.RecordEvent"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Reaction Provenance"
+        },
+        "ord.ReactionSetup": {
+            "properties": {
+                "vessel": {
+                    "$ref": "#/definitions/ord.Vessel",
+                    "additionalProperties": true
+                },
+                "is_automated": {
+                    "type": "boolean",
+                    "description": "Specification of automated protocols."
+                },
+                "isAutomated": {
+                    "type": "boolean",
+                    "description": "Specification of automated protocols."
+                },
+                "automation_platform": {
+                    "type": "string",
+                    "description": "Automated platform name, brand, or model number."
+                },
+                "automationPlatform": {
+                    "type": "string",
+                    "description": "Automated platform name, brand, or model number."
+                },
+                "automation_code": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ord.Data",
+                        "additionalProperties": true
+                    },
+                    "type": "object",
+                    "description": "Raw automation code or synthetic recipe definition."
+                },
+                "automationCode": {
+                    "additionalProperties": {
+                        "$ref": "#/definitions/ord.Data",
+                        "additionalProperties": true
+                    },
+                    "type": "object",
+                    "description": "Raw automation code or synthetic recipe definition."
+                },
+                "environment": {
+                    "$ref": "#/definitions/ord.ReactionSetup.ReactionEnvironment",
+                    "additionalProperties": true,
+                    "description": "Specify reaction environment."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "is_automated"
+                    ]
+                }
+            ],
+            "title": "Reaction Setup"
+        },
+        "ord.ReactionSetup.ReactionEnvironment": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "FUME_HOOD",
+                        "BENCH_TOP",
+                        "GLOVE_BOX",
+                        "GLOVE_BAG"
+                    ],
+                    "type": "string",
+                    "title": "Reaction Environment Type"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Specify environment details, e.g., \"nitrogen-filled\" for GLOVE_BOX."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Reaction Environment"
+        },
+        "ord.ReactionWorkup": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "ADDITION",
+                        "ALIQUOT",
+                        "TEMPERATURE",
+                        "CONCENTRATION",
+                        "EXTRACTION",
+                        "FILTRATION",
+                        "WASH",
+                        "DRY_IN_VACUUM",
+                        "DRY_WITH_MATERIAL",
+                        "FLASH_CHROMATOGRAPHY",
+                        "OTHER_CHROMATOGRAPHY",
+                        "SCAVENGING",
+                        "WAIT",
+                        "STIRRING",
+                        "PH_ADJUST",
+                        "DISSOLUTION",
+                        "DISTILLATION"
+                    ],
+                    "type": "string",
+                    "title": "Reaction Workup Type"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Include step-specific details such as purpose of an addition, e.g., \"crystallization\". Include method details, e.g., \"layer diffusion\"."
+                },
+                "duration": {
+                    "$ref": "#/definitions/ord.Time",
+                    "additionalProperties": true
+                },
+                "input": {
+                    "$ref": "#/definitions/ord.ReactionInput",
+                    "additionalProperties": true
+                },
+                "amount": {
+                    "$ref": "#/definitions/ord.Amount",
+                    "additionalProperties": true,
+                    "description": "When aliquotting a portion of the reaction mixture, the amount is specified by mass or volume. Note that the amounts for additions should be described in the \"input\" field instead; these are only for aliquots."
+                },
+                "temperature": {
+                    "$ref": "#/definitions/ord.TemperatureConditions",
+                    "additionalProperties": true
+                },
+                "keep_phase": {
+                    "type": "string"
+                },
+                "keepPhase": {
+                    "type": "string"
+                },
+                "stirring": {
+                    "$ref": "#/definitions/ord.StirringConditions",
+                    "additionalProperties": true
+                },
+                "target_ph": {
+                    "type": "number"
+                },
+                "targetPh": {
+                    "type": "number"
+                },
+                "is_automated": {
+                    "type": "boolean",
+                    "description": "Indicate automated workup/purification. Include specifications in \"details\", e.g., instrument manufacturer, solvent gradient (if applicable), column material and size, etc."
+                },
+                "isAutomated": {
+                    "type": "boolean",
+                    "description": "Indicate automated workup/purification. Include specifications in \"details\", e.g., instrument manufacturer, solvent gradient (if applicable), column material and size, etc."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "target_ph"
+                    ]
+                },
+                {
+                    "required": [
+                        "is_automated"
+                    ]
+                }
+            ],
+            "title": "Reaction Workup"
+        },
+        "ord.RecordEvent": {
+            "properties": {
+                "time": {
+                    "$ref": "#/definitions/ord.DateTime",
+                    "additionalProperties": true
+                },
+                "person": {
+                    "$ref": "#/definitions/ord.Person",
+                    "additionalProperties": true
+                },
+                "details": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Record Event"
+        },
+        "ord.StirringConditions": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "NONE",
+                        "STIR_BAR",
+                        "OVERHEAD_MIXER",
+                        "AGITATION",
+                        "BALL_MILLING",
+                        "SONICATION"
+                    ],
+                    "type": "string",
+                    "title": "Stirring Method Type"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Specify, e.g., \"egg-shape\" for STIR_BAR."
+                },
+                "rate": {
+                    "$ref": "#/definitions/ord.StirringConditions.StirringRate",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Stirring Conditions"
+        },
+        "ord.StirringConditions.StirringRate": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "HIGH",
+                        "MEDIUM",
+                        "LOW"
+                    ],
+                    "type": "string",
+                    "title": "Stirring Rate Type"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Specify, e.g., \"vigorous\" for HIGH, or specify exact rpm in \"rpm\"."
+                },
+                "rpm": {
+                    "type": "integer"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Stirring Rate"
+        },
+        "ord.Temperature": {
+            "properties": {
+                "value": {
+                    "type": "number"
+                },
+                "precision": {
+                    "type": "number",
+                    "description": "Precision of the measurement (with the same units as `value`)."
+                },
+                "units": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CELSIUS",
+                        "FAHRENHEIT",
+                        "KELVIN"
+                    ],
+                    "type": "string",
+                    "title": "Temperature Unit"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "value"
+                    ]
+                },
+                {
+                    "required": [
+                        "precision"
+                    ]
+                }
+            ],
+            "title": "Temperature"
+        },
+        "ord.TemperatureConditions": {
+            "properties": {
+                "control": {
+                    "$ref": "#/definitions/ord.TemperatureConditions.TemperatureControl",
+                    "additionalProperties": true
+                },
+                "setpoint": {
+                    "$ref": "#/definitions/ord.Temperature",
+                    "additionalProperties": true
+                },
+                "measurements": {
+                    "items": {
+                        "$ref": "#/definitions/ord.TemperatureConditions.TemperatureMeasurement"
+                    },
+                    "type": "array"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Temperature Conditions"
+        },
+        "ord.TemperatureConditions.TemperatureControl": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "AMBIENT",
+                        "OIL_BATH",
+                        "WATER_BATH",
+                        "SAND_BATH",
+                        "ICE_BATH",
+                        "DRY_ALUMINUM_PLATE",
+                        "MICROWAVE",
+                        "DRY_ICE_BATH",
+                        "AIR_FAN",
+                        "LIQUID_NITROGEN"
+                    ],
+                    "type": "string",
+                    "title": "Temperature Control Type"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Specify, e.g., ICE_BATH components (e.g., \"ice water, salt\"), MICROWAVE power, AIR_FAN speed, etc."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Temperature Control"
+        },
+        "ord.TemperatureConditions.TemperatureMeasurement": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "THERMOCOUPLE_INTERNAL",
+                        "THERMOCOUPLE_EXTERNAL",
+                        "INFRARED"
+                    ],
+                    "type": "string",
+                    "title": "Temperature Measurement Type"
+                },
+                "details": {
+                    "type": "string"
+                },
+                "time": {
+                    "$ref": "#/definitions/ord.Time",
+                    "additionalProperties": true
+                },
+                "temperature": {
+                    "$ref": "#/definitions/ord.Temperature",
+                    "additionalProperties": true
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Temperature Measurement"
+        },
+        "ord.Time": {
+            "properties": {
+                "value": {
+                    "type": "number"
+                },
+                "precision": {
+                    "type": "number",
+                    "description": "Precision of the measurement (with the same units as `value`)."
+                },
+                "units": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "DAY",
+                        "HOUR",
+                        "MINUTE",
+                        "SECOND"
+                    ],
+                    "type": "string",
+                    "title": "Time Unit"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "value"
+                    ]
+                },
+                {
+                    "required": [
+                        "precision"
+                    ]
+                }
+            ],
+            "title": "Time",
+            "description": "* To allow users to describe synthetic processes in whatever units they find most natural, we define a fixed list of allowable units for each measurement type. Upon submission to a centralized database, or using a validation and canonicalization script, we will convert all values to the default units (the first nonzero item in each enum). Each message also contains a `precision` field, which specifies the precision of the measurement in the same units as the measurement itself. Often the precision will be the standard deviation from an instrument calibration."
+        },
+        "ord.UnmeasuredAmount": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "SATURATED",
+                        "CATALYTIC",
+                        "TITRATED"
+                    ],
+                    "type": "string",
+                    "title": "Unmeasured Amount Type"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Full description of the unmeasured amount if more details are known."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Unmeasured Amount",
+            "description": "* Compounds may be defined with qualitative amounts in situations where a precise quantity is not measured or reported."
+        },
+        "ord.Vessel": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "ROUND_BOTTOM_FLASK",
+                        "VIAL",
+                        "WELL_PLATE",
+                        "MICROWAVE_VIAL",
+                        "TUBE",
+                        "CONTINUOUS_STIRRED_TANK_REACTOR",
+                        "PACKED_BED_REACTOR",
+                        "NMR_TUBE",
+                        "PRESSURE_FLASK",
+                        "PRESSURE_REACTOR",
+                        "ELECTROCHEMICAL_CELL"
+                    ],
+                    "type": "string",
+                    "title": "Vessel Type",
+                    "description": "Vessel type (flask, vial, well-plate, etc.)."
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Include details such as \"multi-neck\" for ROUND_BOTTOM_FLASK, \"J. Young\" for NMR_TUBE, etc."
+                },
+                "material": {
+                    "$ref": "#/definitions/ord.VesselMaterial",
+                    "additionalProperties": true,
+                    "description": "Vessel material (glass, plastic, etc.)."
+                },
+                "preparations": {
+                    "items": {
+                        "$ref": "#/definitions/ord.VesselPreparation"
+                    },
+                    "type": "array",
+                    "description": "How the vessel was prepared for the reaction."
+                },
+                "attachments": {
+                    "items": {
+                        "$ref": "#/definitions/ord.VesselAttachment"
+                    },
+                    "type": "array",
+                    "description": "Vessel attachments (septum, cap, gas adapter, etc.)."
+                },
+                "volume": {
+                    "$ref": "#/definitions/ord.Volume",
+                    "additionalProperties": true,
+                    "description": "Size (volume) of the vessel."
+                },
+                "plate_id": {
+                    "type": "string",
+                    "description": "Identifier number for a microtiter plate or parallel reactor run."
+                },
+                "plateId": {
+                    "type": "string",
+                    "description": "Identifier number for a microtiter plate or parallel reactor run."
+                },
+                "plate_position": {
+                    "type": "string",
+                    "description": "If a well-plate was used, the position of the well for this experiment, e.g., \"A4\"."
+                },
+                "platePosition": {
+                    "type": "string",
+                    "description": "If a well-plate was used, the position of the well for this experiment, e.g., \"A4\"."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Vessel",
+            "description": "* The Vessel defines the primary container within which the reaction was performed, including the type of vessel, its primary material, any preparation steps or vessel attachments, and its volume."
+        },
+        "ord.VesselAttachment": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "NONE",
+                        "CUSTOM",
+                        "SEPTUM",
+                        "CAP",
+                        "MAT",
+                        "REFLUX_CONDENSER",
+                        "VENT_NEEDLE",
+                        "DEAN_STARK",
+                        "VACUUM_TUBE",
+                        "ADDITION_FUNNEL",
+                        "DRYING_TUBE",
+                        "ALUMINUM_FOIL",
+                        "THERMOCOUPLE",
+                        "BALLOON",
+                        "GAS_ADAPTER",
+                        "PRESSURE_REGULATOR",
+                        "RELEASE_VALVE"
+                    ],
+                    "type": "string",
+                    "title": "Vessel Attachment Type"
+                },
+                "details": {
+                    "type": "string",
+                    "description": "Include attachment specifications, e.g., \"rubber\" for SEPTUM, \"Teflon\" for CAP, \"water jacket\" for REFLUX_CONDENSER, etc. Also include sealing details, e.g., \"electrical tape\", \"parafilm\", etc."
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Vessel Attachment"
+        },
+        "ord.VesselMaterial": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "GLASS",
+                        "POLYPROPYLENE",
+                        "PLASTIC",
+                        "METAL",
+                        "QUARTZ"
+                    ],
+                    "type": "string",
+                    "title": "Vessel Material Type"
+                },
+                "details": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Vessel Material"
+        },
+        "ord.VesselPreparation": {
+            "properties": {
+                "type": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "CUSTOM",
+                        "NONE",
+                        "OVEN_DRIED",
+                        "FLAME_DRIED",
+                        "EVACUATED_BACKFILLED",
+                        "PURGED"
+                    ],
+                    "type": "string",
+                    "title": "Vessel Preparation Type"
+                },
+                "details": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Vessel Preparation"
+        },
+        "ord.Voltage": {
+            "properties": {
+                "value": {
+                    "type": "number"
+                },
+                "precision": {
+                    "type": "number",
+                    "description": "Precision of the measurement (with the same units as `value`)."
+                },
+                "units": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "VOLT",
+                        "MILLIVOLT"
+                    ],
+                    "type": "string",
+                    "title": "Voltage Unit"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "value"
+                    ]
+                },
+                {
+                    "required": [
+                        "precision"
+                    ]
+                }
+            ],
+            "title": "Voltage"
+        },
+        "ord.Volume": {
+            "properties": {
+                "value": {
+                    "type": "number"
+                },
+                "precision": {
+                    "type": "number",
+                    "description": "Precision of the measurement (with the same units as `value`)."
+                },
+                "units": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "LITER",
+                        "MILLILITER",
+                        "MICROLITER",
+                        "NANOLITER"
+                    ],
+                    "type": "string",
+                    "title": "Volume Unit"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "value"
+                    ]
+                },
+                {
+                    "required": [
+                        "precision"
+                    ]
+                }
+            ],
+            "title": "Volume"
+        },
+        "ord.Wavelength": {
+            "properties": {
+                "value": {
+                    "type": "number"
+                },
+                "precision": {
+                    "type": "number",
+                    "description": "Precision of the measurement (with the same units as `value`)."
+                },
+                "units": {
+                    "enum": [
+                        "UNSPECIFIED",
+                        "NANOMETER",
+                        "WAVENUMBER"
+                    ],
+                    "type": "string",
+                    "title": "Wavelength Unit"
+                }
+            },
+            "additionalProperties": true,
+            "type": "object",
+            "oneOf": [
+                {
+                    "required": [
+                        "value"
+                    ]
+                },
+                {
+                    "required": [
+                        "precision"
+                    ]
+                }
+            ],
+            "title": "Wavelength"
+        }
+    }
+}
