@@ -2,7 +2,7 @@
 # on debian do `sudo apt install protobuf-compiler`
 whereami=$PWD
 
-mkdir ord_betterproto
+mkdir -p ord_betterproto/proto
 cd ord_betterproto || exit
 touch __init__.py
 for protoname in reaction dataset
@@ -17,5 +17,6 @@ done
 mkdir -p ord
 protoc -I . --python_betterproto_out=ord dataset.proto --experimental_allow_proto3_optional
 mv ord/ord/__init__.py ./
+mv ./*.proto proto
 rm -rf ord
 cd "$whereami" || exit
