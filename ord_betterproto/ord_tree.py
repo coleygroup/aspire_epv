@@ -97,7 +97,8 @@ def _add_type_to_tree(
     node = len(tree.nodes)
     node_tot = get_tot(tp)
     node_attr = {
-        "label": tp.__name__,
+        # "label": tp.__name__,
+        "label": str(tp),
         "type": tp,
         "type_string": get_class_string(tp),
         "tot": node_tot,
@@ -134,9 +135,14 @@ def _add_attr_to_tree(
         attr: Union[betterproto.Message, List, Dict],
         tree: nx.DiGraph,
 ):
-    # tree.add_node(node, label=attr.__class__)
     if len(tree) == 0:
-        tree.add_node(0, label=attr.__class__.__name__, type=attr.__class__, type_string=get_class_string(attr))
+        tree.add_node(
+            0,
+            # label=attr.__class__.__name__,
+            label=str(attr),
+            type=attr.__class__,
+            type_string=get_class_string(attr)
+        )
     attr_node = len(tree) - 1
 
     if issubclass(attr.__class__, Enum) or attr.__class__ in LiteralClasses or attr is None:
@@ -170,7 +176,8 @@ def _add_attr_to_tree(
         # this captures `Enum` classes
         if issubclass(child_attr.__class__, LiteralClasses) or child_attr is None:
             node_attr = {
-                "label": child_attr.__class__.__name__,
+                # "label": child_attr.__class__.__name__,
+                "label": str(child_attr.__class__),
                 "field": child_attr,
                 "type": child_attr.__class__,
                 "type_string": get_class_string(child_attr),
@@ -178,7 +185,8 @@ def _add_attr_to_tree(
         else:
             # only literals can have field
             node_attr = {
-                "label": child_attr.__class__.__name__,
+                # "label": child_attr.__class__.__name__,
+                "label": str(child_attr.__class__),
                 "type": child_attr.__class__,
                 "type_string": get_class_string(child_attr),
             }
