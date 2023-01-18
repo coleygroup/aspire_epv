@@ -35,6 +35,7 @@ def get_type_hints_better(obj):
 
 class TypeOfType(Enum):
     Literal = "Literal"
+    OrdEnum = "OrdEnum"
     Ord = "Ord"
     ListOrd = "ListOrd"
     ListLiteral = "ListLiteral"
@@ -47,6 +48,8 @@ def get_tot(tp: Type) -> TypeOfType:
     if tp in LiteralClasses:
         return TypeOfType.Literal
     if tp in OrdBetterprotoClasses:
+        if issubclass(tp, Enum):
+            return TypeOfType.OrdEnum
         return TypeOfType.Ord
     if tp.__name__ == List.__name__:
         args_tps = get_args(tp)

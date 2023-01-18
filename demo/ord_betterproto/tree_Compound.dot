@@ -21,7 +21,7 @@ strict digraph "" {
 	0 -> 5	[label=amount];
 	22	[dotpath=".reaction_role",
 		label=<enum 'ReactionRoleReactionRoleType'>,
-		tot="TypeOfType.Ord",
+		tot="TypeOfType.OrdEnum",
 		type="<enum 'ReactionRoleReactionRoleType'>",
 		type_string="ord_betterproto.ReactionRoleReactionRoleType"];
 	0 -> 22	[label=reaction_role];
@@ -57,7 +57,7 @@ strict digraph "" {
 	0 -> 40	[label=analyses];
 	2	[dotpath=".identifiers.<ListIndex>.type",
 		label=<enum 'CompoundIdentifierCompoundIdentifierType'>,
-		tot="TypeOfType.Ord",
+		tot="TypeOfType.OrdEnum",
 		type="<enum 'CompoundIdentifierCompoundIdentifierType'>",
 		type_string="ord_betterproto.CompoundIdentifierCompoundIdentifierType"];
 	1 -> 2	[label="<ListIndex>.type"];
@@ -117,7 +117,7 @@ strict digraph "" {
 	6 -> 8	[label=precision];
 	9	[dotpath=".amount.mass.units",
 		label=<enum 'MassMassUnit'>,
-		tot="TypeOfType.Ord",
+		tot="TypeOfType.OrdEnum",
 		type="<enum 'MassMassUnit'>",
 		type_string="ord_betterproto.MassMassUnit"];
 	6 -> 9	[label=units];
@@ -135,7 +135,7 @@ strict digraph "" {
 	10 -> 12	[label=precision];
 	13	[dotpath=".amount.moles.units",
 		label=<enum 'MolesMolesUnit'>,
-		tot="TypeOfType.Ord",
+		tot="TypeOfType.OrdEnum",
 		type="<enum 'MolesMolesUnit'>",
 		type_string="ord_betterproto.MolesMolesUnit"];
 	10 -> 13	[label=units];
@@ -153,13 +153,13 @@ strict digraph "" {
 	14 -> 16	[label=precision];
 	17	[dotpath=".amount.volume.units",
 		label=<enum 'VolumeVolumeUnit'>,
-		tot="TypeOfType.Ord",
+		tot="TypeOfType.OrdEnum",
 		type="<enum 'VolumeVolumeUnit'>",
 		type_string="ord_betterproto.VolumeVolumeUnit"];
 	14 -> 17	[label=units];
 	19	[dotpath=".amount.unmeasured.type",
 		label=<enum 'UnmeasuredAmountUnmeasuredAmountType'>,
-		tot="TypeOfType.Ord",
+		tot="TypeOfType.OrdEnum",
 		type="<enum 'UnmeasuredAmountUnmeasuredAmountType'>",
 		type_string="ord_betterproto.UnmeasuredAmountUnmeasuredAmountType"];
 	18 -> 19	[label=type];
@@ -171,7 +171,7 @@ strict digraph "" {
 	18 -> 20	[label=details];
 	25	[dotpath=".preparations.<ListIndex>.type",
 		label=<enum 'CompoundPreparationCompoundPreparationType'>,
-		tot="TypeOfType.Ord",
+		tot="TypeOfType.OrdEnum",
 		type="<enum 'CompoundPreparationCompoundPreparationType'>",
 		type_string="ord_betterproto.CompoundPreparationCompoundPreparationType"];
 	24 -> 25	[label="<ListIndex>.type"];
@@ -249,7 +249,7 @@ strict digraph "" {
 	32 -> 39	[label="<DictKey>.format"];
 	41	[dotpath=".analyses.<DictKey>.type",
 		label=<enum 'AnalysisAnalysisType'>,
-		tot="TypeOfType.Ord",
+		tot="TypeOfType.OrdEnum",
 		type="<enum 'AnalysisAnalysisType'>",
 		type_string="ord_betterproto.AnalysisAnalysisType"];
 	40 -> 41	[label="<DictKey>.type"];
