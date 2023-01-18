@@ -7,7 +7,7 @@ import betterproto
 import networkx as nx
 
 import ord_betterproto
-from aspire_api.utils import get_class_string
+from utils.tree_related import get_class_string
 
 """
 convert a betterproto.message class to an arborescence

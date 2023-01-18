@@ -1,4 +1,4 @@
-from aspire_api.utils import write_dot
+from utils.tree_related import write_dot
 from ord_betterproto import Reaction, Compound
 from ord_betterproto.ord_tree import message_to_tree, message_type_to_tree
 

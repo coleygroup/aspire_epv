@@ -2,7 +2,7 @@ import enum
 
 import networkx as nx
 
-from aspire_api.utils import write_dot, read_dot, import_string
+from utils.tree_related import write_dot, read_dot, import_string
 from ord_betterproto.ord_tree import tree_to_message
 
 if __name__ == '__main__':
