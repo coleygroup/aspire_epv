@@ -139,7 +139,7 @@ def _add_attr_to_tree(
         tree.add_node(
             0,
             # label=attr.__class__.__name__,
-            label=str(attr),
+            label=str(attr.__class__),
             type=attr.__class__,
             type_string=get_class_string(attr)
         )

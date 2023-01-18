@@ -1,37 +1,38 @@
 {
   "inputs": {
-    "dichloromethane": {
+    "N,N-dibenzylhydroxylamine": {
       "components": [
         {
           "identifiers": [
             {
               "type": "SMILES",
-              "value": "C(Cl)Cl"
+              "value": "C1=CC=C(C=C1)CN(CC2=CC=CC=C2)O"
             },
             {
               "type": "NAME",
-              "value": "dichloromethane"
+              "value": "N,N-dibenzylhydroxylamine"
             }
           ],
           "amount": {
-            "volume": {
-              "value": 250.0,
-              "units": "MILLILITER"
+            "mass": {
+              "value": 21.3,
+              "units": "GRAM"
             }
           },
-          "reactionRole": "SOLVENT",
+          "reactionRole": "REACTANT",
+          "isLimiting": true,
           "preparations": [
             {
-              "type": "DRIED",
-              "details": "purified by passage under argon pressure through two packed columns of neutral alumina and copper(II) oxide"
+              "type": "CUSTOM",
+              "details": "a few colored or darker crystals, which were present in trace amounts, were discarded using standard tweezers"
             }
           ],
           "source": {
-            "vendor": "J. T. Baker"
+            "vendor": "TCI America"
           }
         }
       ],
-      "additionOrder": 3
+      "additionOrder": 1
     },
     "4-dimethyl-aminopyridine": {
       "components": [
@@ -66,39 +67,38 @@
       ],
       "additionOrder": 2
     },
-    "N,N-dibenzylhydroxylamine": {
+    "dichloromethane": {
       "components": [
         {
           "identifiers": [
             {
               "type": "SMILES",
-              "value": "C1=CC=C(C=C1)CN(CC2=CC=CC=C2)O"
+              "value": "C(Cl)Cl"
             },
             {
               "type": "NAME",
-              "value": "N,N-dibenzylhydroxylamine"
+              "value": "dichloromethane"
             }
           ],
           "amount": {
-            "mass": {
-              "value": 21.3,
-              "units": "GRAM"
+            "volume": {
+              "value": 250.0,
+              "units": "MILLILITER"
             }
           },
-          "reactionRole": "REACTANT",
-          "isLimiting": true,
+          "reactionRole": "SOLVENT",
           "preparations": [
             {
-              "type": "CUSTOM",
-              "details": "a few colored or darker crystals, which were present in trace amounts, were discarded using standard tweezers"
+              "type": "DRIED",
+              "details": "purified by passage under argon pressure through two packed columns of neutral alumina and copper(II) oxide"
             }
           ],
           "source": {
-            "vendor": "TCI America"
+            "vendor": "J. T. Baker"
           }
         }
       ],
-      "additionOrder": 1
+      "additionOrder": 3
     }
   },
   "setup": {
