@@ -87,13 +87,6 @@ def _add_type_to_tree(
         dotpath = ""
     else:
         parent_dotpath = tree.nodes[parent]["dotpath"]
-        parent_tot = tree.nodes[parent]["tot"]
-        if parent_tot in (TypeOfType.ListOrd, TypeOfType.ListLiteral):
-            relation_to_parent = "<ListIndex>" + delimiter + relation_to_parent
-        elif parent_tot in (TypeOfType.DictOrd, TypeOfType.DictLiteral):
-            relation_to_parent = "<DictKey>" + delimiter + relation_to_parent
-        elif parent_tot == TypeOfType.OptionalLiteral:
-            relation_to_parent = "<Optional>" + delimiter + relation_to_parent
         dotpath = parent_dotpath + delimiter + relation_to_parent
 
     # self
@@ -113,18 +106,23 @@ def _add_type_to_tree(
 
     # children
     if node_tot in (TypeOfType.ListOrd, TypeOfType.ListLiteral):
-        self_tp = get_args(tp)[0]
+        attr_name = "<ListIndex>"
+        attr_type = get_args(tp)[0]
+        _add_type_to_tree(attr_type, tree, parent=node, relation_to_parent=attr_name)
     elif node_tot in (TypeOfType.DictOrd, TypeOfType.DictLiteral):
-        self_tp = get_args(tp)[1]
-    elif node_tot == TypeOfType.OptionalLiteral:
-        self_tp = get_args(tp)[0]
-    elif node_tot == TypeOfType.Literal:
+        attr_name = "<DictKey>"
+        attr_type = get_args(tp)[0]
+        _add_type_to_tree(attr_type, tree, parent=node, relation_to_parent=attr_name)
+    elif node_tot in (TypeOfType.Literal, TypeOfType.OptionalLiteral):
+        # this seems unnecessary...
+        # if node_tot == TypeOfType.OptionalLiteral:
+        #     attr_name = "<Optional>"
+        #     attr_type = get_args(tp)[0]
+        #     _add_type_to_tree(attr_type, tree, parent=node, relation_to_parent=attr_name)
         return
     else:
-        self_tp = tp
-
-    for attr_name, attr_type in get_type_hints_better(self_tp).items():
-        _add_type_to_tree(attr_type, tree, parent=node, relation_to_parent=attr_name)
+        for attr_name, attr_type in get_type_hints_better(tp).items():
+            _add_type_to_tree(attr_type, tree, parent=node, relation_to_parent=attr_name)
 
 
 def message_type_to_tree(message: Type) -> nx.DiGraph:
