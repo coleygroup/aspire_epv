@@ -7,6 +7,7 @@ import betterproto
 import networkx as nx
 
 import ord_betterproto
+from aspire_api.utils import get_class_string
 
 """
 convert a betterproto.message class to an arborescence
@@ -96,8 +97,9 @@ def _add_type_to_tree(
     node = len(tree.nodes)
     node_tot = get_tot(tp)
     node_attr = {
-        "label": str(tp),
+        "label": tp.__name__,
         "type": tp,
+        "type_string": get_class_string(tp),
         "tot": node_tot,
         "dotpath": dotpath
     }
@@ -134,7 +136,7 @@ def _add_attr_to_tree(
 ):
     # tree.add_node(node, label=attr.__class__)
     if len(tree) == 0:
-        tree.add_node(0, label=str(attr.__class__), type=attr.__class__)
+        tree.add_node(0, label=attr.__class__.__name__, type=attr.__class__, type_string=get_class_string(attr))
     attr_node = len(tree) - 1
 
     if issubclass(attr.__class__, Enum) or attr.__class__ in LiteralClasses or attr is None:
@@ -168,15 +170,17 @@ def _add_attr_to_tree(
         # this captures `Enum` classes
         if issubclass(child_attr.__class__, LiteralClasses) or child_attr is None:
             node_attr = {
-                "label": str(child_attr),
+                "label": child_attr.__class__.__name__,
                 "field": child_attr,
                 "type": child_attr.__class__,
+                "type_string": get_class_string(child_attr),
             }
         else:
             # only literals can have field
             node_attr = {
-                "label": str(child_attr.__class__),
+                "label": child_attr.__class__.__name__,
                 "type": child_attr.__class__,
+                "type_string": get_class_string(child_attr),
             }
 
         tree.add_node(child, **node_attr)
