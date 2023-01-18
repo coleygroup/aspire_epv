@@ -1,7 +1,7 @@
 import inspect
 from copy import deepcopy
 from enum import Enum
-from typing import get_type_hints, List, get_args, Dict, Type, Optional, Union
+from typing import get_type_hints, List, get_args, Dict, Type, Optional, Union, get_origin
 
 import betterproto
 import networkx as nx
@@ -92,11 +92,15 @@ def _add_type_to_tree(
     # self
     node = len(tree.nodes)
     node_tot = get_tot(tp)
+    if not inspect.isclass(tp):
+        real_type = get_origin(tp)
+    else:
+        real_type = tp
     node_attr = {
         # "label": tp.__name__,
         "label": str(tp),
-        "type": tp,
-        "type_string": get_class_string(tp),
+        "type": real_type,
+        "type_string": get_class_string(real_type),
         "tot": node_tot,
         "dotpath": dotpath
     }
