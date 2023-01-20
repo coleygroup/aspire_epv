@@ -1,5 +1,6 @@
 # make sure protoc compiler is installed
 # on debian do `sudo apt install protobuf-compiler`
+# remember to install `pip install "betterproto[compiler]"`
 whereami=$PWD
 
 mkdir -p ord_betterproto/proto
@@ -15,7 +16,10 @@ do
 done
 
 mkdir -p ord
+
+# this requires `protoc-gen-python_betterproto` in you PATH, if you use a venv this should be in `venv/bin`
 protoc -I . --python_betterproto_out=ord dataset.proto --experimental_allow_proto3_optional
+
 mv ord/ord/__init__.py ./
 mv ./*.proto proto
 rm -rf ord

@@ -1,0 +1,6 @@
+betterproto==2.0.0b5
+betterproto[compiler]
+dash-cytoscape==0.3.0
+networkx==3.0
+pygraphviz==1.10
+ord-schema==0.3.40
