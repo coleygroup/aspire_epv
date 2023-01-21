@@ -1,36 +1,30 @@
 import inspect
 from copy import deepcopy
 from enum import Enum
-from typing import get_type_hints, List, get_args, Dict, Type, Optional, Union, get_origin
+from typing import List, get_args, Dict, Type, Optional, Union, get_origin
 
 import betterproto
 import networkx as nx
 
 import ord_betterproto
-from utils.tree_related import get_class_string
+from utils.tree_related import get_class_string, get_type_hints_better
 
 """
 convert a betterproto.message class to an arborescence
 """
 
-LiteralClasses = (str, float, int, bool, bytes)
-NumericClasses = (float, int)
-OrdBetterprotoClasses = tuple(dict(
+# Groups for classes used in ORD Messages
+BuiltinLiteralClasses = (str, float, int, bool, bytes)
+OrdMessageClasses = tuple(dict(
     (
         inspect.getmembers(
-            ord_betterproto, lambda member: inspect.isclass(member) and member.__module__ == ord_betterproto.__name__
+            ord_betterproto,
+            lambda member: inspect.isclass(member) and member.__module__ == ord_betterproto.__name__
         )
     )
 ).values())
-
-
-def get_type_hints_better(obj):
-    d = dict()
-    for k, v in get_type_hints(obj).items():
-        if k.startswith("_"):
-            continue
-        d[k] = v
-    return d
+OrdEnumClasses = tuple(c for c in OrdMessageClasses if issubclass(c, Enum))
+LiteralCLasses = (*BuiltinLiteralClasses, *OrdEnumClasses)
 
 
 class TypeOfType(Enum):
@@ -44,38 +38,38 @@ class TypeOfType(Enum):
     OptionalLiteral = "OptionalLiteral"
 
 
-def get_tot(tp: Type) -> TypeOfType:
-    if tp in LiteralClasses:
+def get_tot(type_hint: Type) -> TypeOfType:
+    if type_hint in BuiltinLiteralClasses:
         return TypeOfType.Literal
-    if tp in OrdBetterprotoClasses:
-        if issubclass(tp, Enum):
+    if type_hint in OrdMessageClasses:
+        if issubclass(type_hint, Enum):
             return TypeOfType.OrdEnum
         return TypeOfType.Ord
-    if tp.__name__ == List.__name__:
-        args_tps = get_args(tp)
+    if type_hint.__name__ == List.__name__:
+        args_tps = get_args(type_hint)
         assert len(args_tps) == 1, f"type hint for List has len(args) != 1, this is not expected: {args_tps}"
         arg_tp = args_tps[0]
-        if arg_tp in OrdBetterprotoClasses:
+        if arg_tp in OrdMessageClasses:
             return TypeOfType.ListOrd
-        elif arg_tp in LiteralClasses:
+        elif arg_tp in BuiltinLiteralClasses:
             return TypeOfType.ListLiteral
         else:
             raise TypeError(f"unexpected tot: {arg_tp}")
-    if tp.__name__ == Dict.__name__:
-        args_tps = get_args(tp)
+    if type_hint.__name__ == Dict.__name__:
+        args_tps = get_args(type_hint)
         assert len(args_tps) == 2, f"type hint for Dict has len(args) != 2, this is not expected: {args_tps}"
         assert args_tps[0] == str
         arg_tp = args_tps[1]
-        if arg_tp in OrdBetterprotoClasses:
+        if arg_tp in OrdMessageClasses:
             return TypeOfType.DictOrd
-        elif arg_tp in LiteralClasses:
+        elif arg_tp in BuiltinLiteralClasses:
             return TypeOfType.DictLiteral
         else:
             raise TypeError(f"unexpected tot: {arg_tp}")
-    if tp.__name__ == Optional.__name__:
-        assert get_args(tp)[0] in LiteralClasses, f"found an optional field of non-literal class: {tp}"
+    if type_hint.__name__ == Optional.__name__:
+        assert get_args(type_hint)[0] in BuiltinLiteralClasses, f"found an optional field of non-literal class: {type_hint}"
         return TypeOfType.OptionalLiteral
-    raise TypeError(f"unidentifiable type: {tp}")
+    raise TypeError(f"unidentifiable type: {type_hint}")
 
 
 def _add_type_to_tree(
@@ -150,9 +144,9 @@ def _add_attr_to_tree(
         )
     attr_node = len(tree) - 1
 
-    if issubclass(attr.__class__, Enum) or attr.__class__ in LiteralClasses or attr is None:
+    if issubclass(attr.__class__, Enum) or attr.__class__ in BuiltinLiteralClasses or attr is None:
         return
-    elif attr.__class__ in OrdBetterprotoClasses:
+    elif attr.__class__ in OrdMessageClasses:
         items = {field_name: getattr(attr, field_name) for field_name in attr._betterproto.sorted_field_names}.items()
     elif isinstance(attr, List):
         items = {index: obj for index, obj in enumerate(attr)}.items()
@@ -164,7 +158,7 @@ def _add_attr_to_tree(
     items_used = []
     for field_name, child_attr in items:
         # TODO not sure these are the safe ways to ignore default
-        if child_attr.__class__ in OrdBetterprotoClasses:
+        if child_attr.__class__ in OrdMessageClasses:
             if issubclass(child_attr.__class__, Enum):
                 pass
             elif all(getattr(child_attr, f) == child_attr._get_field_default(f) for f in
@@ -179,7 +173,7 @@ def _add_attr_to_tree(
     for field_name, child_attr in items_used:
         child = len(tree)
         # this captures `Enum` classes
-        if issubclass(child_attr.__class__, LiteralClasses) or child_attr is None:
+        if issubclass(child_attr.__class__, BuiltinLiteralClasses) or child_attr is None:
             node_attr = {
                 # "label": child_attr.__class__.__name__,
                 "label": str(child_attr.__class__),
@@ -235,7 +229,7 @@ def _construct_from_leafs(tree: nx.DiGraph):
     parent_class = tree.nodes[parent]['type']
     children = list(tree.successors(parent))
 
-    if parent_class in OrdBetterprotoClasses:
+    if parent_class in OrdMessageClasses:
         parent_object = parent_class()
         for child in children:
             attr = tree.nodes[child]['field']
@@ -265,7 +259,7 @@ def _construct_from_leafs(tree: nx.DiGraph):
 def tree_to_message(tree: nx.DiGraph) -> betterproto.Message:
     assert nx.is_arborescence(tree)
     leafs = get_leafs(tree, sort=True)
-    assert all(issubclass(tree.nodes[leaf]['type'], LiteralClasses) for leaf in leafs)
+    assert all(issubclass(tree.nodes[leaf]['type'], BuiltinLiteralClasses) for leaf in leafs)
     working_tree = deepcopy(tree)
     _construct_from_leafs(working_tree)
     return working_tree.nodes[0]['field']
