@@ -68,16 +68,30 @@ reaction_mojito = Reaction(
                 "taste": Analysis(AnalysisAnalysisType.CUSTOM, details="tasted by me", instrument_manufacturer="my mom")
             }
         ),
+        ReactionOutcome(
+            products=[
+                ProductCompound(
+                    identifiers=[
+                        CompoundIdentifier(type=CompoundIdentifierCompoundIdentifierType.NAME, value="Very good mojito")
+                    ],
+                    is_desired_product=True,
+                )
+            ]
+        )
     ]
 )
 if __name__ == '__main__':
     from google.protobuf.json_format import Parse
-    from ord_schema.proto.reaction_pb2 import Reaction
+    from ord_schema.proto import reaction_pb2
     from ord_schema.validations import validate_reaction
+    from ord_betterproto.ord_tree import message_to_tree
+    from utils.tree_related import write_dot
 
     with open("mojito.json", "w") as f:
         f.write(reaction_mojito.to_json())
 
+    write_dot(message_to_tree(reaction_mojito), "mojito.dot")
+
     # convert back to official message
-    old_mojito = Parse(reaction_mojito.to_json(), Reaction())
+    old_mojito = Parse(reaction_mojito.to_json(), reaction_pb2.Reaction())
     validate_reaction(old_mojito)
