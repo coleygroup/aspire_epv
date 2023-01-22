@@ -3,11 +3,26 @@ import pathlib
 import sys
 import typing
 from importlib import import_module
+from typing import get_type_hints
 
 import networkx as nx
 import pygraphviz
 
 FilePath = typing.Union[str, pathlib.Path]
+
+
+class MessageTypeTreeError(Exception): pass
+
+
+class MessageObjectTreeError(Exception): pass
+
+
+def get_leafs(tree: nx.DiGraph, sort=True):
+    assert nx.is_arborescence(tree)
+    leafs = [n for n in tree.nodes if tree.out_degree(n) == 0]
+    if sort:
+        leafs = sorted(leafs, key=lambda x: len(nx.shortest_path(tree, 0, x)), reverse=True)
+    return leafs
 
 
 def write_dot(g: nx.Graph, fn: FilePath = None):
@@ -67,3 +82,12 @@ def import_string(dotted_path):
             'Module "%s" does not define a "%s" attribute/class'
             % (module_path, class_name)
         ) from err
+
+
+def get_type_hints_without_private(obj):
+    d = dict()
+    for k, v in get_type_hints(obj).items():
+        if k.startswith("_"):
+            continue
+        d[k] = v
+    return d
