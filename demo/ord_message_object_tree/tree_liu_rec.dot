@@ -3,7 +3,7 @@ strict digraph "" {
 		splines=curved
 	];
 	node [label="\N"];
-	0	[dotpath=".",
+	0	[dotpath=ROOT,
 		label=<class 'ord_betterproto.Reaction'>,
 		label_info="str(obj.__class__)",
 		node_class="<class 'ord_betterproto.Reaction'>",

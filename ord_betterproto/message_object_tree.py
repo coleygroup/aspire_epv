@@ -5,23 +5,11 @@ import betterproto
 import networkx as nx
 
 from ord_betterproto import ord_classes
-from ord_betterproto.utils import get_class_string, MessageObjectTreeError, get_leafs
+from ord_betterproto.utils import get_class_string, MessageObjectTreeError, get_leafs, assign_dotpath
 
 """
 convert a betterproto.message instance to an arborescence
 """
-
-
-def assign_dotpath(tree: nx.DiGraph, delimiter=".", root=0, edge_attr="label", node_attr="dotpath"):
-    """ add dotpath to tree nodes """
-    for n in tree.nodes:
-        path_to_root = nx.shortest_path(tree, root, n)
-        if n == root:
-            dotpath = delimiter
-        else:
-            edge_path = list(zip(path_to_root[:-1], path_to_root[1:]))
-            dotpath = delimiter.join([str(tree.edges[e][edge_attr]) for e in edge_path])
-        tree.nodes[n][node_attr] = dotpath
 
 
 def _extend_object_node(obj_node: int, tree: nx.DiGraph, ):

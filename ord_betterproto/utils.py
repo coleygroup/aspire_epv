@@ -3,12 +3,13 @@ import pathlib
 import sys
 import typing
 from importlib import import_module
-from typing import get_type_hints
 
 import networkx as nx
 import pygraphviz
 
 FilePath = typing.Union[str, pathlib.Path]
+DotPathLabel = "DotPath"
+RootDotPath = "ROOT"
 
 
 class MessageTypeTreeError(Exception): pass
@@ -84,10 +85,25 @@ def import_string(dotted_path):
         ) from err
 
 
-def get_type_hints_without_private(obj):
-    d = dict()
-    for k, v in get_type_hints(obj).items():
-        if k.startswith("_"):
-            continue
-        d[k] = v
-    return d
+def assign_dotpath(
+        tree: nx.DiGraph, delimiter=".", root_dotpath=RootDotPath, root=0, edge_attr="label", node_attr=DotPathLabel
+):
+    """ add dotpath to tree nodes """
+    for n in tree.nodes:
+        path_to_root = nx.shortest_path(tree, root, n)
+        if n == root:
+            dotpath = root_dotpath
+        else:
+            edge_path = list(zip(path_to_root[:-1], path_to_root[1:]))
+            dotpath = delimiter.join([str(tree.edges[e][edge_attr]) for e in edge_path])
+        tree.nodes[n][node_attr] = dotpath
+
+
+def get_dotpath_dicts(tree: nx.DiGraph):
+    node_to_path = nx.get_node_attributes(tree, DotPathLabel)
+    edge_to_path = nx.get_edge_attributes(tree, DotPathLabel)
+    path_to_node = {v: k for k, v in node_to_path.items()}
+    path_to_edge = {v: k for k, v in edge_to_path.items()}
+    assert len(node_to_path) == len(tree.nodes) == len(path_to_node)
+    assert len(edge_to_path) == len(tree.edges) == len(path_to_edge)
+    return node_to_path, edge_to_path, path_to_node, path_to_edge

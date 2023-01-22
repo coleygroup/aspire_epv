@@ -2,8 +2,8 @@ from typing import get_args, Type, get_origin
 
 import networkx as nx
 
-from ord_betterproto.type_hints import get_toth, TypeOfTypeHint
-from ord_betterproto.utils import get_class_string, get_type_hints_without_private, MessageTypeTreeError
+from ord_betterproto.type_hints import get_toth, TypeOfTypeHint, get_type_hints_without_private
+from ord_betterproto.utils import get_class_string, MessageTypeTreeError, DotPathLabel, RootDotPath
 
 """
 convert a betterproto.message class to an arborescence
@@ -17,9 +17,9 @@ def _extend_type_hint(
 ):
     # parent
     if parent is None:
-        dotpath = delimiter
+        dotpath = RootDotPath
     else:
-        parent_dotpath = tree.nodes[parent]["dotpath"]
+        parent_dotpath = tree.nodes[parent][DotPathLabel]
         dotpath = parent_dotpath + delimiter + relation_to_parent
 
     # current node
@@ -52,8 +52,8 @@ def _extend_type_hint(
         type_hint=type_hint,
         node_class=node_class,
         node_class_as_string=get_class_string(node_class),
-        dotpath=dotpath,
     )
+    node_attr[DotPathLabel] = dotpath
     tree.add_node(node, **node_attr)
     if parent is not None:
         tree.add_edge(parent, node, label=relation_to_parent)

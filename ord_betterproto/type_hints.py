@@ -1,7 +1,7 @@
 import inspect
 import typing
 from enum import Enum
-from typing import List, get_args, Dict, Optional, get_origin
+from typing import List, get_args, Dict, Optional, get_origin, get_type_hints
 
 from ord_betterproto import ord_classes
 
@@ -113,3 +113,12 @@ def get_toth(type_hint) -> TypeOfTypeHint:
             )
         return TypeOfTypeHint.OptionalLiteral
     raise TypeOfTypeHintError(f"cannot identify TOTH for: {type_hint}")
+
+
+def get_type_hints_without_private(obj):
+    d = dict()
+    for k, v in get_type_hints(obj).items():
+        if k.startswith("_"):
+            continue
+        d[k] = v
+    return d
