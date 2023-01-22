@@ -106,4 +106,4 @@ reaction.outcomes = [
 ]
 
 with open("reaction_obp.json", "w") as f:
-    f.write(reaction.to_json())
+    f.write(reaction.to_json(indent=2))

@@ -1,6 +1,5 @@
 import inspect
 from copy import deepcopy
-from enum import Enum
 
 import betterproto
 import networkx as nx
@@ -34,9 +33,13 @@ def _extend_object_node(obj_node: int, tree: nx.DiGraph, ):
         return
 
     # TODO double check this is right
+    # two ways to handle OrdEnum
     elif obj.__class__ in ord_classes.OrdEnumClasses:
-        assert issubclass(obj.__class__, Enum)
-        items = dict(value=obj.value).items()  # Enum object are initialized as Enum(value=<value>)
+        # 1. treat them as leafs
+        # return
+        # 2. treat them as one level above leafs, initialized as Enum[name] when backward converting
+        # see https://docs.python.org/3/library/enum.html#:~:text=Color.GREEN%3A%202%3E-,__getitem__,-(cls%2C
+        items = dict(name=obj.name).items()
 
     elif obj.__class__ in ord_classes.OrdMessageClasses:
         items = {field_name: getattr(obj, field_name) for field_name in obj._betterproto.sorted_field_names}.items()
@@ -113,30 +116,30 @@ def _construct_from_leafs(tree: nx.DiGraph):
     if parent_class in ord_classes.OrdMessageClasses:
         parent_object = parent_class()
         for child in children:
-            attr = tree.nodes[child]['node_value']
+            attr = tree.nodes[child]['node_object']
             attr_name = tree.edges[(parent, child)]['label']
             setattr(parent_object, attr_name, attr)
 
     elif parent_class in ord_classes.OrdEnumClasses:
-        if len(children) != 2:
+        if len(children) != 1:
             raise MessageObjectTreeError(f"try to construct an Enum: {parent_class} from !=1 children")
         child = children[0]
-        k = tree.nodes[child]['node_value']
-        v = tree.nodes[(parent, child)]['label']
-        assert k == 'value'
-        parent_object = parent_class(value=v)
+        v = tree.nodes[child]['node_object']
+        k = tree.edges[(parent, child)]['label']
+        assert k == 'name'
+        parent_object = parent_class[v]
 
     elif parent_class == list:
         parent_object = []
         children = sorted(children, key=lambda x: tree.edges[(parent, x)]['label'])
         for child in children:
-            attr = tree.nodes[child]['value']
+            attr = tree.nodes[child]['node_object']
             parent_object.append(attr)
 
     elif parent_class == dict:
         parent_object = dict()
         for child in children:
-            attr = tree.nodes[child]['value']
+            attr = tree.nodes[child]['node_object']
             key_name = tree.edges[(parent, child)]['label']
             parent_object[key_name] = attr
     else:
@@ -144,7 +147,7 @@ def _construct_from_leafs(tree: nx.DiGraph):
 
     for child in children:
         tree.remove_node(child)
-    tree.nodes[parent]['value'] = parent_object
+    tree.nodes[parent]['node_object'] = parent_object
     _construct_from_leafs(tree)
 
 
@@ -152,7 +155,7 @@ def message_object_tree_to_message_object(tree: nx.DiGraph) -> betterproto.Messa
     assert nx.is_arborescence(tree)
     working_tree = deepcopy(tree)
     _construct_from_leafs(working_tree)
-    return working_tree.nodes[0]['value']
+    return working_tree.nodes[0]['node_object']
 
 
 def inspect_message_object_tree(tree: nx.DiGraph):

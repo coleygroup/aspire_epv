@@ -67,7 +67,7 @@ def _extend_type_hint(
         attr_name = "<DictKey>"
         attr_type = get_args(type_hint)[0]
         _extend_type_hint(attr_type, tree, parent=node, relation_to_parent=attr_name)
-    elif node_toth in (TypeOfTypeHint.BuiltinLiteral, TypeOfTypeHint.OptionalLiteral):
+    elif node_toth in (TypeOfTypeHint.BuiltinLiteral, TypeOfTypeHint.OptionalLiteral, TypeOfTypeHint.OrdEnum):
         return
     else:
         for attr_name, attr_type in get_type_hints_without_private(type_hint).items():
