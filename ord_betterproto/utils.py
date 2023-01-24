@@ -86,10 +86,13 @@ def import_string(dotted_path):
 
 
 def assign_dotpath(
-        tree: nx.DiGraph, delimiter=".", root_dotpath=RootDotPath, root=0, edge_attr="label", node_attr=DotPathLabel
+        tree: nx.DiGraph, node_subset=None,
+        delimiter=".", root_dotpath=RootDotPath, root=0, edge_attr="label", node_attr=DotPathLabel
 ):
     """ add dotpath to tree nodes """
-    for n in tree.nodes:
+    if node_subset is None:
+        node_subset = tree.nodes
+    for n in node_subset:
         path_to_root = nx.shortest_path(tree, root, n)
         if n == root:
             dotpath = root_dotpath
@@ -99,11 +102,17 @@ def assign_dotpath(
         tree.nodes[n][node_attr] = dotpath
 
 
-def get_dotpath_dicts(tree: nx.DiGraph):
-    node_to_path = nx.get_node_attributes(tree, DotPathLabel)
-    edge_to_path = nx.get_edge_attributes(tree, DotPathLabel)
-    path_to_node = {v: k for k, v in node_to_path.items()}
-    path_to_edge = {v: k for k, v in edge_to_path.items()}
-    assert len(node_to_path) == len(tree.nodes) == len(path_to_node)
-    assert len(edge_to_path) == len(tree.edges) == len(path_to_edge)
-    return node_to_path, edge_to_path, path_to_node, path_to_edge
+def get_dotpath_dict(tree: nx.DiGraph, dict_type: typing.Literal["n2p", "p2n", "e2p", "p2e"]) -> dict:
+    if "n" in dict_type:
+        d = nx.get_node_attributes(tree, DotPathLabel)
+        if dict_type == "p2n":
+            d = {v: k for k, v in d.items()}
+        assert len(set(d.keys())) == len(set(d.values())) == len(tree.nodes)
+    elif "e" in dict_type:
+        d = nx.get_edge_attributes(tree, DotPathLabel)
+        if dict_type == "p2e":
+            d = {v: k for k, v in d.items()}
+        assert len(set(d.keys())) == len(set(d.values())) == len(tree.edges)
+    else:
+        raise ValueError(f'`dict_type` must be one of {["n2p", "p2n", "e2p", "p2e"]}')
+    return d

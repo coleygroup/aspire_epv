@@ -51,6 +51,7 @@ def _extend_type_hint(
         label_info="str(type_hint)",
         type_hint=type_hint,
         node_class=node_class,
+        node_class_toth=node_toth,
         node_class_as_string=get_class_string(node_class),
     )
     node_attr[DotPathLabel] = dotpath
@@ -65,7 +66,7 @@ def _extend_type_hint(
         _extend_type_hint(attr_type, tree, parent=node, relation_to_parent=attr_name)
     elif node_toth in (TypeOfTypeHint.DictOrdMessage, TypeOfTypeHint.DictBuiltinLiteral):
         attr_name = "<DictKey>"
-        attr_type = get_args(type_hint)[0]
+        attr_type = get_args(type_hint)[1]
         _extend_type_hint(attr_type, tree, parent=node, relation_to_parent=attr_name)
     elif node_toth in (TypeOfTypeHint.BuiltinLiteral, TypeOfTypeHint.OptionalLiteral, TypeOfTypeHint.OrdEnum):
         return
