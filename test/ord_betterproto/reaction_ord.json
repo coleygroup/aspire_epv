@@ -1,5 +1,38 @@
 {
   "inputs": {
+    "4-dimethyl-aminopyridine": {
+      "components": [
+        {
+          "identifiers": [
+            {
+              "type": "SMILES",
+              "value": "n1ccc(N(C)C)cc1"
+            },
+            {
+              "type": "NAME",
+              "value": "4-dimethyl-aminopyridine"
+            }
+          ],
+          "amount": {
+            "mass": {
+              "value": 12.8,
+              "units": "GRAM"
+            }
+          },
+          "reactionRole": "REAGENT",
+          "preparations": [
+            {
+              "type": "NONE",
+              "details": "used as received"
+            }
+          ],
+          "source": {
+            "vendor": "Sigma Aldrich"
+          }
+        }
+      ],
+      "additionOrder": 2
+    },
     "dichloromethane": {
       "components": [
         {
@@ -66,39 +99,6 @@
         }
       ],
       "additionOrder": 1
-    },
-    "4-dimethyl-aminopyridine": {
-      "components": [
-        {
-          "identifiers": [
-            {
-              "type": "SMILES",
-              "value": "n1ccc(N(C)C)cc1"
-            },
-            {
-              "type": "NAME",
-              "value": "4-dimethyl-aminopyridine"
-            }
-          ],
-          "amount": {
-            "mass": {
-              "value": 12.8,
-              "units": "GRAM"
-            }
-          },
-          "reactionRole": "REAGENT",
-          "preparations": [
-            {
-              "type": "NONE",
-              "details": "used as received"
-            }
-          ],
-          "source": {
-            "vendor": "Sigma Aldrich"
-          }
-        }
-      ],
-      "additionOrder": 2
     }
   },
   "setup": {
