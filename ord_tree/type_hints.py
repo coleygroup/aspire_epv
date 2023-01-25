@@ -3,7 +3,7 @@ import typing
 from enum import Enum
 from typing import List, get_args, Dict, Optional, get_origin, get_type_hints
 
-from ord_betterproto import ord_classes
+from ord_tree import ord_classes
 
 """
 dealing with types in ORD messages

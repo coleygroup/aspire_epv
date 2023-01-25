@@ -2,28 +2,33 @@ from typing import get_args, Type, get_origin
 
 import networkx as nx
 
-from ord_betterproto.type_hints import get_toth, TypeOfTypeHint, get_type_hints_without_private
-from ord_betterproto.utils import get_class_string, MessageTypeTreeError, DotPathLabel, RootDotPath
+from ord_tree.type_hints import get_toth, TypeOfTypeHint, get_type_hints_without_private
+from ord_tree.utils import get_class_string, MessageTypeTreeError, _RootNodeId, _NodeDelimiter
 
 """
 convert a betterproto.message class to an arborescence
 this provides a skeleton for users to define a message instance
+
+- tree nodes are `|` delimited strings 
+- node attributes:
+    label=str(type_hint),
+    type_hint=type_hint,
+    node_class=node_class,
+    node_class_toth=node_toth,
+    node_class_as_string=get_class_string(node_class),  # for importing
 """
 
 
 def _extend_type_hint(
-        type_hint, tree: nx.DiGraph, parent: int = None,
-        relation_to_parent: str = None, delimiter: str = "."
+        type_hint, tree: nx.DiGraph, parent: str = None,
+        relation_to_parent: str = None, delimiter: str = _NodeDelimiter
 ):
-    # parent
     if parent is None:
-        dotpath = RootDotPath
+        node_id = _RootNodeId
     else:
-        parent_dotpath = tree.nodes[parent][DotPathLabel]
-        dotpath = parent_dotpath + delimiter + relation_to_parent
+        node_id = parent + delimiter + relation_to_parent
+    assert node_id.startswith(_RootNodeId)
 
-    # current node
-    node = len(tree.nodes)
     node_toth = get_toth(type_hint)
 
     # get node class
@@ -46,33 +51,32 @@ def _extend_type_hint(
     else:
         raise MessageTypeTreeError(f"node class or toth cannot be identified from: {type_hint}")
 
+    # TODO use dataclass?
     node_attr = dict(
         label=str(type_hint),
-        label_info="str(type_hint)",
         type_hint=type_hint,
         node_class=node_class,
         node_class_toth=node_toth,
-        node_class_as_string=get_class_string(node_class),
+        node_class_as_string=get_class_string(node_class),  # for importing
     )
-    node_attr[DotPathLabel] = dotpath
-    tree.add_node(node, **node_attr)
+    tree.add_node(node_id, **node_attr)
     if parent is not None:
-        tree.add_edge(parent, node, label=relation_to_parent)
+        tree.add_edge(parent, node_id, label=relation_to_parent)
 
     # children
     if node_toth in (TypeOfTypeHint.ListOrdMessage, TypeOfTypeHint.ListBuiltinLiteral):
         attr_name = "<ListIndex>"
         attr_type = get_args(type_hint)[0]
-        _extend_type_hint(attr_type, tree, parent=node, relation_to_parent=attr_name)
+        _extend_type_hint(attr_type, tree, parent=node_id, relation_to_parent=attr_name)
     elif node_toth in (TypeOfTypeHint.DictOrdMessage, TypeOfTypeHint.DictBuiltinLiteral):
         attr_name = "<DictKey>"
         attr_type = get_args(type_hint)[1]
-        _extend_type_hint(attr_type, tree, parent=node, relation_to_parent=attr_name)
+        _extend_type_hint(attr_type, tree, parent=node_id, relation_to_parent=attr_name)
     elif node_toth in (TypeOfTypeHint.BuiltinLiteral, TypeOfTypeHint.OptionalLiteral, TypeOfTypeHint.OrdEnum):
         return
     else:
         for attr_name, attr_type in get_type_hints_without_private(type_hint).items():
-            _extend_type_hint(attr_type, tree, parent=node, relation_to_parent=attr_name)
+            _extend_type_hint(attr_type, tree, parent=node_id, relation_to_parent=attr_name)
 
 
 def message_type_to_message_type_tree(message: Type) -> nx.DiGraph:
