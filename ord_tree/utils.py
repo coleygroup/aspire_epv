@@ -15,6 +15,11 @@ def read_file(fn: FilePath) -> str:
         return f.read()
 
 
+def write_file(s: str, fn: FilePath):
+    with open(fn, "w") as f:
+        f.write(s)
+
+
 _RootNodeId = "<ROOT>"
 _NodeDelimiter = "|"
 

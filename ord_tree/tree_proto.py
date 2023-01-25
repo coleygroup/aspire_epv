@@ -151,6 +151,11 @@ class PrototypeTree:
         return PrototypeTree.from_mot(mot, m.__class__)
 
     @classmethod
+    def from_message_type(cls, mt: Type):
+        mtt = message_type_to_message_type_tree(mt)
+        return PrototypeTree.from_mtt(mtt)
+
+    @classmethod
     def from_mot(cls, mot: nx.DiGraph, message_type: Type):
         mtt = message_type_to_message_type_tree(message_type)
         pt = nx.DiGraph()
