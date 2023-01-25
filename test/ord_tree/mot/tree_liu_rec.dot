@@ -1,0 +1,746 @@
+strict digraph "" {
+	graph [rankdir=LR,
+		splines=curved
+	];
+	node [label="\N"];
+	"<ROOT>"	[label=<class 'ord_betterproto.Reaction'>,
+		node_class="<class 'ord_betterproto.Reaction'>",
+		node_class_as_string="ord_betterproto.Reaction",
+		node_object="Reaction(identifiers=[], inputs={'4-dimethyl-aminopyridine': ReactionInput(components=[Compound(identifiers=[CompoundIdentifier(\
+type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='n1ccc(N(C)C)cc1'), CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: \
+6>, details='', value='4-dimethyl-aminopyridine')], amount=Amount(mass=Mass(value=12.8, precision=None, units=<MassMassUnit.GRAM: \
+2>), moles=Moles(value=None, precision=None, units=0), volume=Volume(value=None, precision=None, units=0), volume_includes_solutes=\
+None, unmeasured=UnmeasuredAmount(type=0, details='')), reaction_role=<ReactionRoleReactionRoleType.REAGENT: 2>, is_limiting=None, \
+preparations=[CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.NONE: 2>, details='used as received', reaction_\
+id='')], source=CompoundSource(vendor='Sigma Aldrich', catalog_id='', lot=''), features={}, analyses={})], crude_components=[], \
+addition_order=2, addition_time=Time(value=None, precision=None, units=0), addition_speed=ReactionInputAdditionSpeed(type=0, details=''), \
+addition_duration=Time(value=None, precision=None, units=0), flow_rate=FlowRate(value=None, precision=None, units=0), addition_device=\
+ReactionInputAdditionDevice(type=0, details=''), addition_temperature=Temperature(value=None, precision=None, units=0)), 'dichloromethane': \
+ReactionInput(components=[Compound(identifiers=[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', \
+value='C(Cl)Cl'), CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='dichloromethane')], \
+amount=Amount(mass=Mass(value=None, precision=None, units=0), moles=Moles(value=None, precision=None, units=0), volume=Volume(value=\
+250.0, precision=None, units=<VolumeVolumeUnit.MILLILITER: 2>), volume_includes_solutes=None, unmeasured=UnmeasuredAmount(type=0, \
+details='')), reaction_role=<ReactionRoleReactionRoleType.SOLVENT: 3>, is_limiting=None, preparations=[CompoundPreparation(type=<\
+CompoundPreparationCompoundPreparationType.DRIED: 5>, details='purified by passage under argon pressure through two packed columns \
+of neutral alumina and copper(II) oxide', reaction_id='')], source=CompoundSource(vendor='J. T. Baker', catalog_id='', lot=''), \
+features={}, analyses={})], crude_components=[], addition_order=3, addition_time=Time(value=None, precision=None, units=0), addition_\
+speed=ReactionInputAdditionSpeed(type=0, details=''), addition_duration=Time(value=None, precision=None, units=0), flow_rate=FlowRate(\
+value=None, precision=None, units=0), addition_device=ReactionInputAdditionDevice(type=0, details=''), addition_temperature=Temperature(\
+value=None, precision=None, units=0)), 'N,N-dibenzylhydroxylamine': ReactionInput(components=[Compound(identifiers=[CompoundIdentifier(\
+type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='C1=CC=C(C=C1)CN(CC2=CC=CC=C2)O'), CompoundIdentifier(\
+type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='N,N-dibenzylhydroxylamine')], amount=Amount(mass=Mass(\
+value=21.3, precision=None, units=<MassMassUnit.GRAM: 2>), moles=Moles(value=None, precision=None, units=0), volume=Volume(value=\
+None, precision=None, units=0), volume_includes_solutes=None, unmeasured=UnmeasuredAmount(type=0, details='')), reaction_role=<ReactionRoleReactionRoleType.REACTANT: \
+1>, is_limiting=True, preparations=[CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.CUSTOM: 1>, details='a \
+few colored or darker crystals, which were present in trace amounts, were discarded using standard tweezers', reaction_id='')], \
+source=CompoundSource(vendor='TCI America', catalog_id='', lot=''), features={}, analyses={})], crude_components=[], addition_order=\
+1, addition_time=Time(value=None, precision=None, units=0), addition_speed=ReactionInputAdditionSpeed(type=0, details=''), addition_\
+duration=Time(value=None, precision=None, units=0), flow_rate=FlowRate(value=None, precision=None, units=0), addition_device=ReactionInputAdditionDevice(\
+type=0, details=''), addition_temperature=Temperature(value=None, precision=None, units=0))}, setup=ReactionSetup(vessel=Vessel(\
+type=<VesselVesselType.ROUND_BOTTOM_FLASK: 2>, details='single-necked', material=VesselMaterial(type=<VesselMaterialVesselMaterialType.GLASS: \
+2>, details=''), preparations=[VesselPreparation(type=<VesselPreparationVesselPreparationType.OVEN_DRIED: 3>, details=''), VesselPreparation(\
+type=<VesselPreparationVesselPreparationType.PURGED: 6>, details='with nitrogen')], attachments=[VesselAttachment(type=<VesselAttachmentVesselAttachmentType.SEPTUM: \
+3>, details='rubber')], volume=Volume(value=500.0, precision=None, units=<VolumeVolumeUnit.MILLILITER: 2>), plate_id='', plate_position=''), \
+is_automated=False, automation_platform='', automation_code={}, environment=ReactionSetupReactionEnvironment(type=<ReactionSetupReactionEnvironmentReactionEnvironmentType.FUME_\
+HOOD: 2>, details='')), conditions=ReactionConditions(temperature=TemperatureConditions(), pressure=PressureConditions(), stirring=\
+StirringConditions(), illumination=IlluminationConditions(), electrochemistry=ElectrochemistryConditions(), flow=FlowConditions(), \
+reflux=None, ph=None, conditions_are_dynamic=None, details=''), notes=ReactionNotes(is_heterogeneous=None, forms_precipitate=None, \
+is_exothermic=None, offgasses=None, is_sensitive_to_moisture=None, is_sensitive_to_oxygen=None, is_sensitive_to_light=None, safety_\
+notes='', procedure_details=''), observations=[], workups=[], outcomes=[ReactionOutcome(reaction_time=Time(value=6.0, precision=\
+None, units=<TimeTimeUnit.HOUR: 1>), conversion=Percentage(value=None, precision=None), products=[], analyses={})], provenance=ReactionProvenance(\
+experimenter=Person(), city='', experiment_start=DateTime(), doi='', patent='', publication_url='', record_created=RecordEvent(), \
+record_modified=[]), reaction_id='Making N,N-Dibenzyl-O-pivaloylhydroxylamine')"];
+	"<ROOT>|inputs"	[label=<class 'dict'>,
+		node_class="<class 'dict'>",
+		node_class_as_string="builtins.dict",
+		node_object="{'4-dimethyl-aminopyridine': ReactionInput(components=[Compound(identifiers=[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: \
+2>, details='', value='n1ccc(N(C)C)cc1'), CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', \
+value='4-dimethyl-aminopyridine')], amount=Amount(mass=Mass(value=12.8, precision=None, units=<MassMassUnit.GRAM: 2>), moles=Moles(\
+value=None, precision=None, units=0), volume=Volume(value=None, precision=None, units=0), volume_includes_solutes=None, unmeasured=\
+UnmeasuredAmount(type=0, details='')), reaction_role=<ReactionRoleReactionRoleType.REAGENT: 2>, is_limiting=None, preparations=[\
+CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.NONE: 2>, details='used as received', reaction_id='')], source=\
+CompoundSource(vendor='Sigma Aldrich', catalog_id='', lot=''), features={}, analyses={})], crude_components=[], addition_order=2, \
+addition_time=Time(value=None, precision=None, units=0), addition_speed=ReactionInputAdditionSpeed(type=0, details=''), addition_\
+duration=Time(value=None, precision=None, units=0), flow_rate=FlowRate(value=None, precision=None, units=0), addition_device=ReactionInputAdditionDevice(\
+type=0, details=''), addition_temperature=Temperature(value=None, precision=None, units=0)), 'dichloromethane': ReactionInput(components=[\
+Compound(identifiers=[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='C(Cl)Cl'), \
+CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='dichloromethane')], amount=Amount(\
+mass=Mass(value=None, precision=None, units=0), moles=Moles(value=None, precision=None, units=0), volume=Volume(value=250.0, precision=\
+None, units=<VolumeVolumeUnit.MILLILITER: 2>), volume_includes_solutes=None, unmeasured=UnmeasuredAmount(type=0, details='')), reaction_\
+role=<ReactionRoleReactionRoleType.SOLVENT: 3>, is_limiting=None, preparations=[CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.DRIED: \
+5>, details='purified by passage under argon pressure through two packed columns of neutral alumina and copper(II) oxide', reaction_\
+id='')], source=CompoundSource(vendor='J. T. Baker', catalog_id='', lot=''), features={}, analyses={})], crude_components=[], addition_\
+order=3, addition_time=Time(value=None, precision=None, units=0), addition_speed=ReactionInputAdditionSpeed(type=0, details=''), \
+addition_duration=Time(value=None, precision=None, units=0), flow_rate=FlowRate(value=None, precision=None, units=0), addition_device=\
+ReactionInputAdditionDevice(type=0, details=''), addition_temperature=Temperature(value=None, precision=None, units=0)), 'N,N-dibenzylhydroxylamine': \
+ReactionInput(components=[Compound(identifiers=[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', \
+value='C1=CC=C(C=C1)CN(CC2=CC=CC=C2)O'), CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', \
+value='N,N-dibenzylhydroxylamine')], amount=Amount(mass=Mass(value=21.3, precision=None, units=<MassMassUnit.GRAM: 2>), moles=Moles(\
+value=None, precision=None, units=0), volume=Volume(value=None, precision=None, units=0), volume_includes_solutes=None, unmeasured=\
+UnmeasuredAmount(type=0, details='')), reaction_role=<ReactionRoleReactionRoleType.REACTANT: 1>, is_limiting=True, preparations=[\
+CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.CUSTOM: 1>, details='a few colored or darker crystals, which \
+were present in trace amounts, were discarded using standard tweezers', reaction_id='')], source=CompoundSource(vendor='TCI America', \
+catalog_id='', lot=''), features={}, analyses={})], crude_components=[], addition_order=1, addition_time=Time(value=None, precision=\
+None, units=0), addition_speed=ReactionInputAdditionSpeed(type=0, details=''), addition_duration=Time(value=None, precision=None, \
+units=0), flow_rate=FlowRate(value=None, precision=None, units=0), addition_device=ReactionInputAdditionDevice(type=0, details=''), \
+addition_temperature=Temperature(value=None, precision=None, units=0))}"];
+	"<ROOT>" -> "<ROOT>|inputs"	[field_name=inputs,
+		label=inputs];
+	"<ROOT>|setup"	[label=<class 'ord_betterproto.ReactionSetup'>,
+		node_class="<class 'ord_betterproto.ReactionSetup'>",
+		node_class_as_string="ord_betterproto.ReactionSetup",
+		node_object="ReactionSetup(vessel=Vessel(type=<VesselVesselType.ROUND_BOTTOM_FLASK: 2>, details='single-necked', material=VesselMaterial(type=<\
+VesselMaterialVesselMaterialType.GLASS: 2>, details=''), preparations=[VesselPreparation(type=<VesselPreparationVesselPreparationType.OVEN_\
+DRIED: 3>, details=''), VesselPreparation(type=<VesselPreparationVesselPreparationType.PURGED: 6>, details='with nitrogen')], attachments=[\
+VesselAttachment(type=<VesselAttachmentVesselAttachmentType.SEPTUM: 3>, details='rubber')], volume=Volume(value=500.0, precision=\
+None, units=<VolumeVolumeUnit.MILLILITER: 2>), plate_id='', plate_position=''), is_automated=False, automation_platform='', automation_\
+code={}, environment=ReactionSetupReactionEnvironment(type=<ReactionSetupReactionEnvironmentReactionEnvironmentType.FUME_HOOD: 2>, \
+details=''))"];
+	"<ROOT>" -> "<ROOT>|setup"	[field_name=setup,
+		label=setup];
+	"<ROOT>|outcomes"	[label=<class 'list'>,
+		node_class="<class 'list'>",
+		node_class_as_string="builtins.list",
+		node_object="[ReactionOutcome(reaction_time=Time(value=6.0, precision=None, units=<TimeTimeUnit.HOUR: 1>), conversion=Percentage(value=None, \
+precision=None), products=[], analyses={})]"];
+	"<ROOT>" -> "<ROOT>|outcomes"	[field_name=outcomes,
+		label=outcomes];
+	"<ROOT>|reaction_id"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object="Making N,N-Dibenzyl-O-pivaloylhydroxylamine"];
+	"<ROOT>" -> "<ROOT>|reaction_id"	[field_name=reaction_id,
+		label=reaction_id];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine"	[label=<class 'ord_betterproto.ReactionInput'>,
+		node_class="<class 'ord_betterproto.ReactionInput'>",
+		node_class_as_string="ord_betterproto.ReactionInput",
+		node_object="ReactionInput(components=[Compound(identifiers=[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', \
+value='n1ccc(N(C)C)cc1'), CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='4-dimethyl-aminopyridine')], \
+amount=Amount(mass=Mass(value=12.8, precision=None, units=<MassMassUnit.GRAM: 2>), moles=Moles(value=None, precision=None, units=\
+0), volume=Volume(value=None, precision=None, units=0), volume_includes_solutes=None, unmeasured=UnmeasuredAmount(type=0, details='')), \
+reaction_role=<ReactionRoleReactionRoleType.REAGENT: 2>, is_limiting=None, preparations=[CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.NONE: \
+2>, details='used as received', reaction_id='')], source=CompoundSource(vendor='Sigma Aldrich', catalog_id='', lot=''), features={}, \
+analyses={})], crude_components=[], addition_order=2, addition_time=Time(value=None, precision=None, units=0), addition_speed=ReactionInputAdditionSpeed(\
+type=0, details=''), addition_duration=Time(value=None, precision=None, units=0), flow_rate=FlowRate(value=None, precision=None, \
+units=0), addition_device=ReactionInputAdditionDevice(type=0, details=''), addition_temperature=Temperature(value=None, precision=\
+None, units=0))"];
+	"<ROOT>|inputs" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine"	[field_name="4-dimethyl-aminopyridine",
+		label="<DictKey>4-dimethyl-aminopyridine"];
+	"<ROOT>|inputs|<DictKey>dichloromethane"	[label=<class 'ord_betterproto.ReactionInput'>,
+		node_class="<class 'ord_betterproto.ReactionInput'>",
+		node_class_as_string="ord_betterproto.ReactionInput",
+		node_object="ReactionInput(components=[Compound(identifiers=[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', \
+value='C(Cl)Cl'), CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='dichloromethane')], \
+amount=Amount(mass=Mass(value=None, precision=None, units=0), moles=Moles(value=None, precision=None, units=0), volume=Volume(value=\
+250.0, precision=None, units=<VolumeVolumeUnit.MILLILITER: 2>), volume_includes_solutes=None, unmeasured=UnmeasuredAmount(type=0, \
+details='')), reaction_role=<ReactionRoleReactionRoleType.SOLVENT: 3>, is_limiting=None, preparations=[CompoundPreparation(type=<\
+CompoundPreparationCompoundPreparationType.DRIED: 5>, details='purified by passage under argon pressure through two packed columns \
+of neutral alumina and copper(II) oxide', reaction_id='')], source=CompoundSource(vendor='J. T. Baker', catalog_id='', lot=''), \
+features={}, analyses={})], crude_components=[], addition_order=3, addition_time=Time(value=None, precision=None, units=0), addition_\
+speed=ReactionInputAdditionSpeed(type=0, details=''), addition_duration=Time(value=None, precision=None, units=0), flow_rate=FlowRate(\
+value=None, precision=None, units=0), addition_device=ReactionInputAdditionDevice(type=0, details=''), addition_temperature=Temperature(\
+value=None, precision=None, units=0))"];
+	"<ROOT>|inputs" -> "<ROOT>|inputs|<DictKey>dichloromethane"	[field_name=dichloromethane,
+		label="<DictKey>dichloromethane"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine"	[label=<class 'ord_betterproto.ReactionInput'>,
+		node_class="<class 'ord_betterproto.ReactionInput'>",
+		node_class_as_string="ord_betterproto.ReactionInput",
+		node_object="ReactionInput(components=[Compound(identifiers=[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', \
+value='C1=CC=C(C=C1)CN(CC2=CC=CC=C2)O'), CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', \
+value='N,N-dibenzylhydroxylamine')], amount=Amount(mass=Mass(value=21.3, precision=None, units=<MassMassUnit.GRAM: 2>), moles=Moles(\
+value=None, precision=None, units=0), volume=Volume(value=None, precision=None, units=0), volume_includes_solutes=None, unmeasured=\
+UnmeasuredAmount(type=0, details='')), reaction_role=<ReactionRoleReactionRoleType.REACTANT: 1>, is_limiting=True, preparations=[\
+CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.CUSTOM: 1>, details='a few colored or darker crystals, which \
+were present in trace amounts, were discarded using standard tweezers', reaction_id='')], source=CompoundSource(vendor='TCI America', \
+catalog_id='', lot=''), features={}, analyses={})], crude_components=[], addition_order=1, addition_time=Time(value=None, precision=\
+None, units=0), addition_speed=ReactionInputAdditionSpeed(type=0, details=''), addition_duration=Time(value=None, precision=None, \
+units=0), flow_rate=FlowRate(value=None, precision=None, units=0), addition_device=ReactionInputAdditionDevice(type=0, details=''), \
+addition_temperature=Temperature(value=None, precision=None, units=0))"];
+	"<ROOT>|inputs" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine"	[field_name="N,N-dibenzylhydroxylamine",
+		label="<DictKey>N,N-dibenzylhydroxylamine"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components"	[label=<class 'list'>,
+		node_class="<class 'list'>",
+		node_class_as_string="builtins.list",
+		node_object="[Compound(identifiers=[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='n1ccc(N(\
+C)C)cc1'), CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='4-dimethyl-aminopyridine')], \
+amount=Amount(mass=Mass(value=12.8, precision=None, units=<MassMassUnit.GRAM: 2>), moles=Moles(value=None, precision=None, units=\
+0), volume=Volume(value=None, precision=None, units=0), volume_includes_solutes=None, unmeasured=UnmeasuredAmount(type=0, details='')), \
+reaction_role=<ReactionRoleReactionRoleType.REAGENT: 2>, is_limiting=None, preparations=[CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.NONE: \
+2>, details='used as received', reaction_id='')], source=CompoundSource(vendor='Sigma Aldrich', catalog_id='', lot=''), features={}, \
+analyses={})]"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components"	[field_name=components,
+		label=components];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|addition_order"	[label=<class 'int'>,
+		node_class="<class 'int'>",
+		node_class_as_string="builtins.int",
+		node_object=2];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|addition_order"	[field_name=addition_order,
+		label=addition_order];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0"	[label=<class 'ord_betterproto.Compound'>,
+		node_class="<class 'ord_betterproto.Compound'>",
+		node_class_as_string="ord_betterproto.Compound",
+		node_object="Compound(identifiers=[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='n1ccc(N(C)\
+C)cc1'), CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='4-dimethyl-aminopyridine')], \
+amount=Amount(mass=Mass(value=12.8, precision=None, units=<MassMassUnit.GRAM: 2>), moles=Moles(value=None, precision=None, units=\
+0), volume=Volume(value=None, precision=None, units=0), volume_includes_solutes=None, unmeasured=UnmeasuredAmount(type=0, details='')), \
+reaction_role=<ReactionRoleReactionRoleType.REAGENT: 2>, is_limiting=None, preparations=[CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.NONE: \
+2>, details='used as received', reaction_id='')], source=CompoundSource(vendor='Sigma Aldrich', catalog_id='', lot=''), features={}, \
+analyses={})"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0"	[field_name=0,
+		label="<ListIndex>0"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers"	[label=<class 'list'>,
+		node_class="<class 'list'>",
+		node_class_as_string="builtins.list",
+		node_object="[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='n1ccc(N(C)C)cc1'), CompoundIdentifier(\
+type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='4-dimethyl-aminopyridine')]"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers"	[field_name=identifiers,
+		label=identifiers];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|amount"	[label=<class 'ord_betterproto.Amount'>,
+		node_class="<class 'ord_betterproto.Amount'>",
+		node_class_as_string="ord_betterproto.Amount",
+		node_object="Amount(mass=Mass(value=12.8, precision=None, units=<MassMassUnit.GRAM: 2>), moles=Moles(value=None, precision=None, units=0), volume=\
+Volume(value=None, precision=None, units=0), volume_includes_solutes=None, unmeasured=UnmeasuredAmount(type=0, details=''))"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|amount"	[field_name=amount,
+		label=amount];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|reaction_role"	[label=<enum 'ReactionRoleReactionRoleType'>,
+		node_class="<enum 'ReactionRoleReactionRoleType'>",
+		node_class_as_string="ord_betterproto.ReactionRoleReactionRoleType",
+		node_object="ReactionRoleReactionRoleType.REAGENT"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|reaction_role"	[field_name=reaction_role,
+		label=reaction_role];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|preparations"	[label=<class 'list'>,
+		node_class="<class 'list'>",
+		node_class_as_string="builtins.list",
+		node_object="[CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.NONE: 2>, details='used as received', reaction_id='')]"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|preparations"	[field_name=preparations,
+		label=preparations];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|source"	[label=<class 'ord_betterproto.CompoundSource'>,
+		node_class="<class 'ord_betterproto.CompoundSource'>",
+		node_class_as_string="ord_betterproto.CompoundSource",
+		node_object="CompoundSource(vendor='Sigma Aldrich', catalog_id='', lot='')"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|source"	[field_name=source,
+		label=source];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>0"	[label=<class 'ord_betterproto.CompoundIdentifier'>,
+		node_class="<class 'ord_betterproto.CompoundIdentifier'>",
+		node_class_as_string="ord_betterproto.CompoundIdentifier",
+		node_object="CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='n1ccc(N(C)C)cc1')"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>0"	[field_name=0,
+		label="<ListIndex>0"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>1"	[label=<class 'ord_betterproto.CompoundIdentifier'>,
+		node_class="<class 'ord_betterproto.CompoundIdentifier'>",
+		node_class_as_string="ord_betterproto.CompoundIdentifier",
+		node_object="CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='4-dimethyl-aminopyridine')"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>1"	[field_name=1,
+		label="<ListIndex>1"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>0|type"	[label=<enum 'CompoundIdentifierCompoundIdentifierType'>,
+		node_class="<enum 'CompoundIdentifierCompoundIdentifierType'>",
+		node_class_as_string="ord_betterproto.CompoundIdentifierCompoundIdentifierType",
+		node_object="CompoundIdentifierCompoundIdentifierType.SMILES"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>0|type"	[field_name=type,
+		label=type];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>0|value"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object="n1ccc(N(C)C)cc1"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>0|value"	[field_name=value,
+		label=value];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>1|type"	[label=<enum 'CompoundIdentifierCompoundIdentifierType'>,
+		node_class="<enum 'CompoundIdentifierCompoundIdentifierType'>",
+		node_class_as_string="ord_betterproto.CompoundIdentifierCompoundIdentifierType",
+		node_object="CompoundIdentifierCompoundIdentifierType.NAME"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>1" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>1|type"	[field_name=type,
+		label=type];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>1|value"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object="4-dimethyl-aminopyridine"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>1" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|identifiers|<ListIndex>1|value"	[field_name=value,
+		label=value];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|amount|mass"	[label=<class 'ord_betterproto.Mass'>,
+		node_class="<class 'ord_betterproto.Mass'>",
+		node_class_as_string="ord_betterproto.Mass",
+		node_object="Mass(value=12.8, precision=None, units=<MassMassUnit.GRAM: 2>)"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|amount" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|amount|mass"	[field_name=mass,
+		label=mass];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|amount|mass|value"	[label=<class 'float'>,
+		node_class="<class 'float'>",
+		node_class_as_string="builtins.float",
+		node_object=12.8];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|amount|mass" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|amount|mass|value"	[field_name=value,
+		label=value];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|amount|mass|units"	[label=<enum 'MassMassUnit'>,
+		node_class="<enum 'MassMassUnit'>",
+		node_class_as_string="ord_betterproto.MassMassUnit",
+		node_object="MassMassUnit.GRAM"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|amount|mass" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|amount|mass|units"	[field_name=units,
+		label=units];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|preparations|<ListIndex>0"	[label=<class 'ord_betterproto.CompoundPreparation'>,
+		node_class="<class 'ord_betterproto.CompoundPreparation'>",
+		node_class_as_string="ord_betterproto.CompoundPreparation",
+		node_object="CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.NONE: 2>, details='used as received', reaction_id='')"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|preparations" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|preparations|<ListIndex>0"	[field_name=0,
+		label="<ListIndex>0"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|preparations|<ListIndex>0|type"	[label=<enum 'CompoundPreparationCompoundPreparationType'>,
+		node_class="<enum 'CompoundPreparationCompoundPreparationType'>",
+		node_class_as_string="ord_betterproto.CompoundPreparationCompoundPreparationType",
+		node_object="CompoundPreparationCompoundPreparationType.NONE"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|preparations|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|preparations|<ListIndex>0|type"	[field_name=type,
+		label=type];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|preparations|<ListIndex>0|details"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object="used as received"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|preparations|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|preparations|<ListIndex>0|details"	[field_name=details,
+		label=details];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|source|vendor"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object="Sigma Aldrich"];
+	"<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|source" -> "<ROOT>|inputs|<DictKey>4-dimethyl-aminopyridine|components|<ListIndex>0|source|vendor"	[field_name=vendor,
+		label=vendor];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components"	[label=<class 'list'>,
+		node_class="<class 'list'>",
+		node_class_as_string="builtins.list",
+		node_object="[Compound(identifiers=[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='C(Cl)Cl'), \
+CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='dichloromethane')], amount=Amount(\
+mass=Mass(value=None, precision=None, units=0), moles=Moles(value=None, precision=None, units=0), volume=Volume(value=250.0, precision=\
+None, units=<VolumeVolumeUnit.MILLILITER: 2>), volume_includes_solutes=None, unmeasured=UnmeasuredAmount(type=0, details='')), reaction_\
+role=<ReactionRoleReactionRoleType.SOLVENT: 3>, is_limiting=None, preparations=[CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.DRIED: \
+5>, details='purified by passage under argon pressure through two packed columns of neutral alumina and copper(II) oxide', reaction_\
+id='')], source=CompoundSource(vendor='J. T. Baker', catalog_id='', lot=''), features={}, analyses={})]"];
+	"<ROOT>|inputs|<DictKey>dichloromethane" -> "<ROOT>|inputs|<DictKey>dichloromethane|components"	[field_name=components,
+		label=components];
+	"<ROOT>|inputs|<DictKey>dichloromethane|addition_order"	[label=<class 'int'>,
+		node_class="<class 'int'>",
+		node_class_as_string="builtins.int",
+		node_object=3];
+	"<ROOT>|inputs|<DictKey>dichloromethane" -> "<ROOT>|inputs|<DictKey>dichloromethane|addition_order"	[field_name=addition_order,
+		label=addition_order];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0"	[label=<class 'ord_betterproto.Compound'>,
+		node_class="<class 'ord_betterproto.Compound'>",
+		node_class_as_string="ord_betterproto.Compound",
+		node_object="Compound(identifiers=[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='C(Cl)Cl'), \
+CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='dichloromethane')], amount=Amount(\
+mass=Mass(value=None, precision=None, units=0), moles=Moles(value=None, precision=None, units=0), volume=Volume(value=250.0, precision=\
+None, units=<VolumeVolumeUnit.MILLILITER: 2>), volume_includes_solutes=None, unmeasured=UnmeasuredAmount(type=0, details='')), reaction_\
+role=<ReactionRoleReactionRoleType.SOLVENT: 3>, is_limiting=None, preparations=[CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.DRIED: \
+5>, details='purified by passage under argon pressure through two packed columns of neutral alumina and copper(II) oxide', reaction_\
+id='')], source=CompoundSource(vendor='J. T. Baker', catalog_id='', lot=''), features={}, analyses={})"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0"	[field_name=0,
+		label="<ListIndex>0"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers"	[label=<class 'list'>,
+		node_class="<class 'list'>",
+		node_class_as_string="builtins.list",
+		node_object="[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='C(Cl)Cl'), CompoundIdentifier(\
+type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='dichloromethane')]"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers"	[field_name=identifiers,
+		label=identifiers];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|amount"	[label=<class 'ord_betterproto.Amount'>,
+		node_class="<class 'ord_betterproto.Amount'>",
+		node_class_as_string="ord_betterproto.Amount",
+		node_object="Amount(mass=Mass(value=None, precision=None, units=0), moles=Moles(value=None, precision=None, units=0), volume=Volume(value=250.0, \
+precision=None, units=<VolumeVolumeUnit.MILLILITER: 2>), volume_includes_solutes=None, unmeasured=UnmeasuredAmount(type=0, details=''))"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|amount"	[field_name=amount,
+		label=amount];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|reaction_role"	[label=<enum 'ReactionRoleReactionRoleType'>,
+		node_class="<enum 'ReactionRoleReactionRoleType'>",
+		node_class_as_string="ord_betterproto.ReactionRoleReactionRoleType",
+		node_object="ReactionRoleReactionRoleType.SOLVENT"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|reaction_role"	[field_name=reaction_role,
+		label=reaction_role];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|preparations"	[label=<class 'list'>,
+		node_class="<class 'list'>",
+		node_class_as_string="builtins.list",
+		node_object="[CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.DRIED: 5>, details='purified by passage under argon pressure \
+through two packed columns of neutral alumina and copper(II) oxide', reaction_id='')]"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|preparations"	[field_name=preparations,
+		label=preparations];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|source"	[label=<class 'ord_betterproto.CompoundSource'>,
+		node_class="<class 'ord_betterproto.CompoundSource'>",
+		node_class_as_string="ord_betterproto.CompoundSource",
+		node_object="CompoundSource(vendor='J. T. Baker', catalog_id='', lot='')"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|source"	[field_name=source,
+		label=source];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>0"	[label=<class 'ord_betterproto.CompoundIdentifier'>,
+		node_class="<class 'ord_betterproto.CompoundIdentifier'>",
+		node_class_as_string="ord_betterproto.CompoundIdentifier",
+		node_object="CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='C(Cl)Cl')"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>0"	[field_name=0,
+		label="<ListIndex>0"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>1"	[label=<class 'ord_betterproto.CompoundIdentifier'>,
+		node_class="<class 'ord_betterproto.CompoundIdentifier'>",
+		node_class_as_string="ord_betterproto.CompoundIdentifier",
+		node_object="CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='dichloromethane')"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>1"	[field_name=1,
+		label="<ListIndex>1"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>0|type"	[label=<enum 'CompoundIdentifierCompoundIdentifierType'>,
+		node_class="<enum 'CompoundIdentifierCompoundIdentifierType'>",
+		node_class_as_string="ord_betterproto.CompoundIdentifierCompoundIdentifierType",
+		node_object="CompoundIdentifierCompoundIdentifierType.SMILES"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>0|type"	[field_name=type,
+		label=type];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>0|value"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object="C(Cl)Cl"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>0|value"	[field_name=value,
+		label=value];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>1|type"	[label=<enum 'CompoundIdentifierCompoundIdentifierType'>,
+		node_class="<enum 'CompoundIdentifierCompoundIdentifierType'>",
+		node_class_as_string="ord_betterproto.CompoundIdentifierCompoundIdentifierType",
+		node_object="CompoundIdentifierCompoundIdentifierType.NAME"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>1" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>1|type"	[field_name=type,
+		label=type];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>1|value"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object=dichloromethane];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>1" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|identifiers|<ListIndex>1|value"	[field_name=value,
+		label=value];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|amount|volume"	[label=<class 'ord_betterproto.Volume'>,
+		node_class="<class 'ord_betterproto.Volume'>",
+		node_class_as_string="ord_betterproto.Volume",
+		node_object="Volume(value=250.0, precision=None, units=<VolumeVolumeUnit.MILLILITER: 2>)"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|amount" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|amount|volume"	[field_name=volume,
+		label=volume];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|amount|volume|value"	[label=<class 'float'>,
+		node_class="<class 'float'>",
+		node_class_as_string="builtins.float",
+		node_object=250.0];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|amount|volume" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|amount|volume|value"	[field_name=value,
+		label=value];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|amount|volume|units"	[label=<enum 'VolumeVolumeUnit'>,
+		node_class="<enum 'VolumeVolumeUnit'>",
+		node_class_as_string="ord_betterproto.VolumeVolumeUnit",
+		node_object="VolumeVolumeUnit.MILLILITER"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|amount|volume" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|amount|volume|units"	[field_name=units,
+		label=units];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|preparations|<ListIndex>0"	[label=<class 'ord_betterproto.CompoundPreparation'>,
+		node_class="<class 'ord_betterproto.CompoundPreparation'>",
+		node_class_as_string="ord_betterproto.CompoundPreparation",
+		node_object="CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.DRIED: 5>, details='purified by passage under argon pressure \
+through two packed columns of neutral alumina and copper(II) oxide', reaction_id='')"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|preparations" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|preparations|<ListIndex>0"	[field_name=0,
+		label="<ListIndex>0"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|preparations|<ListIndex>0|type"	[label=<enum 'CompoundPreparationCompoundPreparationType'>,
+		node_class="<enum 'CompoundPreparationCompoundPreparationType'>",
+		node_class_as_string="ord_betterproto.CompoundPreparationCompoundPreparationType",
+		node_object="CompoundPreparationCompoundPreparationType.DRIED"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|preparations|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|preparations|<ListIndex>0|type"	[field_name=type,
+		label=type];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|preparations|<ListIndex>0|details"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object="purified by passage under argon pressure through two packed columns of neutral alumina and copper(II) oxide"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|preparations|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|preparations|<ListIndex>0|details"	[field_name=details,
+		label=details];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|source|vendor"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object="J. T. Baker"];
+	"<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|source" -> "<ROOT>|inputs|<DictKey>dichloromethane|components|<ListIndex>0|source|vendor"	[field_name=vendor,
+		label=vendor];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components"	[label=<class 'list'>,
+		node_class="<class 'list'>",
+		node_class_as_string="builtins.list",
+		node_object="[Compound(identifiers=[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='C1=CC=C(\
+C=C1)CN(CC2=CC=CC=C2)O'), CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='N,N-dibenzylhydroxylamine')], \
+amount=Amount(mass=Mass(value=21.3, precision=None, units=<MassMassUnit.GRAM: 2>), moles=Moles(value=None, precision=None, units=\
+0), volume=Volume(value=None, precision=None, units=0), volume_includes_solutes=None, unmeasured=UnmeasuredAmount(type=0, details='')), \
+reaction_role=<ReactionRoleReactionRoleType.REACTANT: 1>, is_limiting=True, preparations=[CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.CUSTOM: \
+1>, details='a few colored or darker crystals, which were present in trace amounts, were discarded using standard tweezers', reaction_\
+id='')], source=CompoundSource(vendor='TCI America', catalog_id='', lot=''), features={}, analyses={})]"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components"	[field_name=components,
+		label=components];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|addition_order"	[label=<class 'int'>,
+		node_class="<class 'int'>",
+		node_class_as_string="builtins.int",
+		node_object=1];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|addition_order"	[field_name=addition_order,
+		label=addition_order];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0"	[label=<class 'ord_betterproto.Compound'>,
+		node_class="<class 'ord_betterproto.Compound'>",
+		node_class_as_string="ord_betterproto.Compound",
+		node_object="Compound(identifiers=[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='C1=CC=C(C=\
+C1)CN(CC2=CC=CC=C2)O'), CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='N,N-dibenzylhydroxylamine')], \
+amount=Amount(mass=Mass(value=21.3, precision=None, units=<MassMassUnit.GRAM: 2>), moles=Moles(value=None, precision=None, units=\
+0), volume=Volume(value=None, precision=None, units=0), volume_includes_solutes=None, unmeasured=UnmeasuredAmount(type=0, details='')), \
+reaction_role=<ReactionRoleReactionRoleType.REACTANT: 1>, is_limiting=True, preparations=[CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.CUSTOM: \
+1>, details='a few colored or darker crystals, which were present in trace amounts, were discarded using standard tweezers', reaction_\
+id='')], source=CompoundSource(vendor='TCI America', catalog_id='', lot=''), features={}, analyses={})"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0"	[field_name=0,
+		label="<ListIndex>0"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers"	[label=<class 'list'>,
+		node_class="<class 'list'>",
+		node_class_as_string="builtins.list",
+		node_object="[CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='C1=CC=C(C=C1)CN(CC2=CC=CC=C2)O'), \
+CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='N,N-dibenzylhydroxylamine')]"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers"	[field_name=identifiers,
+		label=identifiers];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|amount"	[label=<class 'ord_betterproto.Amount'>,
+		node_class="<class 'ord_betterproto.Amount'>",
+		node_class_as_string="ord_betterproto.Amount",
+		node_object="Amount(mass=Mass(value=21.3, precision=None, units=<MassMassUnit.GRAM: 2>), moles=Moles(value=None, precision=None, units=0), volume=\
+Volume(value=None, precision=None, units=0), volume_includes_solutes=None, unmeasured=UnmeasuredAmount(type=0, details=''))"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|amount"	[field_name=amount,
+		label=amount];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|reaction_role"	[label=<enum 'ReactionRoleReactionRoleType'>,
+		node_class="<enum 'ReactionRoleReactionRoleType'>",
+		node_class_as_string="ord_betterproto.ReactionRoleReactionRoleType",
+		node_object="ReactionRoleReactionRoleType.REACTANT"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|reaction_role"	[field_name=reaction_role,
+		label=reaction_role];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|is_limiting"	[label=<class 'bool'>,
+		node_class="<class 'bool'>",
+		node_class_as_string="builtins.bool",
+		node_object=True];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|is_limiting"	[field_name=is_limiting,
+		label=is_limiting];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|preparations"	[label=<class 'list'>,
+		node_class="<class 'list'>",
+		node_class_as_string="builtins.list",
+		node_object="[CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.CUSTOM: 1>, details='a few colored or darker crystals, which \
+were present in trace amounts, were discarded using standard tweezers', reaction_id='')]"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|preparations"	[field_name=preparations,
+		label=preparations];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|source"	[label=<class 'ord_betterproto.CompoundSource'>,
+		node_class="<class 'ord_betterproto.CompoundSource'>",
+		node_class_as_string="ord_betterproto.CompoundSource",
+		node_object="CompoundSource(vendor='TCI America', catalog_id='', lot='')"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|source"	[field_name=source,
+		label=source];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>0"	[label=<class 'ord_betterproto.CompoundIdentifier'>,
+		node_class="<class 'ord_betterproto.CompoundIdentifier'>",
+		node_class_as_string="ord_betterproto.CompoundIdentifier",
+		node_object="CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.SMILES: 2>, details='', value='C1=CC=C(C=C1)CN(CC2=CC=CC=C2)O')"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>0"	[field_name=0,
+		label="<ListIndex>0"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>1"	[label=<class 'ord_betterproto.CompoundIdentifier'>,
+		node_class="<class 'ord_betterproto.CompoundIdentifier'>",
+		node_class_as_string="ord_betterproto.CompoundIdentifier",
+		node_object="CompoundIdentifier(type=<CompoundIdentifierCompoundIdentifierType.NAME: 6>, details='', value='N,N-dibenzylhydroxylamine')"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>1"	[field_name=1,
+		label="<ListIndex>1"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>0|type"	[label=<enum 'CompoundIdentifierCompoundIdentifierType'>,
+		node_class="<enum 'CompoundIdentifierCompoundIdentifierType'>",
+		node_class_as_string="ord_betterproto.CompoundIdentifierCompoundIdentifierType",
+		node_object="CompoundIdentifierCompoundIdentifierType.SMILES"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>0|type"	[field_name=type,
+		label=type];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>0|value"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object="C1=CC=C(C=C1)CN(CC2=CC=CC=C2)O"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>0|value"	[field_name=value,
+		label=value];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>1|type"	[label=<enum 'CompoundIdentifierCompoundIdentifierType'>,
+		node_class="<enum 'CompoundIdentifierCompoundIdentifierType'>",
+		node_class_as_string="ord_betterproto.CompoundIdentifierCompoundIdentifierType",
+		node_object="CompoundIdentifierCompoundIdentifierType.NAME"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>1" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>1|type"	[field_name=type,
+		label=type];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>1|value"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object="N,N-dibenzylhydroxylamine"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>1" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|identifiers|<ListIndex>1|value"	[field_name=value,
+		label=value];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|amount|mass"	[label=<class 'ord_betterproto.Mass'>,
+		node_class="<class 'ord_betterproto.Mass'>",
+		node_class_as_string="ord_betterproto.Mass",
+		node_object="Mass(value=21.3, precision=None, units=<MassMassUnit.GRAM: 2>)"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|amount" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|amount|mass"	[field_name=mass,
+		label=mass];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|amount|mass|value"	[label=<class 'float'>,
+		node_class="<class 'float'>",
+		node_class_as_string="builtins.float",
+		node_object=21.3];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|amount|mass" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|amount|mass|value"	[field_name=value,
+		label=value];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|amount|mass|units"	[label=<enum 'MassMassUnit'>,
+		node_class="<enum 'MassMassUnit'>",
+		node_class_as_string="ord_betterproto.MassMassUnit",
+		node_object="MassMassUnit.GRAM"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|amount|mass" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|amount|mass|units"	[field_name=units,
+		label=units];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|preparations|<ListIndex>0"	[label=<class 'ord_betterproto.CompoundPreparation'>,
+		node_class="<class 'ord_betterproto.CompoundPreparation'>",
+		node_class_as_string="ord_betterproto.CompoundPreparation",
+		node_object="CompoundPreparation(type=<CompoundPreparationCompoundPreparationType.CUSTOM: 1>, details='a few colored or darker crystals, which \
+were present in trace amounts, were discarded using standard tweezers', reaction_id='')"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|preparations" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|preparations|<ListIndex>0"	[field_name=0,
+		label="<ListIndex>0"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|preparations|<ListIndex>0|type"	[label=<enum 'CompoundPreparationCompoundPreparationType'>,
+		node_class="<enum 'CompoundPreparationCompoundPreparationType'>",
+		node_class_as_string="ord_betterproto.CompoundPreparationCompoundPreparationType",
+		node_object="CompoundPreparationCompoundPreparationType.CUSTOM"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|preparations|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|preparations|<ListIndex>0|type"	[field_name=type,
+		label=type];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|preparations|<ListIndex>0|details"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object="a few colored or darker crystals, which were present in trace amounts, were discarded using standard tweezers"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|preparations|<ListIndex>0" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|preparations|<ListIndex>0|details"	[field_name=details,
+		label=details];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|source|vendor"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object="TCI America"];
+	"<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|source" -> "<ROOT>|inputs|<DictKey>N,N-dibenzylhydroxylamine|components|<ListIndex>0|source|vendor"	[field_name=vendor,
+		label=vendor];
+	"<ROOT>|setup|vessel"	[label=<class 'ord_betterproto.Vessel'>,
+		node_class="<class 'ord_betterproto.Vessel'>",
+		node_class_as_string="ord_betterproto.Vessel",
+		node_object="Vessel(type=<VesselVesselType.ROUND_BOTTOM_FLASK: 2>, details='single-necked', material=VesselMaterial(type=<VesselMaterialVesselMaterialType.GLASS: \
+2>, details=''), preparations=[VesselPreparation(type=<VesselPreparationVesselPreparationType.OVEN_DRIED: 3>, details=''), VesselPreparation(\
+type=<VesselPreparationVesselPreparationType.PURGED: 6>, details='with nitrogen')], attachments=[VesselAttachment(type=<VesselAttachmentVesselAttachmentType.SEPTUM: \
+3>, details='rubber')], volume=Volume(value=500.0, precision=None, units=<VolumeVolumeUnit.MILLILITER: 2>), plate_id='', plate_position='')"];
+	"<ROOT>|setup" -> "<ROOT>|setup|vessel"	[field_name=vessel,
+		label=vessel];
+	"<ROOT>|setup|is_automated"	[label=<class 'bool'>,
+		node_class="<class 'bool'>",
+		node_class_as_string="builtins.bool",
+		node_object=False];
+	"<ROOT>|setup" -> "<ROOT>|setup|is_automated"	[field_name=is_automated,
+		label=is_automated];
+	"<ROOT>|setup|environment"	[label=<class 'ord_betterproto.ReactionSetupReactionEnvironment'>,
+		node_class="<class 'ord_betterproto.ReactionSetupReactionEnvironment'>",
+		node_class_as_string="ord_betterproto.ReactionSetupReactionEnvironment",
+		node_object="ReactionSetupReactionEnvironment(type=<ReactionSetupReactionEnvironmentReactionEnvironmentType.FUME_HOOD: 2>, details='')"];
+	"<ROOT>|setup" -> "<ROOT>|setup|environment"	[field_name=environment,
+		label=environment];
+	"<ROOT>|setup|vessel|type"	[label=<enum 'VesselVesselType'>,
+		node_class="<enum 'VesselVesselType'>",
+		node_class_as_string="ord_betterproto.VesselVesselType",
+		node_object="VesselVesselType.ROUND_BOTTOM_FLASK"];
+	"<ROOT>|setup|vessel" -> "<ROOT>|setup|vessel|type"	[field_name=type,
+		label=type];
+	"<ROOT>|setup|vessel|details"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object="single-necked"];
+	"<ROOT>|setup|vessel" -> "<ROOT>|setup|vessel|details"	[field_name=details,
+		label=details];
+	"<ROOT>|setup|vessel|material"	[label=<class 'ord_betterproto.VesselMaterial'>,
+		node_class="<class 'ord_betterproto.VesselMaterial'>",
+		node_class_as_string="ord_betterproto.VesselMaterial",
+		node_object="VesselMaterial(type=<VesselMaterialVesselMaterialType.GLASS: 2>, details='')"];
+	"<ROOT>|setup|vessel" -> "<ROOT>|setup|vessel|material"	[field_name=material,
+		label=material];
+	"<ROOT>|setup|vessel|preparations"	[label=<class 'list'>,
+		node_class="<class 'list'>",
+		node_class_as_string="builtins.list",
+		node_object="[VesselPreparation(type=<VesselPreparationVesselPreparationType.OVEN_DRIED: 3>, details=''), VesselPreparation(type=<VesselPreparationVesselPreparationType.PURGED: \
+6>, details='with nitrogen')]"];
+	"<ROOT>|setup|vessel" -> "<ROOT>|setup|vessel|preparations"	[field_name=preparations,
+		label=preparations];
+	"<ROOT>|setup|vessel|attachments"	[label=<class 'list'>,
+		node_class="<class 'list'>",
+		node_class_as_string="builtins.list",
+		node_object="[VesselAttachment(type=<VesselAttachmentVesselAttachmentType.SEPTUM: 3>, details='rubber')]"];
+	"<ROOT>|setup|vessel" -> "<ROOT>|setup|vessel|attachments"	[field_name=attachments,
+		label=attachments];
+	"<ROOT>|setup|vessel|volume"	[label=<class 'ord_betterproto.Volume'>,
+		node_class="<class 'ord_betterproto.Volume'>",
+		node_class_as_string="ord_betterproto.Volume",
+		node_object="Volume(value=500.0, precision=None, units=<VolumeVolumeUnit.MILLILITER: 2>)"];
+	"<ROOT>|setup|vessel" -> "<ROOT>|setup|vessel|volume"	[field_name=volume,
+		label=volume];
+	"<ROOT>|setup|vessel|material|type"	[label=<enum 'VesselMaterialVesselMaterialType'>,
+		node_class="<enum 'VesselMaterialVesselMaterialType'>",
+		node_class_as_string="ord_betterproto.VesselMaterialVesselMaterialType",
+		node_object="VesselMaterialVesselMaterialType.GLASS"];
+	"<ROOT>|setup|vessel|material" -> "<ROOT>|setup|vessel|material|type"	[field_name=type,
+		label=type];
+	"<ROOT>|setup|vessel|preparations|<ListIndex>0"	[label=<class 'ord_betterproto.VesselPreparation'>,
+		node_class="<class 'ord_betterproto.VesselPreparation'>",
+		node_class_as_string="ord_betterproto.VesselPreparation",
+		node_object="VesselPreparation(type=<VesselPreparationVesselPreparationType.OVEN_DRIED: 3>, details='')"];
+	"<ROOT>|setup|vessel|preparations" -> "<ROOT>|setup|vessel|preparations|<ListIndex>0"	[field_name=0,
+		label="<ListIndex>0"];
+	"<ROOT>|setup|vessel|preparations|<ListIndex>1"	[label=<class 'ord_betterproto.VesselPreparation'>,
+		node_class="<class 'ord_betterproto.VesselPreparation'>",
+		node_class_as_string="ord_betterproto.VesselPreparation",
+		node_object="VesselPreparation(type=<VesselPreparationVesselPreparationType.PURGED: 6>, details='with nitrogen')"];
+	"<ROOT>|setup|vessel|preparations" -> "<ROOT>|setup|vessel|preparations|<ListIndex>1"	[field_name=1,
+		label="<ListIndex>1"];
+	"<ROOT>|setup|vessel|preparations|<ListIndex>0|type"	[label=<enum 'VesselPreparationVesselPreparationType'>,
+		node_class="<enum 'VesselPreparationVesselPreparationType'>",
+		node_class_as_string="ord_betterproto.VesselPreparationVesselPreparationType",
+		node_object="VesselPreparationVesselPreparationType.OVEN_DRIED"];
+	"<ROOT>|setup|vessel|preparations|<ListIndex>0" -> "<ROOT>|setup|vessel|preparations|<ListIndex>0|type"	[field_name=type,
+		label=type];
+	"<ROOT>|setup|vessel|preparations|<ListIndex>1|type"	[label=<enum 'VesselPreparationVesselPreparationType'>,
+		node_class="<enum 'VesselPreparationVesselPreparationType'>",
+		node_class_as_string="ord_betterproto.VesselPreparationVesselPreparationType",
+		node_object="VesselPreparationVesselPreparationType.PURGED"];
+	"<ROOT>|setup|vessel|preparations|<ListIndex>1" -> "<ROOT>|setup|vessel|preparations|<ListIndex>1|type"	[field_name=type,
+		label=type];
+	"<ROOT>|setup|vessel|preparations|<ListIndex>1|details"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object="with nitrogen"];
+	"<ROOT>|setup|vessel|preparations|<ListIndex>1" -> "<ROOT>|setup|vessel|preparations|<ListIndex>1|details"	[field_name=details,
+		label=details];
+	"<ROOT>|setup|vessel|attachments|<ListIndex>0"	[label=<class 'ord_betterproto.VesselAttachment'>,
+		node_class="<class 'ord_betterproto.VesselAttachment'>",
+		node_class_as_string="ord_betterproto.VesselAttachment",
+		node_object="VesselAttachment(type=<VesselAttachmentVesselAttachmentType.SEPTUM: 3>, details='rubber')"];
+	"<ROOT>|setup|vessel|attachments" -> "<ROOT>|setup|vessel|attachments|<ListIndex>0"	[field_name=0,
+		label="<ListIndex>0"];
+	"<ROOT>|setup|vessel|attachments|<ListIndex>0|type"	[label=<enum 'VesselAttachmentVesselAttachmentType'>,
+		node_class="<enum 'VesselAttachmentVesselAttachmentType'>",
+		node_class_as_string="ord_betterproto.VesselAttachmentVesselAttachmentType",
+		node_object="VesselAttachmentVesselAttachmentType.SEPTUM"];
+	"<ROOT>|setup|vessel|attachments|<ListIndex>0" -> "<ROOT>|setup|vessel|attachments|<ListIndex>0|type"	[field_name=type,
+		label=type];
+	"<ROOT>|setup|vessel|attachments|<ListIndex>0|details"	[label=<class 'str'>,
+		node_class="<class 'str'>",
+		node_class_as_string="builtins.str",
+		node_object=rubber];
+	"<ROOT>|setup|vessel|attachments|<ListIndex>0" -> "<ROOT>|setup|vessel|attachments|<ListIndex>0|details"	[field_name=details,
+		label=details];
+	"<ROOT>|setup|vessel|volume|value"	[label=<class 'float'>,
+		node_class="<class 'float'>",
+		node_class_as_string="builtins.float",
+		node_object=500.0];
+	"<ROOT>|setup|vessel|volume" -> "<ROOT>|setup|vessel|volume|value"	[field_name=value,
+		label=value];
+	"<ROOT>|setup|vessel|volume|units"	[label=<enum 'VolumeVolumeUnit'>,
+		node_class="<enum 'VolumeVolumeUnit'>",
+		node_class_as_string="ord_betterproto.VolumeVolumeUnit",
+		node_object="VolumeVolumeUnit.MILLILITER"];
+	"<ROOT>|setup|vessel|volume" -> "<ROOT>|setup|vessel|volume|units"	[field_name=units,
+		label=units];
+	"<ROOT>|setup|environment|type"	[label=<enum 'ReactionSetupReactionEnvironmentReactionEnvironmentType'>,
+		node_class="<enum 'ReactionSetupReactionEnvironmentReactionEnvironmentType'>",
+		node_class_as_string="ord_betterproto.ReactionSetupReactionEnvironmentReactionEnvironmentType",
+		node_object="ReactionSetupReactionEnvironmentReactionEnvironmentType.FUME_HOOD"];
+	"<ROOT>|setup|environment" -> "<ROOT>|setup|environment|type"	[field_name=type,
+		label=type];
+	"<ROOT>|outcomes|<ListIndex>0"	[label=<class 'ord_betterproto.ReactionOutcome'>,
+		node_class="<class 'ord_betterproto.ReactionOutcome'>",
+		node_class_as_string="ord_betterproto.ReactionOutcome",
+		node_object="ReactionOutcome(reaction_time=Time(value=6.0, precision=None, units=<TimeTimeUnit.HOUR: 1>), conversion=Percentage(value=None, precision=\
+None), products=[], analyses={})"];
+	"<ROOT>|outcomes" -> "<ROOT>|outcomes|<ListIndex>0"	[field_name=0,
+		label="<ListIndex>0"];
+	"<ROOT>|outcomes|<ListIndex>0|reaction_time"	[label=<class 'ord_betterproto.Time'>,
+		node_class="<class 'ord_betterproto.Time'>",
+		node_class_as_string="ord_betterproto.Time",
+		node_object="Time(value=6.0, precision=None, units=<TimeTimeUnit.HOUR: 1>)"];
+	"<ROOT>|outcomes|<ListIndex>0" -> "<ROOT>|outcomes|<ListIndex>0|reaction_time"	[field_name=reaction_time,
+		label=reaction_time];
+	"<ROOT>|outcomes|<ListIndex>0|reaction_time|value"	[label=<class 'float'>,
+		node_class="<class 'float'>",
+		node_class_as_string="builtins.float",
+		node_object=6.0];
+	"<ROOT>|outcomes|<ListIndex>0|reaction_time" -> "<ROOT>|outcomes|<ListIndex>0|reaction_time|value"	[field_name=value,
+		label=value];
+	"<ROOT>|outcomes|<ListIndex>0|reaction_time|units"	[label=<enum 'TimeTimeUnit'>,
+		node_class="<enum 'TimeTimeUnit'>",
+		node_class_as_string="ord_betterproto.TimeTimeUnit",
+		node_object="TimeTimeUnit.HOUR"];
+	"<ROOT>|outcomes|<ListIndex>0|reaction_time" -> "<ROOT>|outcomes|<ListIndex>0|reaction_time|units"	[field_name=units,
+		label=units];
+}
