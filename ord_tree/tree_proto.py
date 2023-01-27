@@ -13,6 +13,7 @@ from ord_tree.tree_obj import message_object_to_message_object_tree, PrefixDictK
 from ord_tree.tree_type import message_type_to_message_type_tree
 from ord_tree.type_hints import TypeOfTypeHint
 from ord_tree.utils import nx, _NodeDelimiter, get_root, _RootNodeId
+from ord_tree.convert import mtt_to_json, mtt_from_json_string, mtt_from_json_file
 
 
 # TODO make classes serializable
@@ -409,3 +410,16 @@ class PrototypeTree:
                 self.tree.add_node(child, **child_attr.as_dict())
                 self.tree.add_edge(from_node, child, **edge_attr.as_dict())
                 logger.info(f"edge added, current tree size: {len(self.tree.nodes)}")
+
+    def as_dict(self):
+        d = {
+            "tree": nx.cytoscape_data(self.tree),
+            "mtt": mtt_to_json(self.mtt)
+        }
+        return d
+
+    @classmethod
+    def from_dict(cls, d):
+        t = nx.cytoscape_graph(d['tree'])
+        mtt = mtt_from_json_string(d['mtt'])
+        return cls(t, mtt)

@@ -1,3 +1,4 @@
+import importlib
 import inspect
 import json
 import typing
@@ -8,6 +9,10 @@ from ord_tree.tree_obj import message_object_to_message_object_tree, message_obj
 from ord_tree.tree_type import TypeOfTypeHint
 from ord_tree.type_hints import get_toth
 from ord_tree.utils import FilePath, get_class_string, import_string, read_file
+
+# for constructing objects in tree
+importlib.import_module('ord_betterproto')
+importlib.import_module('builtins')
 
 
 def string_to_type_hint(s: str):
@@ -69,16 +74,22 @@ class MotDecoder(json.JSONDecoder):
         return dct
 
 
-def mtt_to_json(mtt: nx.DiGraph, fn: FilePath):
+def mtt_to_json(mtt: nx.DiGraph, fn: FilePath = None):
     td = nx.cytoscape_data(mtt)
+    if fn is None:
+        return json.dumps(td, cls=MttEncoder)
     with open(fn, "w") as f:
         f.write(json.dumps(td, cls=MttEncoder))
 
 
-def mtt_from_json(fn: FilePath):
-    s = read_file(fn)
+def mtt_from_json_string(s: str):
     d = json.loads(s, cls=MttDecoder)
     return nx.cytoscape_graph(d)
+
+
+def mtt_from_json_file(fn: FilePath):
+    s = read_file(fn)
+    return mtt_from_json_string(s)
 
 
 def mot_to_json(mot: nx.DiGraph, fn: FilePath):
@@ -94,4 +105,3 @@ def mot_from_json(fn: FilePath):
     # this trick makes sure `node_object` are constructed
     m = message_object_tree_to_message_object(mot)
     return message_object_to_message_object_tree(m)
-
