@@ -22,7 +22,10 @@ from ord_tree.convert import mtt_to_json, mtt_from_json_string, mtt_from_json_fi
 class PrototypeTreeError(Exception): pass
 
 
-class PtState(Enum):
+class PtEleState(Enum):
+    # Preset = "Preset"  # can be nodes or edges
+    # Placeholder = "Placeholder"  # can be nodes or edges
+
     NodeNonLiteral = "NodeNonLiteral"  # for non-literal nodes
     NodePlaceholder = "NodePlaceholder"  # can be nodes or edges
     NodePreset = "NodePreset"  # can be nodes or edges
@@ -34,7 +37,7 @@ class PtState(Enum):
 @dataclass
 class PtEleAttr:
     label: str
-    element_state: PtState  # pt state, indicating if the node has been preset, init as default, or placeholder
+    element_state: PtEleState  # pt state, indicating if the node has been preset, init as default, or placeholder
     element_value: Any
     map_to_mtt: Union[str, Tuple[str, str]]  # to which node in MTT it is being mapped to
     can_edit: bool  # literal nodes (builtin, enum, optional) or dict key, note list index is not one of these
@@ -74,12 +77,12 @@ class PrototypeTree:
     @property
     def placeholder_nodes(self):
         return [k for k, d in nx.get_node_attributes(self.tree, "element_state").items() if
-                d['element_state'] == PtState.NodePlaceholder.value]
+                d['element_state'] == PtEleState.NodePlaceholder.value]
 
     @property
     def placeholder_edges(self):
         return [(u, v) for (u, v), d in nx.get_edge_attributes(self.tree, "element_state").items() if
-                d['element_state'] == PtState.EdgePlaceholder.value]
+                d['element_state'] == PtEleState.EdgePlaceholder.value]
 
     def get_nodes_in_toths(self, toths: list[TypeOfTypeHint]):
         nodes = []
@@ -172,14 +175,14 @@ class PrototypeTree:
             mot_node_object = mot_node_attr['node_object']
             pt_node_attr = PtEleAttr(
                 label=mot_node_attr['label'],
-                element_state=PtState.NodePreset,
+                element_state=PtEleState.NodePreset,
                 element_value=mot_node_object,
                 map_to_mtt=mtt_node,
                 can_edit=True
             )
             if mtt_node_attr['node_class_toth'] not in (
                     TypeOfTypeHint.OptionalLiteral, TypeOfTypeHint.BuiltinLiteral, TypeOfTypeHint.OrdEnum):
-                pt_node_attr.element_state = PtState.NodeNonLiteral
+                pt_node_attr.element_state = PtEleState.NodeNonLiteral
                 pt_node_attr.element_value = None
                 pt_node_attr.can_edit = False
             pt.add_node(pt_node, **pt_node_attr.as_dict())
@@ -189,17 +192,17 @@ class PrototypeTree:
             mtt_edge_label = mtt.edges[(mtt_u, mtt_v)]['label']
             pt_edge_attr = PtEleAttr(
                 label=mtt_edge_label,
-                element_state=PtState.EdgeAttrName,
+                element_state=PtEleState.EdgeAttrName,
                 element_value=mtt_edge_label,
                 map_to_mtt=(mtt_u, mtt_v),
                 can_edit=False
             )
             if mtt_edge_label.startswith(PrefixDictKey):
-                pt_edge_attr.element_state = PtState.EdgePreset
+                pt_edge_attr.element_state = PtEleState.EdgePreset
                 pt_edge_attr.element_value = mot_d['field_name']
                 pt_edge_attr.can_edit = True
             elif mtt_edge_label.startswith(PrefixListIndex):
-                pt_edge_attr.element_state = PtState.EdgePreset
+                pt_edge_attr.element_state = PtEleState.EdgePreset
                 pt_edge_attr.element_value = mot_d['field_name']
                 pt_edge_attr.can_edit = False
             pt.add_edge(mot_node_to_pt_node[mot_u], mot_node_to_pt_node[mot_v], **pt_edge_attr.as_dict())
@@ -217,14 +220,14 @@ class PrototypeTree:
             mtt_node_attr = mtt.nodes[mtt_node]
             pt_node_attr = PtEleAttr(
                 label=mtt_node_attr['label'],
-                element_state=PtState.NodePlaceholder,
+                element_state=PtEleState.NodePlaceholder,
                 element_value=None,
                 map_to_mtt=mtt_node,
                 can_edit=True
             )
             if mtt_node_attr['node_class_toth'] not in (
                     TypeOfTypeHint.OptionalLiteral, TypeOfTypeHint.BuiltinLiteral, TypeOfTypeHint.OrdEnum):
-                pt_node_attr.element_state = PtState.NodeNonLiteral
+                pt_node_attr.element_state = PtEleState.NodeNonLiteral
                 pt_node_attr.element_value = None
                 pt_node_attr.can_edit = False
             pt.add_node(pt_node, **pt_node_attr.as_dict())
@@ -232,17 +235,17 @@ class PrototypeTree:
             mtt_edge_label = mtt.edges[(mtt_u, mtt_v)]['label']
             pt_edge_attr = PtEleAttr(
                 label=mtt_edge_label,
-                element_state=PtState.EdgeAttrName,
+                element_state=PtEleState.EdgeAttrName,
                 element_value=mtt_edge_label,
                 map_to_mtt=(mtt_u, mtt_v),
                 can_edit=False
             )
             if mtt_edge_label.startswith(PrefixDictKey):
-                pt_edge_attr.element_state = PtState.EdgePlaceholder
+                pt_edge_attr.element_state = PtEleState.EdgePlaceholder
                 pt_edge_attr.element_value = None
                 pt_edge_attr.can_edit = True
             elif mtt_edge_label.startswith(PrefixListIndex):
-                pt_edge_attr.element_state = PtState.EdgePreset
+                pt_edge_attr.element_state = PtEleState.EdgePreset
                 pt_edge_attr.element_value = 0
                 pt_edge_attr.can_edit = False
             pt.add_edge(mtt_node_to_pt_node[mtt_u], mtt_node_to_pt_node[mtt_v], **pt_edge_attr.as_dict())
@@ -282,27 +285,27 @@ class PrototypeTree:
         mot = self.to_mot()
         return message_object_tree_to_message_object(mot)
 
-    def change_element_state(self, element: Union[int, Tuple[int, int]], state: PtState):
+    def change_element_state(self, element: Union[int, Tuple[int, int]], state: PtEleState):
         if isinstance(element, int):
-            if self.tree.nodes[element]['element_state'] == PtState.NodeNonLiteral:
-                logger.warning(f"changing state of a {PtState.NodeNonLiteral} node, ignoring this operation")
+            if self.tree.nodes[element]['element_state'] == PtEleState.NodeNonLiteral:
+                logger.warning(f"changing state of a {PtEleState.NodeNonLiteral} node, ignoring this operation")
                 return None
             self.tree.nodes[element]['element_state'] = state
         else:
-            if self.tree.edges[element]['element_state'] == PtState.EdgeAttrName:
-                logger.warning(f"changing state of a {PtState.EdgeAttrName} edge, ignoring this operation")
+            if self.tree.edges[element]['element_state'] == PtEleState.EdgeAttrName:
+                logger.warning(f"changing state of a {PtEleState.EdgeAttrName} edge, ignoring this operation")
                 return None
             self.tree.edges[element]['element_state'] = state
 
     def change_element_value(self, element: Union[int, Tuple[int, int]], value: Any):
         if isinstance(element, int):
-            if self.tree.nodes[element]['element_state'] == PtState.NodeNonLiteral:
-                logger.warning(f"changing value of a {PtState.NodeNonLiteral} node, ignoring this operation")
+            if self.tree.nodes[element]['element_state'] == PtEleState.NodeNonLiteral:
+                logger.warning(f"changing value of a {PtEleState.NodeNonLiteral} node, ignoring this operation")
                 return None
             self.tree.nodes[element]['element_value'] = value
         else:
-            if self.tree.edges[element]['element_state'] == PtState.EdgeAttrName:
-                logger.warning(f"changing value of a {PtState.EdgeAttrName} edge, ignoring this operation")
+            if self.tree.edges[element]['element_state'] == PtEleState.EdgeAttrName:
+                logger.warning(f"changing value of a {PtEleState.EdgeAttrName} edge, ignoring this operation")
                 return None
             self.tree.edges[element]['element_state'] = value
 
@@ -322,9 +325,18 @@ class PrototypeTree:
                 edge_attr = self.tree.edges[edge]
                 edge_attr['element_value'] = i
                 edge_attr['label'] = f"{PrefixListIndex}{i}"
+                i += 1
         for off in nx.descendants(self.tree, node_to_remove):
             self.tree.remove_node(off)
         self.tree.remove_node(node_to_remove)
+
+    def detach_tree(self, new_root: int):
+        from ord_tree.utils import import_string
+        new_tree = list(nx.descendants(self.tree, new_root))
+        new_tree.append(new_root)
+        new_tree = self.tree.subgraph(new_tree).copy()
+        self.tree = new_tree
+
 
     def extend_tree(self, from_node: int):
         if len(self.tree.nodes) == 0:
@@ -332,7 +344,7 @@ class PrototypeTree:
             assert mtt_node_attr['node_class_toth'] == TypeOfTypeHint.OrdMessage
             root_attr = PtEleAttr(
                 label=mtt_node_attr['label'],
-                element_state=PtState.NodeNonLiteral,
+                element_state=PtEleState.NodeNonLiteral,
                 element_value=None,
                 map_to_mtt=_RootNodeId,
                 can_edit=False
@@ -345,7 +357,7 @@ class PrototypeTree:
             f"extending node: {from_node} {self.get_path(from_node)}, current tree size: {len(self.tree.nodes)}")
 
         from_node_mtt = self.tree.nodes[from_node]['map_to_mtt']
-        from_node_mtt_toth = self.mtt.nodes[from_node]['node_class_toth']
+        from_node_mtt_toth = self.mtt.nodes[from_node_mtt]['node_class_toth']
         from_node_mtt_toth: TypeOfTypeHint
 
         # if the mapped node is a literal, do nothing, note enum is here
@@ -363,7 +375,7 @@ class PrototypeTree:
                     existing_children = [v for _, v in self.tree.out_edges(from_node)]
                     edge_attr = PtEleAttr(
                         label=f"{PrefixListIndex}{len(existing_children)}",
-                        element_state=PtState.EdgePreset,
+                        element_state=PtEleState.EdgePreset,
                         element_value=len(existing_children),
                         map_to_mtt=(from_node_mtt, mtt_child),
                         can_edit=False
@@ -374,7 +386,7 @@ class PrototypeTree:
                     existing_children = [v for _, v in self.tree.out_edges(from_node)]
                     edge_attr = PtEleAttr(
                         label=f"{PrefixDictKey}{len(existing_children)}",
-                        element_state=PtState.EdgePreset,
+                        element_state=PtEleState.EdgePreset,
                         element_value=f"{PrefixDictKey}{len(existing_children)}",
                         map_to_mtt=(from_node_mtt, mtt_child),
                         can_edit=True
@@ -387,24 +399,24 @@ class PrototypeTree:
                         continue
                     edge_attr = PtEleAttr(
                         label=mtt_edge_label,
-                        element_state=PtState.EdgeAttrName,
+                        element_state=PtEleState.EdgeAttrName,
                         element_value=mtt_edge_label,
                         map_to_mtt=(from_node_mtt, mtt_child),
                         can_edit=False
                     )
 
-                child = len(self.tree)
+                child = max(list(self.tree.nodes)) + 1
                 mtt_child_attr = self.mtt.nodes[mtt_child]
                 child_attr = PtEleAttr(
                     label=mtt_child_attr['label'],
-                    element_state=PtState.NodeNonLiteral,
+                    element_state=PtEleState.NodeNonLiteral,
                     element_value=None,
                     map_to_mtt=mtt_child,
                     can_edit=False
                 )
                 if mtt_child_attr['node_class_toth'] in (
                         TypeOfTypeHint.BuiltinLiteral, TypeOfTypeHint.OptionalLiteral, TypeOfTypeHint.OrdEnum):
-                    child_attr.element_state = PtState.NodePlaceholder
+                    child_attr.element_state = PtEleState.NodePlaceholder
                     child_attr.can_edit = True
                 logger.info(f"adding edge: ({from_node}, {child}) {self.get_path(from_node)}.{edge_attr.label}")
                 self.tree.add_node(child, **child_attr.as_dict())
