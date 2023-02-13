@@ -11,9 +11,13 @@ from ord_tree.type_hints import get_toth
 from ord_tree.utils import FilePath, get_class_string, import_string, read_file
 
 # for constructing objects in tree
-importlib.import_module('ord_betterproto')
-importlib.import_module('builtins')
+# https://stackoverflow.com/questions/19179269/
+# TODO maybe better to just import these in `ord_tree.__init__`
+globals()['ord_betterproto'] = importlib.import_module('ord_betterproto')
+globals()['builtins'] = importlib.import_module('builtins')
 
+
+# TODO implement MTT/MOT -> DICT
 
 def string_to_type_hint(s: str):
     """ https://stackoverflow.com/questions/67500755 """
