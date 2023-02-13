@@ -7,7 +7,7 @@ from loguru import logger
 
 from ord_tree import ord_classes
 from ord_tree.utils import get_class_string, MessageObjectTreeError, get_leafs, _RootNodeId, _NodeDelimiter, \
-    is_arithmetic
+    is_arithmetic, import_string
 
 """
 convert a betterproto.message instance to an arborescence
@@ -121,7 +121,7 @@ def _construct_from_leafs(tree: nx.DiGraph, leaf: str = None):
         leaf = get_leafs(tree)[0]
     logger.info(f"contracting leaf node: {leaf}")
     parent = next(tree.predecessors(leaf))
-    parent_class = tree.nodes[parent]['node_class']
+    parent_class = import_string(tree.nodes[parent]['node_class_as_string'])
     assert inspect.isclass(parent_class)
     logger.info(f"target parent: {parent_class}")
     children = list(tree.successors(parent))
