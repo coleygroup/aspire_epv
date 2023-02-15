@@ -1,7 +1,6 @@
 import inspect
 from copy import deepcopy
-from dataclasses import dataclass, asdict
-from typing import Any, Union
+from typing import Any, Union, TypedDict, Tuple
 
 import betterproto
 import networkx as nx
@@ -16,69 +15,56 @@ from ord_tree.utils import get_leafs, is_arithmetic, import_string, get_class_st
 convert a betterproto.message instance to an arborescence
 """
 
-
-@dataclass
-class MotNodeAttr:
-    mot_node_name: str  # same as node itself
-    mot_map_to_mtt: str
-    mot_is_literal: bool
-    mot_node_object: Any  # if non-literal, this field is set to None when jsonfy
-
-    def as_dict(self) -> dict:
-        d = asdict(self)
-        d['mot_node_object'] = self.mot_node_object
-        return d
-
-    def as_dict_with_mtt(self, mtt: nx.DiGraph) -> dict:
-        d = self.as_dict()
-        mtt_node = self.mot_map_to_mtt
-        d.update(
-            mtt.nodes[mtt_node]
-        )
-        return d
-
-    @staticmethod
-    def map_to_mtt(mot_node_name: str):
-        relations = mot_node_name.split(NodePathDelimiter)
-        for i, r in enumerate(relations):
-            if r.startswith(PrefixListIndex):
-                relations[i] = PrefixListIndex
-            if r.startswith(PrefixDictKey):
-                relations[i] = PrefixDictKey
-        return NodePathDelimiter.join(relations)
+PT_PLACEHOLDER = "PT_PLACEHOLDER"
+PT_PRESET = "PT_PRESET"
+PT_STATES = (PT_PLACEHOLDER, PT_PRESET)
 
 
-@dataclass
-class MotEdgeAttr:
-    mot_relation: Union[str, int]  # attr_name, dict key, or list index
-    mot_relation_representation: str
+def _node_path_mot_to_mtt(mot_node_path: str):
+    relations = mot_node_path.split(NodePathDelimiter)
+    for i, r in enumerate(relations):
+        if r.startswith(PrefixListIndex):
+            relations[i] = PrefixListIndex
+        if r.startswith(PrefixDictKey):
+            relations[i] = PrefixDictKey
+    return NodePathDelimiter.join(relations)
 
-    def as_dict(self) -> dict:
-        return asdict(self)
+    # def as_dict(self) -> dict:
+    #     return asdict(self)
+    #
+    # @staticmethod
+    # def to_dict_key(relation_repr: str):
+    #     assert relation_repr.startswith(PrefixDictKey)
+    #     return relation_repr.replace(PrefixDictKey, "")
+    #
+    # @staticmethod
+    # def to_list_index(relation_repr: str):
+    #     assert relation_repr.startswith(PrefixListIndex)
+    #     return int(relation_repr.replace(PrefixListIndex, ""))
 
-    @staticmethod
-    def to_dict_key(relation_repr: str):
-        assert relation_repr.startswith(PrefixDictKey)
-        return relation_repr.replace(PrefixDictKey, "")
 
-    @staticmethod
-    def to_list_index(relation_repr: str):
-        assert relation_repr.startswith(PrefixListIndex)
-        return int(relation_repr.replace(PrefixListIndex, ""))
+class MotEleAttr(TypedDict):
+    mot_element_id: Union[int, Tuple[int, int]]
+    mot_can_edit: bool  # is_literal for nodes, is DictKey for edges
+    mot_state: str
+    mot_value: Union[int, float, str, bytes, None]  # if not is_literal, this is set to None
+    mtt_element_name: Union[str, Tuple[str, str]]
+    mot_class_string: Union[str, Tuple[str, str]]
 
 
-def _extend_object_node(
-        node_name: str, tree: nx.DiGraph, mtt: nx.DiGraph
+def _extend_object(
+        node_id: int, tree: nx.DiGraph, node_object: Any, node_path: str
 ):
-    assert node_name in tree.nodes
-    obj = tree.nodes[node_name]['mot_node_object']
+    assert node_id in tree.nodes
+
+    mtt_node = _node_path_mot_to_mtt(node_path)
 
     edge_prefix = ""
     # stop if reached literal leafs
-    if obj.__class__ in ord_classes.BuiltinLiteralClasses or obj is None:
+    if node_object.__class__ in ord_classes.BuiltinLiteralClasses or node_object is None:
         return
 
-    elif obj.__class__ in ord_classes.OrdEnumClasses:
+    elif node_object.__class__ in ord_classes.OrdEnumClasses:
         # two ways to handle OrdEnum
         # 1. treat them as leafs
         return
@@ -86,18 +72,19 @@ def _extend_object_node(
         # see https://docs.python.org/3/library/enum.html#:~:text=Color.GREEN%3A%202%3E-,__getitem__,-(cls%2C
         # items = dict(name=obj.name).items()
 
-    elif obj.__class__ in ord_classes.OrdMessageClasses:
-        items = {field_name: getattr(obj, field_name) for field_name in obj._betterproto.sorted_field_names}.items()
+    elif node_object.__class__ in ord_classes.OrdMessageClasses:
+        items = {field_name: getattr(node_object, field_name) for field_name in
+                 node_object._betterproto.sorted_field_names}.items()
 
-    elif obj.__class__ == list:
+    elif node_object.__class__ == list:
         edge_prefix = PrefixListIndex
-        items = {index: obj for index, obj in enumerate(obj)}.items()
+        items = {index: obj for index, obj in enumerate(node_object)}.items()
 
-    elif obj.__class__ == dict:
+    elif node_object.__class__ == dict:
         edge_prefix = PrefixDictKey
-        items = obj.items()
+        items = node_object.items()
     else:
-        raise TypeError(f"unexpected class: {obj.__class__} of {obj}")
+        raise TypeError(f"unexpected class: {node_object.__class__} of {node_object}")
 
     # do not extend the child attr if it's default
     items_used = []
@@ -116,58 +103,74 @@ def _extend_object_node(
         items_used.append((field_name, child_attr))
 
     for field_name, child_attr in items_used:
-        child = f"{node_name}{NodePathDelimiter}{edge_prefix}{field_name}"
-
-        child_node_attr = MotNodeAttr(
-            mot_node_name=child,
-            mot_map_to_mtt=MotNodeAttr.map_to_mtt(child),
-            mot_is_literal=child_attr.__class__ in ord_classes.BuiltinLiteralClasses or child_attr is None,
-            mot_node_object=child_attr,
+        child_id = len(tree.nodes)
+        child_node_path = f"{node_path}{NodePathDelimiter}{edge_prefix}{field_name}"
+        child_mtt_node = _node_path_mot_to_mtt(child_node_path)
+        is_child_literal = child_attr.__class__ in ord_classes.BuiltinLiteralClasses + ord_classes.OrdEnumClasses  # or child_attr is None
+        if is_child_literal:
+            child_value = child_attr
+        else:
+            child_value = None
+        child_node_attr = MotEleAttr(
+            mot_element_id=child_id,
+            mot_can_edit=is_child_literal,
+            mot_state=PT_PRESET,
+            mot_value=child_value,
+            mtt_element_name=child_mtt_node,
+            mot_class_string=get_class_string(child_attr)
         )
-        child_node_attr = child_node_attr.as_dict_with_mtt(mtt)
-        tree.add_node(child, **child_node_attr)
+        tree.add_node(child_id, **child_node_attr)
 
-        edge_attr = MotEdgeAttr(
-            mot_relation=field_name,
-            mot_relation_representation=f"{edge_prefix}{field_name}"
+        edge_attr = MotEleAttr(
+            mot_element_id=(node_id, child_id),
+            mot_can_edit=node_object.__class__ == dict,
+            mot_state=PT_PRESET,
+            mot_value=field_name,
+            mtt_element_name=(mtt_node, child_mtt_node),
+            mot_class_string=(get_class_string(node_object), get_class_string(child_attr)),
         )
 
-        tree.add_edge(node_name, child, **edge_attr.as_dict())
-        _extend_object_node(child, tree, mtt)
+        tree.add_edge(node_id, child_id, **edge_attr)
+        _extend_object(child_id, tree, node_object=child_attr, node_path=child_node_path)
 
 
 def get_mot(message: betterproto.Message, ) -> nx.DiGraph:
     assert message.__class__ in ord_classes.OrdMessageClasses
-    mtt = get_mtt(message.__class__)
     tree = nx.DiGraph()
-    root_node_attr = MotNodeAttr(
-        mot_node_name=RootNodePath,
-        mot_map_to_mtt=RootNodePath,
-        mot_is_literal=False,
-        mot_node_object=message,
+    root_node_attr = MotEleAttr(
+        mot_element_id=0,
+        mot_can_edit=False,
+        mot_state=PT_PRESET,
+        mot_value=None,
+        mtt_element_name=RootNodePath,
+        mot_class_string=get_class_string(message),
     )
     tree.add_node(
-        RootNodePath, **root_node_attr.as_dict_with_mtt(mtt)
+        0, **root_node_attr
     )
-    _extend_object_node(RootNodePath, tree, mtt)
+    _extend_object(0, tree, message, RootNodePath)
+
+    # verify mapping
+    mtt = get_mtt(message.__class__)
+    for n, d in tree.nodes(data=True):
+        assert d['mtt_element_name'] in mtt.nodes
     return tree
 
 
-def _construct_from_leafs(tree: nx.DiGraph, leaf: str = None):
+def _construct_from_leafs(tree: nx.DiGraph):
     tree_size_before = len(tree.nodes)
 
     if len(tree.nodes) == 1:
         logger.debug("reaching the last node, stopping")
         return
 
-    if leaf is None:
-        leaf = get_leafs(tree)[0]
+    leaf = get_leafs(tree)[0]
 
     logger.debug(f"contracting leaf node: {leaf}")
 
     parent = next(tree.predecessors(leaf))
 
-    parent_class = import_string(tree.nodes[parent]['mtt_class_string'])
+    parent_class = import_string(tree.nodes[parent]['mot_class_string'])
     assert inspect.isclass(parent_class)
 
     logger.debug(f"target parent: {parent_class}")
@@ -178,8 +181,8 @@ def _construct_from_leafs(tree: nx.DiGraph, leaf: str = None):
     if parent_class in ord_classes.OrdMessageClasses:
         parent_object = parent_class()
         for child in children:
-            attr = tree.nodes[child]['mot_node_object']
-            attr_name = tree.edges[(parent, child)]['mot_relation']
+            attr = tree.nodes[child]['mot_value']
+            attr_name = tree.edges[(parent, child)]['mot_value']
             setattr(parent_object, attr_name, attr)
 
     elif parent_class in ord_classes.OrdEnumClasses:
@@ -195,17 +198,17 @@ def _construct_from_leafs(tree: nx.DiGraph, leaf: str = None):
 
     elif parent_class == list:
         parent_object = []
-        children = sorted(children, key=lambda x: tree.edges[(parent, x)]['mot_relation'])
-        assert is_arithmetic([tree.edges[(parent, c)]['mot_relation'] for c in children], known_delta=1)
+        children = sorted(children, key=lambda x: tree.edges[(parent, x)]['mot_value'])
+        assert is_arithmetic([tree.edges[(parent, c)]['mot_value'] for c in children], known_delta=1)
         for child in children:
-            attr = tree.nodes[child]['mot_node_object']
+            attr = tree.nodes[child]['mot_value']
             parent_object.append(attr)
 
     elif parent_class == dict:
         parent_object = dict()
         for child in children:
-            attr = tree.nodes[child]['mot_node_object']
-            key_name = tree.edges[(parent, child)]['mot_relation']
+            attr = tree.nodes[child]['mot_value']
+            key_name = tree.edges[(parent, child)]['mot_value']
             parent_object[key_name] = attr
     else:
         raise TypeError(f"unexpected parent class: {parent_class}")
@@ -213,7 +216,7 @@ def _construct_from_leafs(tree: nx.DiGraph, leaf: str = None):
     logger.debug(f"parent object constructed: {parent_object}")
     for child in children:
         tree.remove_node(child)
-    tree.nodes[parent]['mot_node_object'] = parent_object
+    tree.nodes[parent]['mot_value'] = parent_object
     logger.debug(f"tree size contraction: {tree_size_before} -> {len(tree)}")
     _construct_from_leafs(tree)
 
@@ -224,7 +227,7 @@ def message_from_mot(tree: nx.DiGraph) -> betterproto.Message:
     _construct_from_leafs(working_tree)
     assert len(working_tree.nodes) == 1
     root_node = list(working_tree.nodes)[0]
-    return working_tree.nodes[root_node]['mot_node_object']
+    return working_tree.nodes[root_node]['mot_value']
 
 
 def mot_to_dict(mot: nx.DiGraph):
