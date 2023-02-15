@@ -1,7 +1,6 @@
 import inspect
 import typing
-from dataclasses import dataclass, asdict
-from typing import get_args, Type, get_origin, Optional
+from typing import get_args, Type, get_origin, Optional, TypedDict
 
 import networkx as nx
 
@@ -16,27 +15,23 @@ message type tree
 """
 
 
-@dataclass
-class MttNodeAttr:
+class MttNodeAttr(TypedDict):
     mtt_type_hint_string: str
     mtt_class_string: str
     mtt_relation_to_parent: str
     mtt_parent: str
     mtt_node_name: str  # same as node itself
 
-    def as_dict(self) -> dict:
-        return asdict(self)
-
 
 def _extend_mtt(
         type_hint, tree: nx.DiGraph, parent: str = None,
-        relation_to_parent: str = None, delimiter: str = NodePathDelimiter
+        relation_to_parent: str = None
 ):
     """ recursively extending mtt """
     if parent is None:
         node_name = RootNodePath
     else:
-        node_name = parent + delimiter + relation_to_parent
+        node_name = parent + NodePathDelimiter + relation_to_parent
 
     if inspect.isclass(type_hint):
         node_class = type_hint
@@ -55,7 +50,7 @@ def _extend_mtt(
         mtt_node_name=node_name,
     )
 
-    tree.add_node(node_name, **node_attr.as_dict())
+    tree.add_node(node_name, **node_attr)
     if parent is not None:
         tree.add_edge(parent, node_name)
 
