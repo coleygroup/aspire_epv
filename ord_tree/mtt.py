@@ -7,7 +7,8 @@ import networkx as nx
 
 from ord_tree.ord_classes import BuiltinLiteralClasses, OrdEnumClasses
 from ord_tree.type_hints import get_type_hints_without_private
-from ord_tree.utils import get_class_string, NodePathDelimiter, RootNodePath, PrefixListIndex, PrefixDictKey
+from ord_tree.utils import get_class_string, NodePathDelimiter, RootNodePath, PrefixListIndex, PrefixDictKey, \
+    import_string
 
 """
 message type tree
@@ -87,3 +88,9 @@ def mtt_to_dict(mtt: nx.DiGraph):
 
 def mtt_from_dict(d: dict):
     return nx.from_dict_of_dicts(d)
+
+
+def get_mtt_node_class(mtt: nx.DiGraph, node: str) -> Type:
+    c = import_string(mtt.nodes[node]['mtt_class_string'])
+    assert inspect.isclass(c)
+    return c
