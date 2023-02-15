@@ -7,7 +7,7 @@ import networkx as nx
 from ord_tree.ord_classes import BuiltinLiteralClasses, OrdEnumClasses
 from ord_tree.type_hints import get_type_hints_without_private
 from ord_tree.utils import get_class_string, NodePathDelimiter, RootNodePath, PrefixListIndex, PrefixDictKey, \
-    import_string
+    import_string, get_root
 
 """
 message type tree
@@ -16,11 +16,11 @@ message type tree
 
 
 class MttNodeAttr(TypedDict):
+    mtt_node_name: str  # same as node itself
     mtt_type_hint_string: str
     mtt_class_string: str
     mtt_relation_to_parent: str
     mtt_parent: str
-    mtt_node_name: str  # same as node itself
 
 
 def _extend_mtt(
@@ -89,3 +89,8 @@ def get_mtt_node_class(mtt: nx.DiGraph, node: str) -> Type:
     c = import_string(mtt.nodes[node]['mtt_class_string'])
     assert inspect.isclass(c)
     return c
+
+
+def get_mtt_root_class(mtt: nx.DiGraph) -> Type:
+    root = get_root(mtt)
+    return get_mtt_node_class(mtt, root)
