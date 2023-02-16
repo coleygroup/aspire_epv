@@ -9,7 +9,7 @@ from loguru import logger
 from ord_tree import ord_classes
 from ord_tree.mtt import get_mtt
 from ord_tree.utils import NodePathDelimiter, RootNodePath, PrefixListIndex, PrefixDictKey, get_root, \
-    get_leafs, is_arithmetic, import_string, get_class_string, get_path
+    get_leafs, is_arithmetic, import_string, get_class_string
 
 """
 convert a betterproto.message instance to an arborescence
@@ -60,8 +60,12 @@ def _extend_object(
         # items = dict(name=obj.name).items()
 
     elif node_object.__class__ in ord_classes.OrdMessageClasses:
-        items = {field_name: getattr(node_object, field_name) for field_name in
-                 node_object._betterproto.sorted_field_names}.items()
+        items = dict()
+        for field_name in node_object._betterproto.sorted_field_names:
+            v = node_object._Message__raw_get(field_name)
+            if v is not betterproto.PLACEHOLDER:
+                items[field_name] = v
+        items = items.items()
 
     elif node_object.__class__ == list:
         edge_prefix = PrefixListIndex
@@ -118,6 +122,7 @@ def _extend_object(
         )
 
         tree.add_edge(node_id, child_id, **edge_attr)
+        logger.debug(f"extending: {child_id}, {mot_get_path(tree, child_id)}, {child_node_attr['mot_value']}")
         _extend_object(child_id, tree, node_object=child_attr, node_path=child_node_path)
 
 
@@ -141,7 +146,17 @@ def get_mot(message: betterproto.Message, ) -> nx.DiGraph:
     mtt = get_mtt(message.__class__)
     for n, d in tree.nodes(data=True):
         assert d['mtt_element_name'] in mtt.nodes
-        assert d['mot_class_string'] == mtt.nodes[d['mtt_element_name']]['mtt_class_string']
+        mot_class_string = d['mot_class_string']
+        mtt_class_string = mtt.nodes[d['mtt_element_name']]['mtt_class_string']
+        mot_class = import_string(mot_class_string)
+        mtt_class = import_string(mtt_class_string)
+        try:
+            assert mot_class == mtt_class
+        except AssertionError:
+            logger.debug(
+                f"for node path: {mot_get_path(tree, n)} mtt_class: {mtt_class_string}, mot_class: {mot_class_string}")
+            assert mtt_class in ord_classes.OrdEnumClasses
+            assert mot_class in ord_classes.BuiltinLiteralClasses
     return tree
 
 
@@ -171,11 +186,23 @@ def _construct_from_leafs(tree: nx.DiGraph, visited_leafs: set[int] = None):
     logger.debug(f"contracting with children: {children}")
 
     if parent_class in ord_classes.OrdMessageClasses:
+
+        # this is better for `oneof` see `test/bug/betterproto_data.py`
         parent_object = parent_class()
         for child in children:
             attr = tree.nodes[child]['mot_value']
             attr_name = tree.edges[(parent, child)]['mot_value']
             setattr(parent_object, attr_name, attr)
+            logger.debug(f"setting {mot_get_path(tree, child)} {attr_name}=={attr}")
+
+        # kwargs = dict()
+        # for child in children:
+        #     attr = tree.nodes[child]['mot_value']
+        #     attr_name = tree.edges[(parent, child)]['mot_value']
+        #     logger.debug(f"setting {mot_get_path(tree, child)} {attr_name}=={attr} {type(attr)}")
+        #     kwargs[attr_name] = attr
+        # parent_object = parent_class(**kwargs)
+
 
     elif parent_class in ord_classes.OrdEnumClasses:
         raise RuntimeError(f"{parent_class} can only be leafs!")
@@ -237,7 +264,25 @@ def mot_from_dict(d):
 
 
 def mot_get_path(mot: nx.DiGraph, node: int):
-    return get_path(mot, node, edge_attr_name="mot_value", root_path=RootNodePath)
+    root = get_root(mot)
+    p = nx.shortest_path(mot, source=root, target=node)
+    if len(p) == 1:
+        return RootNodePath
+    str_path = []
+    for i in range(len(p) - 1):
+        u = p[i]
+        v = p[i + 1]
+        u_class = import_string(mot.nodes[u]['mot_class_string'])
+        if u_class == list:
+            prefix = PrefixListIndex
+        elif u_class == dict:
+            prefix = PrefixDictKey
+        else:
+            prefix = ""
+        str_p = str(mot.edges[(u, v)]["mot_value"])
+        str_p = prefix + str_p
+        str_path.append(str_p)
+    return NodePathDelimiter.join(str_path)
 
 
 # prototype operations
