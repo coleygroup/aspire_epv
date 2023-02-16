@@ -1,0 +1,556 @@
+{
+  "message": {
+    "inputs": {
+      "dichloromethane": {
+        "components": [
+          {
+            "identifiers": [
+              {
+                "type": "SMILES",
+                "value": "C(Cl)Cl"
+              },
+              {
+                "type": "NAME",
+                "value": "dichloromethane"
+              }
+            ],
+            "amount": {
+              "volume": {
+                "value": 250.0,
+                "units": "MILLILITER"
+              }
+            },
+            "reactionRole": "SOLVENT",
+            "preparations": [
+              {
+                "type": "DRIED",
+                "details": "purified by passage under argon pressure through two packed columns of neutral alumina and copper(II) oxide"
+              }
+            ],
+            "source": {
+              "vendor": "J. T. Baker"
+            }
+          }
+        ],
+        "additionOrder": 3
+      },
+      "4-dimethyl-aminopyridine": {
+        "components": [
+          {
+            "identifiers": [
+              {
+                "type": "SMILES",
+                "value": "n1ccc(N(C)C)cc1"
+              },
+              {
+                "type": "NAME",
+                "value": "4-dimethyl-aminopyridine"
+              }
+            ],
+            "amount": {
+              "mass": {
+                "value": 12.8,
+                "units": "GRAM"
+              }
+            },
+            "reactionRole": "REAGENT",
+            "preparations": [
+              {
+                "type": "NONE",
+                "details": "used as received"
+              }
+            ],
+            "source": {
+              "vendor": "Sigma Aldrich"
+            }
+          }
+        ],
+        "additionOrder": 2
+      },
+      "N,N-dibenzylhydroxylamine": {
+        "components": [
+          {
+            "identifiers": [
+              {
+                "type": "SMILES",
+                "value": "C1=CC=C(C=C1)CN(CC2=CC=CC=C2)O"
+              },
+              {
+                "type": "NAME",
+                "value": "N,N-dibenzylhydroxylamine"
+              }
+            ],
+            "amount": {
+              "mass": {
+                "value": 21.3,
+                "units": "GRAM"
+              }
+            },
+            "reactionRole": "REACTANT",
+            "isLimiting": true,
+            "preparations": [
+              {
+                "type": "CUSTOM",
+                "details": "a few colored or darker crystals, which were present in trace amounts, were discarded using standard tweezers"
+              }
+            ],
+            "source": {
+              "vendor": "TCI America"
+            }
+          }
+        ],
+        "additionOrder": 1
+      },
+      "pivaloyl chloride": {
+        "components": [
+          {
+            "identifiers": [
+              {
+                "type": "SMILES",
+                "value": "CC(C)(C)C(=O)Cl"
+              },
+              {
+                "type": "NAME",
+                "value": "pivaloyl chloride"
+              }
+            ],
+            "amount": {
+              "volume": {
+                "value": 12.9,
+                "units": "MILLILITER"
+              }
+            },
+            "reactionRole": "REACTANT",
+            "preparations": [
+              {
+                "type": "NONE",
+                "details": "used as received"
+              }
+            ],
+            "source": {
+              "vendor": "Alfa Aesar"
+            }
+          }
+        ],
+        "additionOrder": 4,
+        "additionSpeed": {
+          "type": "DROPWISE"
+        },
+        "additionDuration": {
+          "value": 5.0,
+          "units": "MINUTE"
+        },
+        "additionDevice": {
+          "type": "SYRINGE",
+          "details": "plastic 30-mL syringe"
+        }
+      }
+    },
+    "setup": {
+      "vessel": {
+        "type": "ROUND_BOTTOM_FLASK",
+        "details": "single-necked",
+        "material": {
+          "type": "GLASS"
+        },
+        "preparations": [
+          {
+            "type": "OVEN_DRIED"
+          },
+          {
+            "type": "PURGED",
+            "details": "with nitrogen"
+          }
+        ],
+        "attachments": [
+          {
+            "type": "SEPTUM",
+            "details": "rubber"
+          }
+        ],
+        "volume": {
+          "value": 500.0,
+          "units": "MILLILITER"
+        }
+      },
+      "isAutomated": false,
+      "environment": {
+        "type": "FUME_HOOD"
+      }
+    },
+    "conditions": {
+      "temperature": {
+        "control": {
+          "type": "ICE_BATH",
+          "details": "reaction started in ice bath before addition of pivaloyl \nchloride, then allowed to warm to 23 C, then stirred for additional 6 hours at \nRT (23 degC)"
+        },
+        "setpoint": {
+          "value": 0.0,
+          "units": "CELSIUS"
+        }
+      },
+      "pressure": {
+        "control": {
+          "type": "SLIGHT_POSITIVE",
+          "details": "sealed with rubber septum, pierced with needle connected to manifold"
+        },
+        "atmosphere": {
+          "type": "NITROGEN",
+          "details": "dry nitrogen"
+        }
+      },
+      "stirring": {
+        "type": "STIR_BAR"
+      },
+      "conditionsAreDynamic": true,
+      "details": "reaction started in ice bath before addition of\npivaloyl chloride, then allowed to warm to 23 C, then stirred for '\nan additional 6 hours at RT (23 degC)"
+    },
+    "notes": {
+      "isHeterogeneous": true
+    },
+    "workups": [
+      {
+        "type": "ADDITION",
+        "input": {
+          "components": [
+            {
+              "identifiers": [
+                {
+                  "type": "SMILES",
+                  "value": "O"
+                },
+                {
+                  "type": "NAME",
+                  "value": "water"
+                }
+              ],
+              "amount": {
+                "volume": {
+                  "value": 50.0,
+                  "units": "MILLILITER"
+                },
+                "volumeIncludesSolutes": true
+              }
+            },
+            {
+              "identifiers": [
+                {
+                  "type": "SMILES",
+                  "value": "[NH4+].[Cl-]"
+                },
+                {
+                  "type": "NAME",
+                  "value": "ammonium chloride"
+                }
+              ],
+              "amount": {
+                "mass": {
+                  "value": 19.15,
+                  "units": "GRAM"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "ADDITION",
+        "input": {
+          "components": [
+            {
+              "identifiers": [
+                {
+                  "type": "SMILES",
+                  "value": "C(Cl)Cl"
+                },
+                {
+                  "type": "NAME",
+                  "value": "DCM"
+                }
+              ],
+              "amount": {
+                "volume": {
+                  "value": 50.0,
+                  "units": "MILLILITER"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "ADDITION",
+        "input": {
+          "components": [
+            {
+              "identifiers": [
+                {
+                  "type": "SMILES",
+                  "value": "C(Cl)Cl"
+                },
+                {
+                  "type": "NAME",
+                  "value": "DCM"
+                }
+              ],
+              "amount": {
+                "volume": {
+                  "value": 50.0,
+                  "units": "MILLILITER"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "ADDITION",
+        "input": {
+          "components": [
+            {
+              "identifiers": [
+                {
+                  "type": "SMILES",
+                  "value": "C(Cl)Cl"
+                },
+                {
+                  "type": "NAME",
+                  "value": "DCM"
+                }
+              ],
+              "amount": {
+                "volume": {
+                  "value": 50.0,
+                  "units": "MILLILITER"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "EXTRACTION",
+        "details": "3 x 50 mL DCM extraction in 1 L separatory funnel",
+        "keepPhase": "organic"
+      },
+      {
+        "type": "WASH",
+        "input": {
+          "components": [
+            {
+              "identifiers": [
+                {
+                  "type": "SMILES",
+                  "value": "O"
+                },
+                {
+                  "type": "NAME",
+                  "value": "water"
+                }
+              ],
+              "amount": {
+                "volume": {
+                  "value": 200.0,
+                  "units": "MILLILITER"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "CONCENTRATION",
+        "details": "rotary evaporator (30 degC, 80 mmHg)"
+      },
+      {
+        "type": "DISSOLUTION",
+        "input": {
+          "components": [
+            {
+              "identifiers": [
+                {
+                  "type": "SMILES",
+                  "value": "C(Cl)Cl"
+                },
+                {
+                  "type": "NAME",
+                  "value": "DCM"
+                }
+              ],
+              "amount": {
+                "volume": {
+                  "value": 50.0,
+                  "units": "MILLILITER"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "FLASH_CHROMATOGRAPHY",
+        "details": "Aluminum oxide (neutral, powder, reagent-grade) was \npurchased from J.T. Baker. The crude reaction mixture is suspended in \ndichloromethane (50 mL) and is loaded onto a column, with interior diameter of \nroughly 2 inches, packed with alumina (100 g) and wetted with hexanes. \ndichloromethane is used as the eluent, and fractions are collected in Erlenmeyer\n flasks (50 mL each). The desired product typically elutes in fractions 2 \n through 25. The fractions that contain the desired product are combined"
+      },
+      {
+        "type": "CONCENTRATION",
+        "details": "rotary evaporator (30 degC, 80 mmHg)"
+      },
+      {
+        "type": "DRY_IN_VACUUM"
+      }
+    ],
+    "outcomes": [
+      {
+        "reactionTime": {
+          "value": 6.0,
+          "units": "HOUR"
+        },
+        "products": [
+          {
+            "identifiers": [
+              {
+                "type": "SMILES",
+                "value": "O=C(C(C)(C)C)ON(CC1=CC=CC=C1)CC2=CC=CC=C2"
+              },
+              {
+                "type": "NAME",
+                "value": "N,N-Dibenzyl-O-pivaloylhydroxylamine"
+              }
+            ],
+            "isDesiredProduct": true,
+            "measurements": [
+              {
+                "analysisKey": "1H NMR",
+                "type": "IDENTITY"
+              },
+              {
+                "analysisKey": "13C NMR",
+                "type": "IDENTITY"
+              },
+              {
+                "analysisKey": "HRMS",
+                "type": "IDENTITY"
+              },
+              {
+                "analysisKey": "thin film IR",
+                "type": "IDENTITY"
+              },
+              {
+                "analysisKey": "isolated_weight",
+                "type": "YIELD",
+                "percentage": {
+                  "value": 93.5,
+                  "precision": 0.5
+                }
+              },
+              {
+                "analysisKey": "quantitative NMR",
+                "type": "PURITY",
+                "percentage": {
+                  "value": 99.0
+                }
+              },
+              {
+                "analysisKey": "isolated_weight",
+                "type": "AMOUNT",
+                "amount": {
+                  "mass": {
+                    "value": 27.75,
+                    "units": "GRAM"
+                  }
+                }
+              }
+            ],
+            "isolatedColor": "white",
+            "texture": {
+              "type": "POWDER"
+            },
+            "reactionRole": "PRODUCT"
+          }
+        ],
+        "analyses": {
+          "isolated_weight": {
+            "type": "WEIGHT",
+            "details": "27.5-28.0 g recovered after workup",
+            "isOfIsolatedSpecies": true
+          },
+          "13C NMR": {
+            "type": "NMR_13C",
+            "details": "101 MHz, CDCl3",
+            "isOfIsolatedSpecies": true,
+            "data": {
+              "peaks": {
+                "stringValue": "27.1, 38.4, 62.4, 127.7, 128.3, 129.6, 136.2, 176.3",
+                "description": "List of peaks"
+              }
+            }
+          },
+          "quantitative NMR": {
+            "type": "NMR_1H",
+            "details": "Quantitative NMR using 1,1,2,2-tetrachloroethane (>98%, purchased from Alfa Aesar) in CDCl3",
+            "isOfIsolatedSpecies": true
+          },
+          "HRMS": {
+            "type": "HRMS",
+            "details": "ESI-TOF",
+            "isOfIsolatedSpecies": true,
+            "data": {
+              "found": {
+                "floatValue": 298.1794,
+                "description": "Observed m/z"
+              },
+              "expected": {
+                "floatValue": 298.1802,
+                "description": "Expected m/z"
+              }
+            }
+          },
+          "thin film IR": {
+            "type": "IR",
+            "details": "neat film, NaCl",
+            "isOfIsolatedSpecies": true,
+            "data": {
+              "peaks": {
+                "stringValue": "3064, 3031, 2973, 2932, 2906, 2872, 1751, 1496, 1479, 1456, 1273, 1116, 1029, 738, 698",
+                "description": "List of peaks [cm-1]"
+              }
+            }
+          },
+          "1H NMR": {
+            "type": "NMR_1H",
+            "details": "400 MHz, CDCl3",
+            "isOfIsolatedSpecies": true,
+            "data": {
+              "peaks": {
+                "stringValue": "0.92 (s, 9H), 4.06 (s, 4H), 7.23 - 7.34 (m, 6H), 7.40 (d, J = 7.1 Hz, 4H)",
+                "description": "List of peaks"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "provenance": {
+      "experimenter": {
+        "name": "Richard Y. Liu",
+        "organization": "MIT"
+      },
+      "city": "Cambridge, MA",
+      "doi": "10.15227/orgsyn.095.0080",
+      "publicationUrl": "http://www.orgsyn.org/demo.aspx?prep=v95p0080",
+      "recordCreated": {
+        "time": {
+          "value": "02/16/2023, 02:52:33"
+        },
+        "person": {
+          "name": "Connor W. Coley",
+          "orcid": "0000-0002-8271-8723",
+          "organization": "MIT",
+          "email": "ccoley@mit.edu"
+        }
+      }
+    },
+    "reactionId": "Making N,N-Dibenzyl-O-pivaloylhydroxylamine"
+  },
+  "root_class_string": "ord_betterproto.Reaction"
+}
