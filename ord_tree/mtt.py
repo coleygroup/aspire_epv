@@ -4,14 +4,14 @@ from typing import get_args, Type, get_origin, Optional, TypedDict
 
 import networkx as nx
 
-from ord_tree.ord_classes import BuiltinLiteralClasses, OrdEnumClasses
+from ord_tree.ord_classes import BuiltinLiteralClasses, OrdEnumClasses, OrdMessageClasses
 from ord_tree.utils import get_class_string, NodePathDelimiter, RootNodePath, PrefixListIndex, PrefixDictKey, \
     import_string, get_root, get_type_hints_without_private
 
 """
 message type tree
-- node == sting path from root
 """
+# TODO how to represent `oneof` field?
 
 
 class MttNodeAttr(TypedDict):
@@ -70,6 +70,7 @@ def _extend_mtt(
 
 
 def get_mtt(message: Type) -> nx.DiGraph:
+    assert inspect.isclass(message) and message in OrdMessageClasses
     g = nx.DiGraph()
     _extend_mtt(message, g)
     assert nx.is_arborescence(g)
@@ -77,11 +78,11 @@ def get_mtt(message: Type) -> nx.DiGraph:
 
 
 def mtt_to_dict(mtt: nx.DiGraph):
-    return nx.to_dict_of_dicts(mtt)
+    return nx.node_link_data(mtt)
 
 
 def mtt_from_dict(d: dict):
-    return nx.from_dict_of_dicts(d)
+    return nx.node_link_graph(d, directed=True)
 
 
 def get_mtt_node_class(mtt: nx.DiGraph, node: str) -> Type:
