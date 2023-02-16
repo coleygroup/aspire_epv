@@ -5,9 +5,8 @@ from typing import get_args, Type, get_origin, Optional, TypedDict
 import networkx as nx
 
 from ord_tree.ord_classes import BuiltinLiteralClasses, OrdEnumClasses
-from ord_tree.type_hints import get_type_hints_without_private
 from ord_tree.utils import get_class_string, NodePathDelimiter, RootNodePath, PrefixListIndex, PrefixDictKey, \
-    import_string, get_root
+    import_string, get_root, get_type_hints_without_private
 
 """
 message type tree

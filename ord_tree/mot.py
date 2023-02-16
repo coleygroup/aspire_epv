@@ -8,8 +8,8 @@ from loguru import logger
 
 from ord_tree import ord_classes
 from ord_tree.mtt import get_mtt
-from ord_tree.utils import NodePathDelimiter, RootNodePath, PrefixListIndex, PrefixDictKey, get_root
-from ord_tree.utils import get_leafs, is_arithmetic, import_string, get_class_string, get_path
+from ord_tree.utils import NodePathDelimiter, RootNodePath, PrefixListIndex, PrefixDictKey, get_root, \
+    get_leafs, is_arithmetic, import_string, get_class_string, get_path
 
 """
 convert a betterproto.message instance to an arborescence
