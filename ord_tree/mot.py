@@ -8,8 +8,8 @@ from loguru import logger
 
 from ord_tree import ord_classes
 from ord_tree.mtt import get_mtt
-from ord_tree.utils import NodePathDelimiter, RootNodePath, PrefixListIndex, PrefixDictKey
-from ord_tree.utils import get_leafs, is_arithmetic, import_string, get_class_string
+from ord_tree.utils import NodePathDelimiter, RootNodePath, PrefixListIndex, PrefixDictKey, get_root
+from ord_tree.utils import get_leafs, is_arithmetic, import_string, get_class_string, get_path
 
 """
 convert a betterproto.message instance to an arborescence
@@ -28,19 +28,6 @@ def _node_path_mot_to_mtt(mot_node_path: str):
         if r.startswith(PrefixDictKey):
             relations[i] = PrefixDictKey
     return NodePathDelimiter.join(relations)
-
-    # def as_dict(self) -> dict:
-    #     return asdict(self)
-    #
-    # @staticmethod
-    # def to_dict_key(relation_repr: str):
-    #     assert relation_repr.startswith(PrefixDictKey)
-    #     return relation_repr.replace(PrefixDictKey, "")
-    #
-    # @staticmethod
-    # def to_list_index(relation_repr: str):
-    #     assert relation_repr.startswith(PrefixListIndex)
-    #     return int(relation_repr.replace(PrefixListIndex, ""))
 
 
 class MotEleAttr(TypedDict):
@@ -154,17 +141,22 @@ def get_mot(message: betterproto.Message, ) -> nx.DiGraph:
     mtt = get_mtt(message.__class__)
     for n, d in tree.nodes(data=True):
         assert d['mtt_element_name'] in mtt.nodes
+        assert d['mot_class_string'] == mtt.nodes[d['mtt_element_name']]['mtt_class_string']
     return tree
 
 
-def _construct_from_leafs(tree: nx.DiGraph):
-    tree_size_before = len(tree.nodes)
+def _construct_from_leafs(tree: nx.DiGraph, visited_leafs: set[int] = None):
+    if visited_leafs is None:
+        visited_leafs = set()
 
-    if len(tree.nodes) == 1:
-        logger.debug("reaching the last node, stopping")
+    n_visited = len(visited_leafs)
+
+    unvisited_leafs = set(tree.nodes).difference(visited_leafs)
+    if len(unvisited_leafs) == 1:
+        logger.debug("all nodes visited, stopping")
         return
 
-    leaf = get_leafs(tree)[0]
+    leaf = get_leafs(tree.subgraph(unvisited_leafs))[0]
 
     logger.debug(f"contracting leaf node: {leaf}")
 
@@ -215,18 +207,17 @@ def _construct_from_leafs(tree: nx.DiGraph):
 
     logger.debug(f"parent object constructed: {parent_object}")
     for child in children:
-        tree.remove_node(child)
+        visited_leafs.add(child)
     tree.nodes[parent]['mot_value'] = parent_object
-    logger.debug(f"tree size contraction: {tree_size_before} -> {len(tree)}")
-    _construct_from_leafs(tree)
+    logger.debug(f"visited: {n_visited} -> {len(visited_leafs)}")
+    _construct_from_leafs(tree, visited_leafs)
 
 
 def message_from_mot(tree: nx.DiGraph) -> betterproto.Message:
     assert nx.is_arborescence(tree)
     working_tree = deepcopy(tree)
     _construct_from_leafs(working_tree)
-    assert len(working_tree.nodes) == 1
-    root_node = list(working_tree.nodes)[0]
+    root_node = get_root(working_tree)
     return working_tree.nodes[root_node]['mot_value']
 
 
@@ -243,3 +234,112 @@ def mot_from_dict(d):
     m = m_class()
     m.from_dict(d['message'])
     return get_mot(m)
+
+
+def mot_get_path(mot: nx.DiGraph, node: int):
+    return get_path(mot, node, edge_attr_name="mot_value", root_path=RootNodePath)
+
+
+# prototype operations
+def pt_remove_node(mot_original: nx.DiGraph, node_to_remove: int, inplace=False):
+    if inplace:
+        mot = mot_original
+    else:
+        mot = deepcopy(mot_original)
+    # if the node is an element of a list, reassign indices of the edges to its siblings
+    parent = next(mot.predecessors(node_to_remove))
+    parent_class = import_string(mot.nodes[parent]['mot_class_string'])
+    if parent_class == list:
+        children = list(mot.successors(parent))
+        i = 0
+        for child in children:
+            if child == node_to_remove:
+                continue
+            edge = (parent, child)
+            edge_attr = mot.edges[edge]
+            edge_attr['mot_value'] = i
+            i += 1
+    for off in nx.descendants(mot, node_to_remove):
+        mot.remove_node(off)
+    mot.remove_node(node_to_remove)
+    return mot
+
+
+def pt_detach_node(mot: nx.DiGraph, new_root: int):
+    new_tree = list(nx.descendants(mot, new_root))
+    new_tree.append(new_root)
+    new_tree = deepcopy(mot.subgraph(new_tree))
+    return new_tree
+
+
+def pt_extend_node(mot_original: nx.DiGraph, from_node: int, inplace=False):
+    if inplace:
+        mot = mot_original
+    else:
+        mot = deepcopy(mot_original)
+    mtt = get_mtt(import_string(mot.nodes[get_root(mot)]['mot_class_string']))
+    assert len(mot.nodes) > 0
+    logger.info(
+        f"extending node: {from_node} {mot_get_path(mot, from_node)}, current tree size: {len(mot.nodes)}"
+    )
+    from_node_class_string = mot.nodes[from_node]['mot_class_string']
+    from_node_class = import_string(from_node_class_string)
+    # if the mapped node is a literal, do nothing, note enum is here
+    if from_node_class in ord_classes.BuiltinLiteralClasses + ord_classes.OrdEnumClasses:
+        pass
+
+    # otherwise, add children
+    else:
+        from_node_mtt = mot.nodes[from_node]['mtt_element_name']
+        children_mtt = list(mtt.successors(from_node_mtt))
+        for child_mtt in children_mtt:
+            child_class_string = mtt.nodes[child_mtt]['mtt_class_string']
+            child_class = import_string(child_class_string)
+            new_child = max(mot.nodes) + 1
+            child_attr = MotEleAttr(
+                mot_element_id=new_child,
+                mot_can_edit=child_class in ord_classes.BuiltinLiteralClasses + ord_classes.OrdEnumClasses,
+                mot_state=PT_PLACEHOLDER,
+                mot_value=None,
+                mtt_element_name=child_mtt,
+                mot_class_string=child_class_string,
+            )
+            existing_edge_values = [d['mot_value'] for _, _, d in mot.out_edges(from_node, data=True)]
+
+            if from_node_class == list:
+                assert len(children_mtt) == 1
+                tmp_mot_can_edit = False
+                tmp_mot_state = PT_PRESET
+                tmp_mot_value = len(existing_edge_values)
+
+            elif from_node_class == dict:
+                assert len(children_mtt) == 1
+                tmp_mot_can_edit = True
+                tmp_mot_state = PT_PLACEHOLDER
+                tmp_mot_value = f"{PrefixDictKey}{len(existing_edge_values)}"
+
+            else:
+                child_mtt_relation_to_parent = mtt.nodes[child_mtt]['mtt_relation_to_parent']
+                if child_mtt_relation_to_parent in existing_edge_values:
+                    logger.info(
+                        f"extending an edge but its label already exists, skipping: {child_mtt_relation_to_parent}")
+                    continue
+
+                tmp_mot_can_edit = False
+                tmp_mot_state = PT_PRESET
+                tmp_mot_value = child_mtt_relation_to_parent
+
+            edge_attr = MotEleAttr(
+                mot_element_id=(from_node, new_child),
+                mot_can_edit=tmp_mot_can_edit,
+                mot_state=tmp_mot_state,
+                mot_value=tmp_mot_value,
+                mtt_element_name=(from_node_mtt, child_mtt),
+                mot_class_string=(from_node_class_string, child_class_string),
+            )
+
+            logger.info(
+                f"adding edge: ({from_node}, {new_child}) {mot_get_path(mot, from_node)}.{edge_attr['mot_value']}")
+            mot.add_node(new_child, **child_attr)
+            mot.add_edge(from_node, new_child, **edge_attr)
+            logger.info(f"edge added, current tree size: {len(mot.nodes)}")
