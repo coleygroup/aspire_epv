@@ -1,8 +1,9 @@
 import inspect
 import typing
-from typing import get_args, Type, get_origin, Optional, TypedDict
+from typing import get_args, Type, get_origin, Optional, TypedDict, Union
 
 import networkx as nx
+from betterproto import ProtoClassMetadata
 
 from ord_tree.ord_classes import BuiltinLiteralClasses, OrdEnumClasses, OrdMessageClasses
 from ord_tree.utils import get_class_string, NodePathDelimiter, RootNodePath, PrefixListIndex, PrefixDictKey, \
@@ -11,20 +12,21 @@ from ord_tree.utils import get_class_string, NodePathDelimiter, RootNodePath, Pr
 """
 message type tree
 """
-# TODO how to represent `oneof` field?
 
 
 class MttNodeAttr(TypedDict):
     mtt_node_name: str  # same as node itself
     mtt_type_hint_string: str
     mtt_class_string: str
-    mtt_relation_to_parent: str
     mtt_parent: str
+    mtt_relation_to_parent: str
+    mtt_relation_to_parent_oneof: Union[None, str]
 
 
 def _extend_mtt(
         type_hint, tree: nx.DiGraph, parent: str = None,
-        relation_to_parent: str = None
+        relation_to_parent: str = None,
+        relation_to_parent_oneof: str = None,
 ):
     """ recursively extending mtt """
     if parent is None:
@@ -47,6 +49,7 @@ def _extend_mtt(
         mtt_relation_to_parent=relation_to_parent,
         mtt_parent=parent,
         mtt_node_name=node_name,
+        mtt_relation_to_parent_oneof=relation_to_parent_oneof,
     )
 
     tree.add_node(node_name, **node_attr)
@@ -65,8 +68,15 @@ def _extend_mtt(
     elif node_class in BuiltinLiteralClasses + OrdEnumClasses:
         return
     else:
+        assert node_class in OrdMessageClasses
+        pcm = ProtoClassMetadata(node_class)
         for attr_name, attr_type in get_type_hints_without_private(type_hint).items():
-            _extend_mtt(attr_type, tree, parent=node_name, relation_to_parent=attr_name)
+            try:
+                group_name = pcm.oneof_group_by_field[attr_name]
+            except KeyError:
+                group_name = None
+            _extend_mtt(attr_type, tree, parent=node_name, relation_to_parent=attr_name,
+                        relation_to_parent_oneof=group_name)
 
 
 def get_mtt(message: Type) -> nx.DiGraph:
@@ -94,3 +104,9 @@ def get_mtt_node_class(mtt: nx.DiGraph, node: str) -> Type:
 def get_mtt_root_class(mtt: nx.DiGraph) -> Type:
     root = get_root(mtt)
     return get_mtt_node_class(mtt, root)
+
+
+if __name__ == '__main__':
+    from ord_betterproto import Reaction
+
+    get_mtt(Reaction)
