@@ -5,10 +5,10 @@ from dash import html, Input, Output, State, dcc
 from dash import register_page, get_app
 from copy import deepcopy
 
-from ord_tree.cyto_app.cyto_config import DASH_CID_CYTO, CYTO_STYLE_SHEET, DASH_CID_MTT_DIV_INFO_ELEMENT, \
+from cyto_app.cyto_config import DASH_CID_CYTO, CYTO_STYLE_SHEET, DASH_CID_MTT_DIV_INFO_ELEMENT, \
     DASH_CID_MTT_SELECTOR, DASH_CID_MTT_SWITCHES
-from ord_tree.cyto_app.cyto_elements import mtt_to_cyto, MttNodeAttr
-from ord_tree.cyto_app.fixtures import MttDataDict, MttData
+from cyto_app.cyto_elements import mtt_to_cyto, MttNodeAttr
+from cyto_app.fixtures import MttDataDict, MttData
 from ord_tree.mtt import mtt_from_dict, OrdEnumClasses, BuiltinLiteralClasses, OrdMessageClasses
 from ord_tree.utils import import_string, NodePathDelimiter
 
