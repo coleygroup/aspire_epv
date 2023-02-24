@@ -19,7 +19,7 @@ app = Dash(
 
 navlinks = [
     dbc.NavLink(
-        f"{page['description']}", href=page["relative_path"], active='exact', style={"color": "#ffffff"}
+        f"{page['description']}", href=page["relative_path"], className="mx-2", active='exact', style={"color": "#ffffff"}
     ) for page in dash.page_registry.values()
 ]
 
@@ -29,7 +29,7 @@ navbar_callback(app, DASH_CID_NAVBAR)
 CONTENT_STYLE = {
     "margin-left": "2rem",
     "margin-right": "2rem",
-    "padding": "2rem 1rem",
+    "padding": "1rem 1rem",
     "z-index": "0",
 }
 content = html.Div(id="page-content", children=[dash.page_container], style=CONTENT_STYLE)
