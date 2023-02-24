@@ -57,6 +57,7 @@ class TestOrdTree:
             m = import_string(f"ord_betterproto.{t}")
             message = m().from_json(js)
             mot = get_mot(message)
+            write_dot(mot, f"output/mot_{t}.dot")
             d = mot_to_dict(mot)
             write_file(json.dumps(d, indent=2), f"output/mot_{t}.json")
 

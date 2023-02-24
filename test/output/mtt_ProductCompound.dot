@@ -6,791 +6,923 @@ strict digraph "" {
 		mtt_node_name="<ROOT>",
 		mtt_parent=None,
 		mtt_relation_to_parent=None,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'ord_betterproto.ProductCompound'>"];
 	"<ROOT>|identifiers"	[mtt_class_string="builtins.list",
 		mtt_node_name="<ROOT>|identifiers",
 		mtt_parent="<ROOT>",
 		mtt_relation_to_parent=identifiers,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="typing.List[ord_betterproto.CompoundIdentifier]"];
 	"<ROOT>" -> "<ROOT>|identifiers";
 	"<ROOT>|is_desired_product"	[mtt_class_string="builtins.bool",
 		mtt_node_name="<ROOT>|is_desired_product",
 		mtt_parent="<ROOT>",
 		mtt_relation_to_parent=is_desired_product,
+		mtt_relation_to_parent_oneof=_is_desired_product,
 		mtt_type_hint_string="typing.Optional[bool]"];
 	"<ROOT>" -> "<ROOT>|is_desired_product";
 	"<ROOT>|measurements"	[mtt_class_string="builtins.list",
 		mtt_node_name="<ROOT>|measurements",
 		mtt_parent="<ROOT>",
 		mtt_relation_to_parent=measurements,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="typing.List[ord_betterproto.ProductMeasurement]"];
 	"<ROOT>" -> "<ROOT>|measurements";
 	"<ROOT>|isolated_color"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|isolated_color",
 		mtt_parent="<ROOT>",
 		mtt_relation_to_parent=isolated_color,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>" -> "<ROOT>|isolated_color";
-	"<ROOT>|texture"	[mtt_class_string="ord_betterproto.ProductCompoundTexture",
+	"<ROOT>|texture"	[mtt_class_string="ord_betterproto.Texture",
 		mtt_node_name="<ROOT>|texture",
 		mtt_parent="<ROOT>",
 		mtt_relation_to_parent=texture,
-		mtt_type_hint_string="<class 'ord_betterproto.ProductCompoundTexture'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<class 'ord_betterproto.Texture'>"];
 	"<ROOT>" -> "<ROOT>|texture";
 	"<ROOT>|features"	[mtt_class_string="builtins.dict",
 		mtt_node_name="<ROOT>|features",
 		mtt_parent="<ROOT>",
 		mtt_relation_to_parent=features,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="typing.Dict[str, ord_betterproto.Data]"];
 	"<ROOT>" -> "<ROOT>|features";
-	"<ROOT>|reaction_role"	[mtt_class_string="ord_betterproto.ReactionRoleReactionRoleType",
+	"<ROOT>|reaction_role"	[mtt_class_string="ord_betterproto.ReactionRoleType",
 		mtt_node_name="<ROOT>|reaction_role",
 		mtt_parent="<ROOT>",
 		mtt_relation_to_parent=reaction_role,
-		mtt_type_hint_string="<enum 'ReactionRoleReactionRoleType'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'ReactionRoleType'>"];
 	"<ROOT>" -> "<ROOT>|reaction_role";
 	"<ROOT>|identifiers|<ListIndex>"	[mtt_class_string="ord_betterproto.CompoundIdentifier",
 		mtt_node_name="<ROOT>|identifiers|<ListIndex>",
 		mtt_parent="<ROOT>|identifiers",
 		mtt_relation_to_parent="<ListIndex>",
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'ord_betterproto.CompoundIdentifier'>"];
 	"<ROOT>|identifiers" -> "<ROOT>|identifiers|<ListIndex>";
-	"<ROOT>|identifiers|<ListIndex>|type"	[mtt_class_string="ord_betterproto.CompoundIdentifierCompoundIdentifierType",
+	"<ROOT>|identifiers|<ListIndex>|type"	[mtt_class_string="ord_betterproto.CompoundIdentifierType",
 		mtt_node_name="<ROOT>|identifiers|<ListIndex>|type",
 		mtt_parent="<ROOT>|identifiers|<ListIndex>",
 		mtt_relation_to_parent=type,
-		mtt_type_hint_string="<enum 'CompoundIdentifierCompoundIdentifierType'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'CompoundIdentifierType'>"];
 	"<ROOT>|identifiers|<ListIndex>" -> "<ROOT>|identifiers|<ListIndex>|type";
 	"<ROOT>|identifiers|<ListIndex>|details"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|identifiers|<ListIndex>|details",
 		mtt_parent="<ROOT>|identifiers|<ListIndex>",
 		mtt_relation_to_parent=details,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|identifiers|<ListIndex>" -> "<ROOT>|identifiers|<ListIndex>|details";
 	"<ROOT>|identifiers|<ListIndex>|value"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|identifiers|<ListIndex>|value",
 		mtt_parent="<ROOT>|identifiers|<ListIndex>",
 		mtt_relation_to_parent=value,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|identifiers|<ListIndex>" -> "<ROOT>|identifiers|<ListIndex>|value";
 	"<ROOT>|measurements|<ListIndex>"	[mtt_class_string="ord_betterproto.ProductMeasurement",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>",
 		mtt_parent="<ROOT>|measurements",
 		mtt_relation_to_parent="<ListIndex>",
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'ord_betterproto.ProductMeasurement'>"];
 	"<ROOT>|measurements" -> "<ROOT>|measurements|<ListIndex>";
 	"<ROOT>|measurements|<ListIndex>|analysis_key"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|analysis_key",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=analysis_key,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|analysis_key";
-	"<ROOT>|measurements|<ListIndex>|type"	[mtt_class_string="ord_betterproto.ProductMeasurementProductMeasurementType",
+	"<ROOT>|measurements|<ListIndex>|type"	[mtt_class_string="ord_betterproto.ProductMeasurementType",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|type",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=type,
-		mtt_type_hint_string="<enum 'ProductMeasurementProductMeasurementType'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'ProductMeasurementType'>"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|type";
 	"<ROOT>|measurements|<ListIndex>|details"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|details",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=details,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|details";
 	"<ROOT>|measurements|<ListIndex>|uses_internal_standard"	[mtt_class_string="builtins.bool",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|uses_internal_standard",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=uses_internal_standard,
+		mtt_relation_to_parent_oneof=_uses_internal_standard,
 		mtt_type_hint_string="typing.Optional[bool]"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|uses_internal_standard";
 	"<ROOT>|measurements|<ListIndex>|is_normalized"	[mtt_class_string="builtins.bool",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|is_normalized",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=is_normalized,
+		mtt_relation_to_parent_oneof=_is_normalized,
 		mtt_type_hint_string="typing.Optional[bool]"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|is_normalized";
 	"<ROOT>|measurements|<ListIndex>|uses_authentic_standard"	[mtt_class_string="builtins.bool",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|uses_authentic_standard",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=uses_authentic_standard,
+		mtt_relation_to_parent_oneof=_uses_authentic_standard,
 		mtt_type_hint_string="typing.Optional[bool]"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|uses_authentic_standard";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard"	[mtt_class_string="ord_betterproto.Compound",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=authentic_standard,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'ord_betterproto.Compound'>"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard";
 	"<ROOT>|measurements|<ListIndex>|percentage"	[mtt_class_string="ord_betterproto.Percentage",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|percentage",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=percentage,
+		mtt_relation_to_parent_oneof=value,
 		mtt_type_hint_string="<class 'ord_betterproto.Percentage'>"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|percentage";
 	"<ROOT>|measurements|<ListIndex>|float_value"	[mtt_class_string="ord_betterproto.FloatValue",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|float_value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=float_value,
+		mtt_relation_to_parent_oneof=value,
 		mtt_type_hint_string="<class 'ord_betterproto.FloatValue'>"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|float_value";
 	"<ROOT>|measurements|<ListIndex>|string_value"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|string_value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=string_value,
+		mtt_relation_to_parent_oneof=value,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|string_value";
 	"<ROOT>|measurements|<ListIndex>|amount"	[mtt_class_string="ord_betterproto.Amount",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=amount,
+		mtt_relation_to_parent_oneof=value,
 		mtt_type_hint_string="<class 'ord_betterproto.Amount'>"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|amount";
 	"<ROOT>|measurements|<ListIndex>|retention_time"	[mtt_class_string="ord_betterproto.Time",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|retention_time",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=retention_time,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'ord_betterproto.Time'>"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|retention_time";
-	"<ROOT>|measurements|<ListIndex>|mass_spec_details"	[mtt_class_string="ord_betterproto.ProductMeasurementMassSpecMeasurementDetails",
+	"<ROOT>|measurements|<ListIndex>|mass_spec_details"	[mtt_class_string="ord_betterproto.MassSpecMeasurementDetails",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|mass_spec_details",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=mass_spec_details,
-		mtt_type_hint_string="<class 'ord_betterproto.ProductMeasurementMassSpecMeasurementDetails'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<class 'ord_betterproto.MassSpecMeasurementDetails'>"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|mass_spec_details";
-	"<ROOT>|measurements|<ListIndex>|selectivity"	[mtt_class_string="ord_betterproto.ProductMeasurementSelectivity",
+	"<ROOT>|measurements|<ListIndex>|selectivity"	[mtt_class_string="ord_betterproto.Selectivity",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|selectivity",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=selectivity,
-		mtt_type_hint_string="<class 'ord_betterproto.ProductMeasurementSelectivity'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<class 'ord_betterproto.Selectivity'>"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|selectivity";
 	"<ROOT>|measurements|<ListIndex>|wavelength"	[mtt_class_string="ord_betterproto.Wavelength",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|wavelength",
 		mtt_parent="<ROOT>|measurements|<ListIndex>",
 		mtt_relation_to_parent=wavelength,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'ord_betterproto.Wavelength'>"];
 	"<ROOT>|measurements|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|wavelength";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers"	[mtt_class_string="builtins.list",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard",
 		mtt_relation_to_parent=identifiers,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="typing.List[ord_betterproto.CompoundIdentifier]"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount"	[mtt_class_string="ord_betterproto.Amount",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard",
 		mtt_relation_to_parent=amount,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'ord_betterproto.Amount'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount";
-	"<ROOT>|measurements|<ListIndex>|authentic_standard|reaction_role"	[mtt_class_string="ord_betterproto.ReactionRoleReactionRoleType",
+	"<ROOT>|measurements|<ListIndex>|authentic_standard|reaction_role"	[mtt_class_string="ord_betterproto.ReactionRoleType",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|reaction_role",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard",
 		mtt_relation_to_parent=reaction_role,
-		mtt_type_hint_string="<enum 'ReactionRoleReactionRoleType'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'ReactionRoleType'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|reaction_role";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|is_limiting"	[mtt_class_string="builtins.bool",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|is_limiting",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard",
 		mtt_relation_to_parent=is_limiting,
+		mtt_relation_to_parent_oneof=_is_limiting,
 		mtt_type_hint_string="typing.Optional[bool]"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|is_limiting";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|preparations"	[mtt_class_string="builtins.list",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|preparations",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard",
 		mtt_relation_to_parent=preparations,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="typing.List[ord_betterproto.CompoundPreparation]"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|preparations";
-	"<ROOT>|measurements|<ListIndex>|authentic_standard|source"	[mtt_class_string="ord_betterproto.CompoundSource",
+	"<ROOT>|measurements|<ListIndex>|authentic_standard|source"	[mtt_class_string="ord_betterproto.Source",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|source",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard",
 		mtt_relation_to_parent=source,
-		mtt_type_hint_string="<class 'ord_betterproto.CompoundSource'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<class 'ord_betterproto.Source'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|source";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features"	[mtt_class_string="builtins.dict",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|features",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard",
 		mtt_relation_to_parent=features,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="typing.Dict[str, ord_betterproto.Data]"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|features";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses"	[mtt_class_string="builtins.dict",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard",
 		mtt_relation_to_parent=analyses,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="typing.Dict[str, ord_betterproto.Analysis]"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>"	[mtt_class_string="ord_betterproto.CompoundIdentifier",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers",
 		mtt_relation_to_parent="<ListIndex>",
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'ord_betterproto.CompoundIdentifier'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>";
-	"<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>|type"	[mtt_class_string="ord_betterproto.CompoundIdentifierCompoundIdentifierType",
+	"<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>|type"	[mtt_class_string="ord_betterproto.CompoundIdentifierType",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>|type",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>",
 		mtt_relation_to_parent=type,
-		mtt_type_hint_string="<enum 'CompoundIdentifierCompoundIdentifierType'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'CompoundIdentifierType'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>|type";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>|details"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>|details",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>",
 		mtt_relation_to_parent=details,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>|details";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>|value"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>|value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>",
 		mtt_relation_to_parent=value,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|identifiers|<ListIndex>|value";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass"	[mtt_class_string="ord_betterproto.Mass",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount",
 		mtt_relation_to_parent=mass,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'ord_betterproto.Mass'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles"	[mtt_class_string="ord_betterproto.Moles",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount",
 		mtt_relation_to_parent=moles,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'ord_betterproto.Moles'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume"	[mtt_class_string="ord_betterproto.Volume",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount",
 		mtt_relation_to_parent=volume,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'ord_betterproto.Volume'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|unmeasured"	[mtt_class_string="ord_betterproto.UnmeasuredAmount",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|unmeasured",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount",
 		mtt_relation_to_parent=unmeasured,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'ord_betterproto.UnmeasuredAmount'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|unmeasured";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume_includes_solutes"	[mtt_class_string="builtins.bool",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume_includes_solutes",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount",
 		mtt_relation_to_parent=volume_includes_solutes,
+		mtt_relation_to_parent_oneof=_volume_includes_solutes,
 		mtt_type_hint_string="typing.Optional[bool]"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume_includes_solutes";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass|value"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass|value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass",
 		mtt_relation_to_parent=value,
+		mtt_relation_to_parent_oneof=_value,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass|value";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass|precision"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass|precision",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass",
 		mtt_relation_to_parent=precision,
+		mtt_relation_to_parent_oneof=_precision,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass|precision";
-	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass|units"	[mtt_class_string="ord_betterproto.MassMassUnit",
+	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass|units"	[mtt_class_string="ord_betterproto.MassUnit",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass|units",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass",
 		mtt_relation_to_parent=units,
-		mtt_type_hint_string="<enum 'MassMassUnit'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'MassUnit'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|mass|units";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles|value"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles|value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles",
 		mtt_relation_to_parent=value,
+		mtt_relation_to_parent_oneof=_value,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles|value";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles|precision"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles|precision",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles",
 		mtt_relation_to_parent=precision,
+		mtt_relation_to_parent_oneof=_precision,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles|precision";
-	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles|units"	[mtt_class_string="ord_betterproto.MolesMolesUnit",
+	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles|units"	[mtt_class_string="ord_betterproto.MolesUnit",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles|units",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles",
 		mtt_relation_to_parent=units,
-		mtt_type_hint_string="<enum 'MolesMolesUnit'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'MolesUnit'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|moles|units";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume|value"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume|value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume",
 		mtt_relation_to_parent=value,
+		mtt_relation_to_parent_oneof=_value,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume|value";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume|precision"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume|precision",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume",
 		mtt_relation_to_parent=precision,
+		mtt_relation_to_parent_oneof=_precision,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume|precision";
-	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume|units"	[mtt_class_string="ord_betterproto.VolumeVolumeUnit",
+	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume|units"	[mtt_class_string="ord_betterproto.VolumeUnit",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume|units",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume",
 		mtt_relation_to_parent=units,
-		mtt_type_hint_string="<enum 'VolumeVolumeUnit'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'VolumeUnit'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|volume|units";
-	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|unmeasured|type"	[mtt_class_string="ord_betterproto.UnmeasuredAmountUnmeasuredAmountType",
+	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|unmeasured|type"	[mtt_class_string="ord_betterproto.UnmeasuredAmountType",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|unmeasured|type",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|unmeasured",
 		mtt_relation_to_parent=type,
-		mtt_type_hint_string="<enum 'UnmeasuredAmountUnmeasuredAmountType'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'UnmeasuredAmountType'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|unmeasured" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|unmeasured|type";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|unmeasured|details"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|unmeasured|details",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|amount|unmeasured",
 		mtt_relation_to_parent=details,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|amount|unmeasured" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|amount|unmeasured|details";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>"	[mtt_class_string="ord_betterproto.CompoundPreparation",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|preparations",
 		mtt_relation_to_parent="<ListIndex>",
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'ord_betterproto.CompoundPreparation'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|preparations" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>";
-	"<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>|type"	[mtt_class_string="ord_betterproto.CompoundPreparationCompoundPreparationType",
+	"<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>|type"	[mtt_class_string="ord_betterproto.CompoundPreparationType",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>|type",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>",
 		mtt_relation_to_parent=type,
-		mtt_type_hint_string="<enum 'CompoundPreparationCompoundPreparationType'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'CompoundPreparationType'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>|type";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>|details"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>|details",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>",
 		mtt_relation_to_parent=details,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>|details";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>|reaction_id"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>|reaction_id",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>",
 		mtt_relation_to_parent=reaction_id,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|preparations|<ListIndex>|reaction_id";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|source|vendor"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|source|vendor",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|source",
 		mtt_relation_to_parent=vendor,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|source" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|source|vendor";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|source|catalog_id"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|source|catalog_id",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|source",
 		mtt_relation_to_parent=catalog_id,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|source" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|source|catalog_id";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|source|lot"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|source|lot",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|source",
 		mtt_relation_to_parent=lot,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|source" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|source|lot";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>"	[mtt_class_string="ord_betterproto.Data",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|features",
 		mtt_relation_to_parent="<DictKey>",
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'ord_betterproto.Data'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|float_value"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|float_value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>",
 		mtt_relation_to_parent=float_value,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'float'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|float_value";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|integer_value"	[mtt_class_string="builtins.int",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|integer_value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>",
 		mtt_relation_to_parent=integer_value,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'int'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|integer_value";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|bytes_value"	[mtt_class_string="builtins.bytes",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|bytes_value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>",
 		mtt_relation_to_parent=bytes_value,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'bytes'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|bytes_value";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|string_value"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|string_value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>",
 		mtt_relation_to_parent=string_value,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|string_value";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|url"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|url",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>",
 		mtt_relation_to_parent=url,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|url";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|description"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|description",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>",
 		mtt_relation_to_parent=description,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|description";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|format"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|format",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>",
 		mtt_relation_to_parent=format,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|features|<DictKey>|format";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>"	[mtt_class_string="ord_betterproto.Analysis",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses",
 		mtt_relation_to_parent="<DictKey>",
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'ord_betterproto.Analysis'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>";
-	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|type"	[mtt_class_string="ord_betterproto.AnalysisAnalysisType",
+	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|type"	[mtt_class_string="ord_betterproto.AnalysisType",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|type",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>",
 		mtt_relation_to_parent=type,
-		mtt_type_hint_string="<enum 'AnalysisAnalysisType'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'AnalysisType'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|type";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|details"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|details",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>",
 		mtt_relation_to_parent=details,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|details";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|chmo_id"	[mtt_class_string="builtins.int",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|chmo_id",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>",
 		mtt_relation_to_parent=chmo_id,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'int'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|chmo_id";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|is_of_isolated_species"	[mtt_class_string="builtins.bool",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|is_of_isolated_species",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>",
 		mtt_relation_to_parent=is_of_isolated_species,
+		mtt_relation_to_parent_oneof=_is_of_isolated_species,
 		mtt_type_hint_string="typing.Optional[bool]"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|is_of_isolated_species";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data"	[mtt_class_string="builtins.dict",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>",
 		mtt_relation_to_parent=data,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="typing.Dict[str, ord_betterproto.Data]"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|instrument_manufacturer"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|instrument_manufacturer",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>",
 		mtt_relation_to_parent=instrument_manufacturer,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|instrument_manufacturer";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|instrument_last_calibrated"	[mtt_class_string="ord_betterproto.DateTime",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|instrument_last_calibrated",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>",
 		mtt_relation_to_parent=instrument_last_calibrated,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'ord_betterproto.DateTime'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|instrument_last_calibrated";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>"	[mtt_class_string="ord_betterproto.Data",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data",
 		mtt_relation_to_parent="<DictKey>",
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'ord_betterproto.Data'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|float_value"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|float_value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>",
 		mtt_relation_to_parent=float_value,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'float'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|float_value";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|integer_value"	[mtt_class_string="builtins.int",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|integer_value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>",
 		mtt_relation_to_parent=integer_value,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'int'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|integer_value";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|bytes_value"	[mtt_class_string="builtins.bytes",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|bytes_value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>",
 		mtt_relation_to_parent=bytes_value,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'bytes'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|bytes_value";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|string_value"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|string_value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>",
 		mtt_relation_to_parent=string_value,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|string_value";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|url"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|url",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>",
 		mtt_relation_to_parent=url,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|url";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|description"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|description",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>",
 		mtt_relation_to_parent=description,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|description";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|format"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|format",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>",
 		mtt_relation_to_parent=format,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|data|<DictKey>|format";
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|instrument_last_calibrated|value"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|instrument_last_calibrated|value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|instrument_last_calibrated",
 		mtt_relation_to_parent=value,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|instrument_last_calibrated" -> "<ROOT>|measurements|<ListIndex>|authentic_standard|analyses|<DictKey>|instrument_last_calibrated|value";
 	"<ROOT>|measurements|<ListIndex>|percentage|value"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|percentage|value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|percentage",
 		mtt_relation_to_parent=value,
+		mtt_relation_to_parent_oneof=_value,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|percentage" -> "<ROOT>|measurements|<ListIndex>|percentage|value";
 	"<ROOT>|measurements|<ListIndex>|percentage|precision"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|percentage|precision",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|percentage",
 		mtt_relation_to_parent=precision,
+		mtt_relation_to_parent_oneof=_precision,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|percentage" -> "<ROOT>|measurements|<ListIndex>|percentage|precision";
 	"<ROOT>|measurements|<ListIndex>|float_value|value"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|float_value|value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|float_value",
 		mtt_relation_to_parent=value,
+		mtt_relation_to_parent_oneof=_value,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|float_value" -> "<ROOT>|measurements|<ListIndex>|float_value|value";
 	"<ROOT>|measurements|<ListIndex>|float_value|precision"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|float_value|precision",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|float_value",
 		mtt_relation_to_parent=precision,
+		mtt_relation_to_parent_oneof=_precision,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|float_value" -> "<ROOT>|measurements|<ListIndex>|float_value|precision";
 	"<ROOT>|measurements|<ListIndex>|amount|mass"	[mtt_class_string="ord_betterproto.Mass",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|mass",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount",
 		mtt_relation_to_parent=mass,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'ord_betterproto.Mass'>"];
 	"<ROOT>|measurements|<ListIndex>|amount" -> "<ROOT>|measurements|<ListIndex>|amount|mass";
 	"<ROOT>|measurements|<ListIndex>|amount|moles"	[mtt_class_string="ord_betterproto.Moles",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|moles",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount",
 		mtt_relation_to_parent=moles,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'ord_betterproto.Moles'>"];
 	"<ROOT>|measurements|<ListIndex>|amount" -> "<ROOT>|measurements|<ListIndex>|amount|moles";
 	"<ROOT>|measurements|<ListIndex>|amount|volume"	[mtt_class_string="ord_betterproto.Volume",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|volume",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount",
 		mtt_relation_to_parent=volume,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'ord_betterproto.Volume'>"];
 	"<ROOT>|measurements|<ListIndex>|amount" -> "<ROOT>|measurements|<ListIndex>|amount|volume";
 	"<ROOT>|measurements|<ListIndex>|amount|unmeasured"	[mtt_class_string="ord_betterproto.UnmeasuredAmount",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|unmeasured",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount",
 		mtt_relation_to_parent=unmeasured,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'ord_betterproto.UnmeasuredAmount'>"];
 	"<ROOT>|measurements|<ListIndex>|amount" -> "<ROOT>|measurements|<ListIndex>|amount|unmeasured";
 	"<ROOT>|measurements|<ListIndex>|amount|volume_includes_solutes"	[mtt_class_string="builtins.bool",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|volume_includes_solutes",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount",
 		mtt_relation_to_parent=volume_includes_solutes,
+		mtt_relation_to_parent_oneof=_volume_includes_solutes,
 		mtt_type_hint_string="typing.Optional[bool]"];
 	"<ROOT>|measurements|<ListIndex>|amount" -> "<ROOT>|measurements|<ListIndex>|amount|volume_includes_solutes";
 	"<ROOT>|measurements|<ListIndex>|amount|mass|value"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|mass|value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount|mass",
 		mtt_relation_to_parent=value,
+		mtt_relation_to_parent_oneof=_value,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|amount|mass" -> "<ROOT>|measurements|<ListIndex>|amount|mass|value";
 	"<ROOT>|measurements|<ListIndex>|amount|mass|precision"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|mass|precision",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount|mass",
 		mtt_relation_to_parent=precision,
+		mtt_relation_to_parent_oneof=_precision,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|amount|mass" -> "<ROOT>|measurements|<ListIndex>|amount|mass|precision";
-	"<ROOT>|measurements|<ListIndex>|amount|mass|units"	[mtt_class_string="ord_betterproto.MassMassUnit",
+	"<ROOT>|measurements|<ListIndex>|amount|mass|units"	[mtt_class_string="ord_betterproto.MassUnit",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|mass|units",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount|mass",
 		mtt_relation_to_parent=units,
-		mtt_type_hint_string="<enum 'MassMassUnit'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'MassUnit'>"];
 	"<ROOT>|measurements|<ListIndex>|amount|mass" -> "<ROOT>|measurements|<ListIndex>|amount|mass|units";
 	"<ROOT>|measurements|<ListIndex>|amount|moles|value"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|moles|value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount|moles",
 		mtt_relation_to_parent=value,
+		mtt_relation_to_parent_oneof=_value,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|amount|moles" -> "<ROOT>|measurements|<ListIndex>|amount|moles|value";
 	"<ROOT>|measurements|<ListIndex>|amount|moles|precision"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|moles|precision",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount|moles",
 		mtt_relation_to_parent=precision,
+		mtt_relation_to_parent_oneof=_precision,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|amount|moles" -> "<ROOT>|measurements|<ListIndex>|amount|moles|precision";
-	"<ROOT>|measurements|<ListIndex>|amount|moles|units"	[mtt_class_string="ord_betterproto.MolesMolesUnit",
+	"<ROOT>|measurements|<ListIndex>|amount|moles|units"	[mtt_class_string="ord_betterproto.MolesUnit",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|moles|units",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount|moles",
 		mtt_relation_to_parent=units,
-		mtt_type_hint_string="<enum 'MolesMolesUnit'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'MolesUnit'>"];
 	"<ROOT>|measurements|<ListIndex>|amount|moles" -> "<ROOT>|measurements|<ListIndex>|amount|moles|units";
 	"<ROOT>|measurements|<ListIndex>|amount|volume|value"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|volume|value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount|volume",
 		mtt_relation_to_parent=value,
+		mtt_relation_to_parent_oneof=_value,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|amount|volume" -> "<ROOT>|measurements|<ListIndex>|amount|volume|value";
 	"<ROOT>|measurements|<ListIndex>|amount|volume|precision"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|volume|precision",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount|volume",
 		mtt_relation_to_parent=precision,
+		mtt_relation_to_parent_oneof=_precision,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|amount|volume" -> "<ROOT>|measurements|<ListIndex>|amount|volume|precision";
-	"<ROOT>|measurements|<ListIndex>|amount|volume|units"	[mtt_class_string="ord_betterproto.VolumeVolumeUnit",
+	"<ROOT>|measurements|<ListIndex>|amount|volume|units"	[mtt_class_string="ord_betterproto.VolumeUnit",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|volume|units",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount|volume",
 		mtt_relation_to_parent=units,
-		mtt_type_hint_string="<enum 'VolumeVolumeUnit'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'VolumeUnit'>"];
 	"<ROOT>|measurements|<ListIndex>|amount|volume" -> "<ROOT>|measurements|<ListIndex>|amount|volume|units";
-	"<ROOT>|measurements|<ListIndex>|amount|unmeasured|type"	[mtt_class_string="ord_betterproto.UnmeasuredAmountUnmeasuredAmountType",
+	"<ROOT>|measurements|<ListIndex>|amount|unmeasured|type"	[mtt_class_string="ord_betterproto.UnmeasuredAmountType",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|unmeasured|type",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount|unmeasured",
 		mtt_relation_to_parent=type,
-		mtt_type_hint_string="<enum 'UnmeasuredAmountUnmeasuredAmountType'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'UnmeasuredAmountType'>"];
 	"<ROOT>|measurements|<ListIndex>|amount|unmeasured" -> "<ROOT>|measurements|<ListIndex>|amount|unmeasured|type";
 	"<ROOT>|measurements|<ListIndex>|amount|unmeasured|details"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|amount|unmeasured|details",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|amount|unmeasured",
 		mtt_relation_to_parent=details,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|amount|unmeasured" -> "<ROOT>|measurements|<ListIndex>|amount|unmeasured|details";
 	"<ROOT>|measurements|<ListIndex>|retention_time|value"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|retention_time|value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|retention_time",
 		mtt_relation_to_parent=value,
+		mtt_relation_to_parent_oneof=_value,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|retention_time" -> "<ROOT>|measurements|<ListIndex>|retention_time|value";
 	"<ROOT>|measurements|<ListIndex>|retention_time|precision"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|retention_time|precision",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|retention_time",
 		mtt_relation_to_parent=precision,
+		mtt_relation_to_parent_oneof=_precision,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|retention_time" -> "<ROOT>|measurements|<ListIndex>|retention_time|precision";
-	"<ROOT>|measurements|<ListIndex>|retention_time|units"	[mtt_class_string="ord_betterproto.TimeTimeUnit",
+	"<ROOT>|measurements|<ListIndex>|retention_time|units"	[mtt_class_string="ord_betterproto.TimeUnit",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|retention_time|units",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|retention_time",
 		mtt_relation_to_parent=units,
-		mtt_type_hint_string="<enum 'TimeTimeUnit'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'TimeUnit'>"];
 	"<ROOT>|measurements|<ListIndex>|retention_time" -> "<ROOT>|measurements|<ListIndex>|retention_time|units";
-	"<ROOT>|measurements|<ListIndex>|mass_spec_details|type"	[mtt_class_string="ord_betterproto.ProductMeasurementMassSpecMeasurementDetailsMassSpecMeasurementType",
+	"<ROOT>|measurements|<ListIndex>|mass_spec_details|type"	[mtt_class_string="ord_betterproto.MassSpecMeasurementType",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|mass_spec_details|type",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|mass_spec_details",
 		mtt_relation_to_parent=type,
-		mtt_type_hint_string="<enum 'ProductMeasurementMassSpecMeasurementDetailsMassSpecMeasurementType'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'MassSpecMeasurementType'>"];
 	"<ROOT>|measurements|<ListIndex>|mass_spec_details" -> "<ROOT>|measurements|<ListIndex>|mass_spec_details|type";
 	"<ROOT>|measurements|<ListIndex>|mass_spec_details|details"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|mass_spec_details|details",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|mass_spec_details",
 		mtt_relation_to_parent=details,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|mass_spec_details" -> "<ROOT>|measurements|<ListIndex>|mass_spec_details|details";
 	"<ROOT>|measurements|<ListIndex>|mass_spec_details|tic_minimum_mz"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|mass_spec_details|tic_minimum_mz",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|mass_spec_details",
 		mtt_relation_to_parent=tic_minimum_mz,
+		mtt_relation_to_parent_oneof=_tic_minimum_mz,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|mass_spec_details" -> "<ROOT>|measurements|<ListIndex>|mass_spec_details|tic_minimum_mz";
 	"<ROOT>|measurements|<ListIndex>|mass_spec_details|tic_maximum_mz"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|mass_spec_details|tic_maximum_mz",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|mass_spec_details",
 		mtt_relation_to_parent=tic_maximum_mz,
+		mtt_relation_to_parent_oneof=_tic_maximum_mz,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|mass_spec_details" -> "<ROOT>|measurements|<ListIndex>|mass_spec_details|tic_maximum_mz";
 	"<ROOT>|measurements|<ListIndex>|mass_spec_details|eic_masses"	[mtt_class_string="builtins.list",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|mass_spec_details|eic_masses",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|mass_spec_details",
 		mtt_relation_to_parent=eic_masses,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="typing.List[float]"];
 	"<ROOT>|measurements|<ListIndex>|mass_spec_details" -> "<ROOT>|measurements|<ListIndex>|mass_spec_details|eic_masses";
 	"<ROOT>|measurements|<ListIndex>|mass_spec_details|eic_masses|<ListIndex>"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|mass_spec_details|eic_masses|<ListIndex>",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|mass_spec_details|eic_masses",
 		mtt_relation_to_parent="<ListIndex>",
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'float'>"];
 	"<ROOT>|measurements|<ListIndex>|mass_spec_details|eic_masses" -> "<ROOT>|measurements|<ListIndex>|mass_spec_details|eic_masses|<ListIndex>";
-	"<ROOT>|measurements|<ListIndex>|selectivity|type"	[mtt_class_string="ord_betterproto.ProductMeasurementSelectivitySelectivityType",
+	"<ROOT>|measurements|<ListIndex>|selectivity|type"	[mtt_class_string="ord_betterproto.SelectivityType",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|selectivity|type",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|selectivity",
 		mtt_relation_to_parent=type,
-		mtt_type_hint_string="<enum 'ProductMeasurementSelectivitySelectivityType'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'SelectivityType'>"];
 	"<ROOT>|measurements|<ListIndex>|selectivity" -> "<ROOT>|measurements|<ListIndex>|selectivity|type";
 	"<ROOT>|measurements|<ListIndex>|selectivity|details"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|selectivity|details",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|selectivity",
 		mtt_relation_to_parent=details,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|measurements|<ListIndex>|selectivity" -> "<ROOT>|measurements|<ListIndex>|selectivity|details";
 	"<ROOT>|measurements|<ListIndex>|wavelength|value"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|wavelength|value",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|wavelength",
 		mtt_relation_to_parent=value,
+		mtt_relation_to_parent_oneof=_value,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|wavelength" -> "<ROOT>|measurements|<ListIndex>|wavelength|value";
 	"<ROOT>|measurements|<ListIndex>|wavelength|precision"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|wavelength|precision",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|wavelength",
 		mtt_relation_to_parent=precision,
+		mtt_relation_to_parent_oneof=_precision,
 		mtt_type_hint_string="typing.Optional[float]"];
 	"<ROOT>|measurements|<ListIndex>|wavelength" -> "<ROOT>|measurements|<ListIndex>|wavelength|precision";
-	"<ROOT>|measurements|<ListIndex>|wavelength|units"	[mtt_class_string="ord_betterproto.WavelengthWavelengthUnit",
+	"<ROOT>|measurements|<ListIndex>|wavelength|units"	[mtt_class_string="ord_betterproto.WavelengthUnit",
 		mtt_node_name="<ROOT>|measurements|<ListIndex>|wavelength|units",
 		mtt_parent="<ROOT>|measurements|<ListIndex>|wavelength",
 		mtt_relation_to_parent=units,
-		mtt_type_hint_string="<enum 'WavelengthWavelengthUnit'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'WavelengthUnit'>"];
 	"<ROOT>|measurements|<ListIndex>|wavelength" -> "<ROOT>|measurements|<ListIndex>|wavelength|units";
-	"<ROOT>|texture|type"	[mtt_class_string="ord_betterproto.ProductCompoundTextureTextureType",
+	"<ROOT>|texture|type"	[mtt_class_string="ord_betterproto.TextureType",
 		mtt_node_name="<ROOT>|texture|type",
 		mtt_parent="<ROOT>|texture",
 		mtt_relation_to_parent=type,
-		mtt_type_hint_string="<enum 'ProductCompoundTextureTextureType'>"];
+		mtt_relation_to_parent_oneof=None,
+		mtt_type_hint_string="<enum 'TextureType'>"];
 	"<ROOT>|texture" -> "<ROOT>|texture|type";
 	"<ROOT>|texture|details"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|texture|details",
 		mtt_parent="<ROOT>|texture",
 		mtt_relation_to_parent=details,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|texture" -> "<ROOT>|texture|details";
 	"<ROOT>|features|<DictKey>"	[mtt_class_string="ord_betterproto.Data",
 		mtt_node_name="<ROOT>|features|<DictKey>",
 		mtt_parent="<ROOT>|features",
 		mtt_relation_to_parent="<DictKey>",
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'ord_betterproto.Data'>"];
 	"<ROOT>|features" -> "<ROOT>|features|<DictKey>";
 	"<ROOT>|features|<DictKey>|float_value"	[mtt_class_string="builtins.float",
 		mtt_node_name="<ROOT>|features|<DictKey>|float_value",
 		mtt_parent="<ROOT>|features|<DictKey>",
 		mtt_relation_to_parent=float_value,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'float'>"];
 	"<ROOT>|features|<DictKey>" -> "<ROOT>|features|<DictKey>|float_value";
 	"<ROOT>|features|<DictKey>|integer_value"	[mtt_class_string="builtins.int",
 		mtt_node_name="<ROOT>|features|<DictKey>|integer_value",
 		mtt_parent="<ROOT>|features|<DictKey>",
 		mtt_relation_to_parent=integer_value,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'int'>"];
 	"<ROOT>|features|<DictKey>" -> "<ROOT>|features|<DictKey>|integer_value";
 	"<ROOT>|features|<DictKey>|bytes_value"	[mtt_class_string="builtins.bytes",
 		mtt_node_name="<ROOT>|features|<DictKey>|bytes_value",
 		mtt_parent="<ROOT>|features|<DictKey>",
 		mtt_relation_to_parent=bytes_value,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'bytes'>"];
 	"<ROOT>|features|<DictKey>" -> "<ROOT>|features|<DictKey>|bytes_value";
 	"<ROOT>|features|<DictKey>|string_value"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|features|<DictKey>|string_value",
 		mtt_parent="<ROOT>|features|<DictKey>",
 		mtt_relation_to_parent=string_value,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|features|<DictKey>" -> "<ROOT>|features|<DictKey>|string_value";
 	"<ROOT>|features|<DictKey>|url"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|features|<DictKey>|url",
 		mtt_parent="<ROOT>|features|<DictKey>",
 		mtt_relation_to_parent=url,
+		mtt_relation_to_parent_oneof=kind,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|features|<DictKey>" -> "<ROOT>|features|<DictKey>|url";
 	"<ROOT>|features|<DictKey>|description"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|features|<DictKey>|description",
 		mtt_parent="<ROOT>|features|<DictKey>",
 		mtt_relation_to_parent=description,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|features|<DictKey>" -> "<ROOT>|features|<DictKey>|description";
 	"<ROOT>|features|<DictKey>|format"	[mtt_class_string="builtins.str",
 		mtt_node_name="<ROOT>|features|<DictKey>|format",
 		mtt_parent="<ROOT>|features|<DictKey>",
 		mtt_relation_to_parent=format,
+		mtt_relation_to_parent_oneof=None,
 		mtt_type_hint_string="<class 'str'>"];
 	"<ROOT>|features|<DictKey>" -> "<ROOT>|features|<DictKey>|format";
 }
