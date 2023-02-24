@@ -2,6 +2,10 @@
 .radio-group .btn-group {
     flex-wrap: wrap;
 }
+
+.mtt-switch .form-check{
+ display: inline-block;
+}
 /*.radio-group .form-check {*/
 /*  padding-left: 2px;*/
 /*}*/

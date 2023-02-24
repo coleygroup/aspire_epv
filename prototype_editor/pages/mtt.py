@@ -28,6 +28,8 @@ COMPONENT_CYTO_MAIN = cyto.Cytoscape(
     layout={
         'name': 'dagre',
         'nodeDimensionsIncludeLabels': True,
+        'animate': True,
+        'animationDuration': 1000,
         'align': 'UL',
     },
     style={'width': '100%', 'height': '100%', 'min-height': '600px'},
@@ -49,21 +51,24 @@ layout = html.Div(
         # html.Hr(),
         dbc.Row(
             [
-                html.Div(COMPONENT_CYTO_MAIN, className="col-lg-8 border-primary border"),
+                dbc.Card(
+                    COMPONENT_CYTO_MAIN,
+                    className="col-lg-8"
+                ),
                 html.Div(
                     [
                         html.Div(
                             [html.H6("ORD message type", className="text-center"), COMPONENT_MTT_SELECTOR],
-                            className="mb-3"
+                            className="mb-3 mt-3"
                         ),
                         dbc.Checklist(
                             options=[
                                 {"label": "Hide Literals", "value": 'Hide Literals'},
                                 {"label": "Relation Label", "value": 'Relation Label'},
                             ],
-                            input_style={"display": "inline-block"},
                             input_class_name="mx-2",
                             label_class_name="mx-2",
+                            class_name="mtt-switch",
                             value=['Hide Literals'],
                             id=DASH_CID_MTT_SWITCHES,
                             switch=True,

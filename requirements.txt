@@ -3,4 +3,8 @@ betterproto[compiler]
 dash-cytoscape==0.3.0
 networkx==3.0
 pygraphviz==1.10
-ord-schema==0.3.40
+ord-schema==0.3.43
+loguru
+dash-bootstrap-components==1.3.1
+pymongo>=3.2.0,<4.0.0
+dash==2.7.0
