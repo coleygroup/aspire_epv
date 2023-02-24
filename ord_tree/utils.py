@@ -1,13 +1,28 @@
+import importlib
 import inspect
 import pathlib
 import sys
 import typing
 from importlib import import_module
+from typing import get_type_hints
 
 import networkx as nx
 import pygraphviz
 
+# for `string_to_type_hint`
+globals()['ord_betterproto'] = importlib.import_module('ord_betterproto')
+globals()['builtins'] = importlib.import_module('builtins')
+
 FilePath = typing.Union[str, pathlib.Path]
+RootNodePath = "<ROOT>"
+NodePathDelimiter = "|"
+PrefixDictKey = "<DictKey>"
+PrefixListIndex = "<ListIndex>"
+
+
+def string_to_type_hint(s: str):
+    """ https://stackoverflow.com/questions/67500755 """
+    return typing._eval_type(typing.ForwardRef(s), globals(), globals())
 
 
 def read_file(fn: FilePath) -> str:
@@ -20,14 +35,27 @@ def write_file(s: str, fn: FilePath):
         f.write(s)
 
 
-_RootNodeId = "<ROOT>"
-_NodeDelimiter = "|"
+def get_path(tree: nx.DiGraph, node, edge_attr_name: str, root_path: str = RootNodePath):
+    """
+    get a string representation of the path from root to node
 
-
-class MessageTypeTreeError(Exception): pass
-
-
-class MessageObjectTreeError(Exception): pass
+    :param tree:
+    :param node:
+    :param edge_attr_name:
+    :param root_path:
+    :return:
+    """
+    root = get_root(tree)
+    p = nx.shortest_path(tree, source=root, target=node)
+    if len(p) == 1:
+        return root_path
+    str_path = []
+    for i in range(len(p) - 1):
+        u = p[i]
+        v = p[i + 1]
+        str_p = str(tree.edges[(u, v)][edge_attr_name])
+        str_path.append(str_p)
+    return NodePathDelimiter.join(str_path)
 
 
 def get_root(tree: nx.DiGraph):
@@ -41,6 +69,10 @@ def get_leafs(tree: nx.DiGraph, sort=True):
         root_node = get_root(tree)
         leafs = sorted(leafs, key=lambda x: len(nx.shortest_path(tree, root_node, x)), reverse=True)
     return leafs
+
+
+def is_leaf(tree: nx.DiGraph, node):
+    return tree.out_degree(node) == 0
 
 
 def write_dot(g: nx.Graph, fn: FilePath = None):
@@ -103,6 +135,7 @@ def import_string(dotted_path):
 
 
 def is_arithmetic(lst, known_delta=None):
+    """ if an array is arithmetic sequence """
     if known_delta:
         delta = known_delta
     else:
@@ -111,3 +144,23 @@ def is_arithmetic(lst, known_delta=None):
         if not (lst[index + 1] - lst[index] == delta):
             return False
     return True
+
+
+def get_type_hints_without_private(obj):
+    d = dict()
+    for k, v in get_type_hints(obj).items():
+        if k.startswith("_"):
+            continue
+        d[k] = v
+    return d
+
+
+def get_tree_depth(tree: nx.DiGraph):
+    r = get_root(tree)
+    deep = 0
+    for n in tree.nodes:
+        p = nx.shortest_path(tree, source=r, target=n)
+        d = len(p) - 1
+        if d > deep:
+            deep = d
+    return deep

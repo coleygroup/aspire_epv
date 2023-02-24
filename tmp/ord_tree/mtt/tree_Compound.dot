@@ -1,0 +1,370 @@
+strict digraph "" {
+	graph [rankdir=LR,
+		splines=curved
+	];
+	"<ROOT>"	[mtt_class_string="ord_betterproto.Compound",
+		mtt_node_name="<ROOT>",
+		mtt_parent=None,
+		mtt_relation_to_parent=None,
+		mtt_type_hint_string="<class 'ord_betterproto.Compound'>"];
+	"<ROOT>|identifiers"	[mtt_class_string="builtins.list",
+		mtt_node_name="<ROOT>|identifiers",
+		mtt_parent="<ROOT>",
+		mtt_relation_to_parent=identifiers,
+		mtt_type_hint_string="typing.List[ord_betterproto.CompoundIdentifier]"];
+	"<ROOT>" -> "<ROOT>|identifiers";
+	"<ROOT>|amount"	[mtt_class_string="ord_betterproto.Amount",
+		mtt_node_name="<ROOT>|amount",
+		mtt_parent="<ROOT>",
+		mtt_relation_to_parent=amount,
+		mtt_type_hint_string="<class 'ord_betterproto.Amount'>"];
+	"<ROOT>" -> "<ROOT>|amount";
+	"<ROOT>|reaction_role"	[mtt_class_string="ord_betterproto.ReactionRoleReactionRoleType",
+		mtt_node_name="<ROOT>|reaction_role",
+		mtt_parent="<ROOT>",
+		mtt_relation_to_parent=reaction_role,
+		mtt_type_hint_string="<enum 'ReactionRoleReactionRoleType'>"];
+	"<ROOT>" -> "<ROOT>|reaction_role";
+	"<ROOT>|is_limiting"	[mtt_class_string="builtins.bool",
+		mtt_node_name="<ROOT>|is_limiting",
+		mtt_parent="<ROOT>",
+		mtt_relation_to_parent=is_limiting,
+		mtt_type_hint_string="typing.Optional[bool]"];
+	"<ROOT>" -> "<ROOT>|is_limiting";
+	"<ROOT>|preparations"	[mtt_class_string="builtins.list",
+		mtt_node_name="<ROOT>|preparations",
+		mtt_parent="<ROOT>",
+		mtt_relation_to_parent=preparations,
+		mtt_type_hint_string="typing.List[ord_betterproto.CompoundPreparation]"];
+	"<ROOT>" -> "<ROOT>|preparations";
+	"<ROOT>|source"	[mtt_class_string="ord_betterproto.CompoundSource",
+		mtt_node_name="<ROOT>|source",
+		mtt_parent="<ROOT>",
+		mtt_relation_to_parent=source,
+		mtt_type_hint_string="<class 'ord_betterproto.CompoundSource'>"];
+	"<ROOT>" -> "<ROOT>|source";
+	"<ROOT>|features"	[mtt_class_string="builtins.dict",
+		mtt_node_name="<ROOT>|features",
+		mtt_parent="<ROOT>",
+		mtt_relation_to_parent=features,
+		mtt_type_hint_string="typing.Dict[str, ord_betterproto.Data]"];
+	"<ROOT>" -> "<ROOT>|features";
+	"<ROOT>|analyses"	[mtt_class_string="builtins.dict",
+		mtt_node_name="<ROOT>|analyses",
+		mtt_parent="<ROOT>",
+		mtt_relation_to_parent=analyses,
+		mtt_type_hint_string="typing.Dict[str, ord_betterproto.Analysis]"];
+	"<ROOT>" -> "<ROOT>|analyses";
+	"<ROOT>|identifiers|<ListIndex>"	[mtt_class_string="ord_betterproto.CompoundIdentifier",
+		mtt_node_name="<ROOT>|identifiers|<ListIndex>",
+		mtt_parent="<ROOT>|identifiers",
+		mtt_relation_to_parent="<ListIndex>",
+		mtt_type_hint_string="<class 'ord_betterproto.CompoundIdentifier'>"];
+	"<ROOT>|identifiers" -> "<ROOT>|identifiers|<ListIndex>";
+	"<ROOT>|identifiers|<ListIndex>|type"	[mtt_class_string="ord_betterproto.CompoundIdentifierCompoundIdentifierType",
+		mtt_node_name="<ROOT>|identifiers|<ListIndex>|type",
+		mtt_parent="<ROOT>|identifiers|<ListIndex>",
+		mtt_relation_to_parent=type,
+		mtt_type_hint_string="<enum 'CompoundIdentifierCompoundIdentifierType'>"];
+	"<ROOT>|identifiers|<ListIndex>" -> "<ROOT>|identifiers|<ListIndex>|type";
+	"<ROOT>|identifiers|<ListIndex>|details"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|identifiers|<ListIndex>|details",
+		mtt_parent="<ROOT>|identifiers|<ListIndex>",
+		mtt_relation_to_parent=details,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|identifiers|<ListIndex>" -> "<ROOT>|identifiers|<ListIndex>|details";
+	"<ROOT>|identifiers|<ListIndex>|value"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|identifiers|<ListIndex>|value",
+		mtt_parent="<ROOT>|identifiers|<ListIndex>",
+		mtt_relation_to_parent=value,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|identifiers|<ListIndex>" -> "<ROOT>|identifiers|<ListIndex>|value";
+	"<ROOT>|amount|mass"	[mtt_class_string="ord_betterproto.Mass",
+		mtt_node_name="<ROOT>|amount|mass",
+		mtt_parent="<ROOT>|amount",
+		mtt_relation_to_parent=mass,
+		mtt_type_hint_string="<class 'ord_betterproto.Mass'>"];
+	"<ROOT>|amount" -> "<ROOT>|amount|mass";
+	"<ROOT>|amount|moles"	[mtt_class_string="ord_betterproto.Moles",
+		mtt_node_name="<ROOT>|amount|moles",
+		mtt_parent="<ROOT>|amount",
+		mtt_relation_to_parent=moles,
+		mtt_type_hint_string="<class 'ord_betterproto.Moles'>"];
+	"<ROOT>|amount" -> "<ROOT>|amount|moles";
+	"<ROOT>|amount|volume"	[mtt_class_string="ord_betterproto.Volume",
+		mtt_node_name="<ROOT>|amount|volume",
+		mtt_parent="<ROOT>|amount",
+		mtt_relation_to_parent=volume,
+		mtt_type_hint_string="<class 'ord_betterproto.Volume'>"];
+	"<ROOT>|amount" -> "<ROOT>|amount|volume";
+	"<ROOT>|amount|unmeasured"	[mtt_class_string="ord_betterproto.UnmeasuredAmount",
+		mtt_node_name="<ROOT>|amount|unmeasured",
+		mtt_parent="<ROOT>|amount",
+		mtt_relation_to_parent=unmeasured,
+		mtt_type_hint_string="<class 'ord_betterproto.UnmeasuredAmount'>"];
+	"<ROOT>|amount" -> "<ROOT>|amount|unmeasured";
+	"<ROOT>|amount|volume_includes_solutes"	[mtt_class_string="builtins.bool",
+		mtt_node_name="<ROOT>|amount|volume_includes_solutes",
+		mtt_parent="<ROOT>|amount",
+		mtt_relation_to_parent=volume_includes_solutes,
+		mtt_type_hint_string="typing.Optional[bool]"];
+	"<ROOT>|amount" -> "<ROOT>|amount|volume_includes_solutes";
+	"<ROOT>|amount|mass|value"	[mtt_class_string="builtins.float",
+		mtt_node_name="<ROOT>|amount|mass|value",
+		mtt_parent="<ROOT>|amount|mass",
+		mtt_relation_to_parent=value,
+		mtt_type_hint_string="typing.Optional[float]"];
+	"<ROOT>|amount|mass" -> "<ROOT>|amount|mass|value";
+	"<ROOT>|amount|mass|precision"	[mtt_class_string="builtins.float",
+		mtt_node_name="<ROOT>|amount|mass|precision",
+		mtt_parent="<ROOT>|amount|mass",
+		mtt_relation_to_parent=precision,
+		mtt_type_hint_string="typing.Optional[float]"];
+	"<ROOT>|amount|mass" -> "<ROOT>|amount|mass|precision";
+	"<ROOT>|amount|mass|units"	[mtt_class_string="ord_betterproto.MassMassUnit",
+		mtt_node_name="<ROOT>|amount|mass|units",
+		mtt_parent="<ROOT>|amount|mass",
+		mtt_relation_to_parent=units,
+		mtt_type_hint_string="<enum 'MassMassUnit'>"];
+	"<ROOT>|amount|mass" -> "<ROOT>|amount|mass|units";
+	"<ROOT>|amount|moles|value"	[mtt_class_string="builtins.float",
+		mtt_node_name="<ROOT>|amount|moles|value",
+		mtt_parent="<ROOT>|amount|moles",
+		mtt_relation_to_parent=value,
+		mtt_type_hint_string="typing.Optional[float]"];
+	"<ROOT>|amount|moles" -> "<ROOT>|amount|moles|value";
+	"<ROOT>|amount|moles|precision"	[mtt_class_string="builtins.float",
+		mtt_node_name="<ROOT>|amount|moles|precision",
+		mtt_parent="<ROOT>|amount|moles",
+		mtt_relation_to_parent=precision,
+		mtt_type_hint_string="typing.Optional[float]"];
+	"<ROOT>|amount|moles" -> "<ROOT>|amount|moles|precision";
+	"<ROOT>|amount|moles|units"	[mtt_class_string="ord_betterproto.MolesMolesUnit",
+		mtt_node_name="<ROOT>|amount|moles|units",
+		mtt_parent="<ROOT>|amount|moles",
+		mtt_relation_to_parent=units,
+		mtt_type_hint_string="<enum 'MolesMolesUnit'>"];
+	"<ROOT>|amount|moles" -> "<ROOT>|amount|moles|units";
+	"<ROOT>|amount|volume|value"	[mtt_class_string="builtins.float",
+		mtt_node_name="<ROOT>|amount|volume|value",
+		mtt_parent="<ROOT>|amount|volume",
+		mtt_relation_to_parent=value,
+		mtt_type_hint_string="typing.Optional[float]"];
+	"<ROOT>|amount|volume" -> "<ROOT>|amount|volume|value";
+	"<ROOT>|amount|volume|precision"	[mtt_class_string="builtins.float",
+		mtt_node_name="<ROOT>|amount|volume|precision",
+		mtt_parent="<ROOT>|amount|volume",
+		mtt_relation_to_parent=precision,
+		mtt_type_hint_string="typing.Optional[float]"];
+	"<ROOT>|amount|volume" -> "<ROOT>|amount|volume|precision";
+	"<ROOT>|amount|volume|units"	[mtt_class_string="ord_betterproto.VolumeVolumeUnit",
+		mtt_node_name="<ROOT>|amount|volume|units",
+		mtt_parent="<ROOT>|amount|volume",
+		mtt_relation_to_parent=units,
+		mtt_type_hint_string="<enum 'VolumeVolumeUnit'>"];
+	"<ROOT>|amount|volume" -> "<ROOT>|amount|volume|units";
+	"<ROOT>|amount|unmeasured|type"	[mtt_class_string="ord_betterproto.UnmeasuredAmountUnmeasuredAmountType",
+		mtt_node_name="<ROOT>|amount|unmeasured|type",
+		mtt_parent="<ROOT>|amount|unmeasured",
+		mtt_relation_to_parent=type,
+		mtt_type_hint_string="<enum 'UnmeasuredAmountUnmeasuredAmountType'>"];
+	"<ROOT>|amount|unmeasured" -> "<ROOT>|amount|unmeasured|type";
+	"<ROOT>|amount|unmeasured|details"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|amount|unmeasured|details",
+		mtt_parent="<ROOT>|amount|unmeasured",
+		mtt_relation_to_parent=details,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|amount|unmeasured" -> "<ROOT>|amount|unmeasured|details";
+	"<ROOT>|preparations|<ListIndex>"	[mtt_class_string="ord_betterproto.CompoundPreparation",
+		mtt_node_name="<ROOT>|preparations|<ListIndex>",
+		mtt_parent="<ROOT>|preparations",
+		mtt_relation_to_parent="<ListIndex>",
+		mtt_type_hint_string="<class 'ord_betterproto.CompoundPreparation'>"];
+	"<ROOT>|preparations" -> "<ROOT>|preparations|<ListIndex>";
+	"<ROOT>|preparations|<ListIndex>|type"	[mtt_class_string="ord_betterproto.CompoundPreparationCompoundPreparationType",
+		mtt_node_name="<ROOT>|preparations|<ListIndex>|type",
+		mtt_parent="<ROOT>|preparations|<ListIndex>",
+		mtt_relation_to_parent=type,
+		mtt_type_hint_string="<enum 'CompoundPreparationCompoundPreparationType'>"];
+	"<ROOT>|preparations|<ListIndex>" -> "<ROOT>|preparations|<ListIndex>|type";
+	"<ROOT>|preparations|<ListIndex>|details"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|preparations|<ListIndex>|details",
+		mtt_parent="<ROOT>|preparations|<ListIndex>",
+		mtt_relation_to_parent=details,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|preparations|<ListIndex>" -> "<ROOT>|preparations|<ListIndex>|details";
+	"<ROOT>|preparations|<ListIndex>|reaction_id"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|preparations|<ListIndex>|reaction_id",
+		mtt_parent="<ROOT>|preparations|<ListIndex>",
+		mtt_relation_to_parent=reaction_id,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|preparations|<ListIndex>" -> "<ROOT>|preparations|<ListIndex>|reaction_id";
+	"<ROOT>|source|vendor"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|source|vendor",
+		mtt_parent="<ROOT>|source",
+		mtt_relation_to_parent=vendor,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|source" -> "<ROOT>|source|vendor";
+	"<ROOT>|source|catalog_id"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|source|catalog_id",
+		mtt_parent="<ROOT>|source",
+		mtt_relation_to_parent=catalog_id,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|source" -> "<ROOT>|source|catalog_id";
+	"<ROOT>|source|lot"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|source|lot",
+		mtt_parent="<ROOT>|source",
+		mtt_relation_to_parent=lot,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|source" -> "<ROOT>|source|lot";
+	"<ROOT>|features|<DictKey>"	[mtt_class_string="ord_betterproto.Data",
+		mtt_node_name="<ROOT>|features|<DictKey>",
+		mtt_parent="<ROOT>|features",
+		mtt_relation_to_parent="<DictKey>",
+		mtt_type_hint_string="<class 'ord_betterproto.Data'>"];
+	"<ROOT>|features" -> "<ROOT>|features|<DictKey>";
+	"<ROOT>|features|<DictKey>|float_value"	[mtt_class_string="builtins.float",
+		mtt_node_name="<ROOT>|features|<DictKey>|float_value",
+		mtt_parent="<ROOT>|features|<DictKey>",
+		mtt_relation_to_parent=float_value,
+		mtt_type_hint_string="<class 'float'>"];
+	"<ROOT>|features|<DictKey>" -> "<ROOT>|features|<DictKey>|float_value";
+	"<ROOT>|features|<DictKey>|integer_value"	[mtt_class_string="builtins.int",
+		mtt_node_name="<ROOT>|features|<DictKey>|integer_value",
+		mtt_parent="<ROOT>|features|<DictKey>",
+		mtt_relation_to_parent=integer_value,
+		mtt_type_hint_string="<class 'int'>"];
+	"<ROOT>|features|<DictKey>" -> "<ROOT>|features|<DictKey>|integer_value";
+	"<ROOT>|features|<DictKey>|bytes_value"	[mtt_class_string="builtins.bytes",
+		mtt_node_name="<ROOT>|features|<DictKey>|bytes_value",
+		mtt_parent="<ROOT>|features|<DictKey>",
+		mtt_relation_to_parent=bytes_value,
+		mtt_type_hint_string="<class 'bytes'>"];
+	"<ROOT>|features|<DictKey>" -> "<ROOT>|features|<DictKey>|bytes_value";
+	"<ROOT>|features|<DictKey>|string_value"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|features|<DictKey>|string_value",
+		mtt_parent="<ROOT>|features|<DictKey>",
+		mtt_relation_to_parent=string_value,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|features|<DictKey>" -> "<ROOT>|features|<DictKey>|string_value";
+	"<ROOT>|features|<DictKey>|url"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|features|<DictKey>|url",
+		mtt_parent="<ROOT>|features|<DictKey>",
+		mtt_relation_to_parent=url,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|features|<DictKey>" -> "<ROOT>|features|<DictKey>|url";
+	"<ROOT>|features|<DictKey>|description"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|features|<DictKey>|description",
+		mtt_parent="<ROOT>|features|<DictKey>",
+		mtt_relation_to_parent=description,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|features|<DictKey>" -> "<ROOT>|features|<DictKey>|description";
+	"<ROOT>|features|<DictKey>|format"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|features|<DictKey>|format",
+		mtt_parent="<ROOT>|features|<DictKey>",
+		mtt_relation_to_parent=format,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|features|<DictKey>" -> "<ROOT>|features|<DictKey>|format";
+	"<ROOT>|analyses|<DictKey>"	[mtt_class_string="ord_betterproto.Analysis",
+		mtt_node_name="<ROOT>|analyses|<DictKey>",
+		mtt_parent="<ROOT>|analyses",
+		mtt_relation_to_parent="<DictKey>",
+		mtt_type_hint_string="<class 'ord_betterproto.Analysis'>"];
+	"<ROOT>|analyses" -> "<ROOT>|analyses|<DictKey>";
+	"<ROOT>|analyses|<DictKey>|type"	[mtt_class_string="ord_betterproto.AnalysisAnalysisType",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|type",
+		mtt_parent="<ROOT>|analyses|<DictKey>",
+		mtt_relation_to_parent=type,
+		mtt_type_hint_string="<enum 'AnalysisAnalysisType'>"];
+	"<ROOT>|analyses|<DictKey>" -> "<ROOT>|analyses|<DictKey>|type";
+	"<ROOT>|analyses|<DictKey>|details"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|details",
+		mtt_parent="<ROOT>|analyses|<DictKey>",
+		mtt_relation_to_parent=details,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|analyses|<DictKey>" -> "<ROOT>|analyses|<DictKey>|details";
+	"<ROOT>|analyses|<DictKey>|chmo_id"	[mtt_class_string="builtins.int",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|chmo_id",
+		mtt_parent="<ROOT>|analyses|<DictKey>",
+		mtt_relation_to_parent=chmo_id,
+		mtt_type_hint_string="<class 'int'>"];
+	"<ROOT>|analyses|<DictKey>" -> "<ROOT>|analyses|<DictKey>|chmo_id";
+	"<ROOT>|analyses|<DictKey>|is_of_isolated_species"	[mtt_class_string="builtins.bool",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|is_of_isolated_species",
+		mtt_parent="<ROOT>|analyses|<DictKey>",
+		mtt_relation_to_parent=is_of_isolated_species,
+		mtt_type_hint_string="typing.Optional[bool]"];
+	"<ROOT>|analyses|<DictKey>" -> "<ROOT>|analyses|<DictKey>|is_of_isolated_species";
+	"<ROOT>|analyses|<DictKey>|data"	[mtt_class_string="builtins.dict",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|data",
+		mtt_parent="<ROOT>|analyses|<DictKey>",
+		mtt_relation_to_parent=data,
+		mtt_type_hint_string="typing.Dict[str, ord_betterproto.Data]"];
+	"<ROOT>|analyses|<DictKey>" -> "<ROOT>|analyses|<DictKey>|data";
+	"<ROOT>|analyses|<DictKey>|instrument_manufacturer"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|instrument_manufacturer",
+		mtt_parent="<ROOT>|analyses|<DictKey>",
+		mtt_relation_to_parent=instrument_manufacturer,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|analyses|<DictKey>" -> "<ROOT>|analyses|<DictKey>|instrument_manufacturer";
+	"<ROOT>|analyses|<DictKey>|instrument_last_calibrated"	[mtt_class_string="ord_betterproto.DateTime",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|instrument_last_calibrated",
+		mtt_parent="<ROOT>|analyses|<DictKey>",
+		mtt_relation_to_parent=instrument_last_calibrated,
+		mtt_type_hint_string="<class 'ord_betterproto.DateTime'>"];
+	"<ROOT>|analyses|<DictKey>" -> "<ROOT>|analyses|<DictKey>|instrument_last_calibrated";
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>"	[mtt_class_string="ord_betterproto.Data",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|data|<DictKey>",
+		mtt_parent="<ROOT>|analyses|<DictKey>|data",
+		mtt_relation_to_parent="<DictKey>",
+		mtt_type_hint_string="<class 'ord_betterproto.Data'>"];
+	"<ROOT>|analyses|<DictKey>|data" -> "<ROOT>|analyses|<DictKey>|data|<DictKey>";
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>|float_value"	[mtt_class_string="builtins.float",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|data|<DictKey>|float_value",
+		mtt_parent="<ROOT>|analyses|<DictKey>|data|<DictKey>",
+		mtt_relation_to_parent=float_value,
+		mtt_type_hint_string="<class 'float'>"];
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>" -> "<ROOT>|analyses|<DictKey>|data|<DictKey>|float_value";
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>|integer_value"	[mtt_class_string="builtins.int",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|data|<DictKey>|integer_value",
+		mtt_parent="<ROOT>|analyses|<DictKey>|data|<DictKey>",
+		mtt_relation_to_parent=integer_value,
+		mtt_type_hint_string="<class 'int'>"];
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>" -> "<ROOT>|analyses|<DictKey>|data|<DictKey>|integer_value";
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>|bytes_value"	[mtt_class_string="builtins.bytes",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|data|<DictKey>|bytes_value",
+		mtt_parent="<ROOT>|analyses|<DictKey>|data|<DictKey>",
+		mtt_relation_to_parent=bytes_value,
+		mtt_type_hint_string="<class 'bytes'>"];
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>" -> "<ROOT>|analyses|<DictKey>|data|<DictKey>|bytes_value";
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>|string_value"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|data|<DictKey>|string_value",
+		mtt_parent="<ROOT>|analyses|<DictKey>|data|<DictKey>",
+		mtt_relation_to_parent=string_value,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>" -> "<ROOT>|analyses|<DictKey>|data|<DictKey>|string_value";
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>|url"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|data|<DictKey>|url",
+		mtt_parent="<ROOT>|analyses|<DictKey>|data|<DictKey>",
+		mtt_relation_to_parent=url,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>" -> "<ROOT>|analyses|<DictKey>|data|<DictKey>|url";
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>|description"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|data|<DictKey>|description",
+		mtt_parent="<ROOT>|analyses|<DictKey>|data|<DictKey>",
+		mtt_relation_to_parent=description,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>" -> "<ROOT>|analyses|<DictKey>|data|<DictKey>|description";
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>|format"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|data|<DictKey>|format",
+		mtt_parent="<ROOT>|analyses|<DictKey>|data|<DictKey>",
+		mtt_relation_to_parent=format,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|analyses|<DictKey>|data|<DictKey>" -> "<ROOT>|analyses|<DictKey>|data|<DictKey>|format";
+	"<ROOT>|analyses|<DictKey>|instrument_last_calibrated|value"	[mtt_class_string="builtins.str",
+		mtt_node_name="<ROOT>|analyses|<DictKey>|instrument_last_calibrated|value",
+		mtt_parent="<ROOT>|analyses|<DictKey>|instrument_last_calibrated",
+		mtt_relation_to_parent=value,
+		mtt_type_hint_string="<class 'str'>"];
+	"<ROOT>|analyses|<DictKey>|instrument_last_calibrated" -> "<ROOT>|analyses|<DictKey>|instrument_last_calibrated|value";
+}

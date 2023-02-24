@@ -1,0 +1,129 @@
+{
+  "reactionTime": {
+    "value": 6.0,
+    "units": "HOUR"
+  },
+  "products": [
+    {
+      "identifiers": [
+        {
+          "type": "SMILES",
+          "value": "O=C(C(C)(C)C)ON(CC1=CC=CC=C1)CC2=CC=CC=C2"
+        },
+        {
+          "type": "NAME",
+          "value": "N,N-Dibenzyl-O-pivaloylhydroxylamine"
+        }
+      ],
+      "isDesiredProduct": true,
+      "measurements": [
+        {
+          "analysisKey": "1H NMR",
+          "type": "IDENTITY"
+        },
+        {
+          "analysisKey": "13C NMR",
+          "type": "IDENTITY"
+        },
+        {
+          "analysisKey": "HRMS",
+          "type": "IDENTITY"
+        },
+        {
+          "analysisKey": "thin film IR",
+          "type": "IDENTITY"
+        },
+        {
+          "analysisKey": "isolated_weight",
+          "type": "YIELD",
+          "percentage": {
+            "value": 93.5,
+            "precision": 0.5
+          }
+        },
+        {
+          "analysisKey": "quantitative NMR",
+          "type": "PURITY",
+          "percentage": {
+            "value": 99.0
+          }
+        },
+        {
+          "analysisKey": "isolated_weight",
+          "type": "AMOUNT",
+          "amount": {
+            "mass": {
+              "value": 27.75,
+              "units": "GRAM"
+            }
+          }
+        }
+      ],
+      "isolatedColor": "white",
+      "texture": {
+        "type": "POWDER"
+      },
+      "reactionRole": "PRODUCT"
+    }
+  ],
+  "analyses": {
+    "isolated_weight": {
+      "type": "WEIGHT",
+      "details": "27.5-28.0 g recovered after workup",
+      "isOfIsolatedSpecies": true
+    },
+    "13C NMR": {
+      "type": "NMR_13C",
+      "details": "101 MHz, CDCl3",
+      "isOfIsolatedSpecies": true,
+      "data": {
+        "peaks": {
+          "stringValue": "27.1, 38.4, 62.4, 127.7, 128.3, 129.6, 136.2, 176.3",
+          "description": "List of peaks"
+        }
+      }
+    },
+    "quantitative NMR": {
+      "type": "NMR_1H",
+      "details": "Quantitative NMR using 1,1,2,2-tetrachloroethane (>98%, purchased from Alfa Aesar) in CDCl3",
+      "isOfIsolatedSpecies": true
+    },
+    "HRMS": {
+      "type": "HRMS",
+      "details": "ESI-TOF",
+      "isOfIsolatedSpecies": true,
+      "data": {
+        "found": {
+          "floatValue": 298.1794,
+          "description": "Observed m/z"
+        },
+        "expected": {
+          "floatValue": 298.1802,
+          "description": "Expected m/z"
+        }
+      }
+    },
+    "thin film IR": {
+      "type": "IR",
+      "details": "neat film, NaCl",
+      "isOfIsolatedSpecies": true,
+      "data": {
+        "peaks": {
+          "stringValue": "3064, 3031, 2973, 2932, 2906, 2872, 1751, 1496, 1479, 1456, 1273, 1116, 1029, 738, 698",
+          "description": "List of peaks [cm-1]"
+        }
+      }
+    },
+    "1H NMR": {
+      "type": "NMR_1H",
+      "details": "400 MHz, CDCl3",
+      "isOfIsolatedSpecies": true,
+      "data": {
+        "peaks": {
+          "stringValue": "0.92 (s, 9H), 4.06 (s, 4H), 7.23 - 7.34 (m, 6H), 7.40 (d, J = 7.1 Hz, 4H)",
+          "description": "List of peaks"
+        }
+      }
+    }
+  }
+}
