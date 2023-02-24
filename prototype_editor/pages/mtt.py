@@ -1,11 +1,12 @@
+from copy import deepcopy
+
 import dash_bootstrap_components as dbc
 import dash_cytoscape as cyto
 import networkx as nx
 from dash import html, Input, Output, State, dcc
 from dash import register_page, get_app
-from copy import deepcopy
 
-from cyto_app.cyto_config import DASH_CID_CYTO, CYTO_STYLE_SHEET, DASH_CID_MTT_DIV_INFO_ELEMENT, \
+from cyto_app.cyto_config import DASH_CID_MTT_CYTO, CYTO_STYLE_SHEET_MTT, DASH_CID_MTT_DIV_INFO_ELEMENT, \
     DASH_CID_MTT_SELECTOR, DASH_CID_MTT_SWITCHES
 from cyto_app.cyto_elements import mtt_to_cyto, MttNodeAttr
 from cyto_app.fixtures import MttDataDict, MttData
@@ -20,8 +21,8 @@ app = get_app()
 _MttDataDict = {k: v for k, v in MttDataDict.items() if v['depth'] > 3}
 
 # define components
-COMPONENT_CYTO_MAIN = cyto.Cytoscape(
-    id=DASH_CID_CYTO,
+COMPONENT_CYTO_MTT = cyto.Cytoscape(
+    id=DASH_CID_MTT_CYTO,
     zoomingEnabled=True,
     maxZoom=2,
     minZoom=0.5,
@@ -33,7 +34,7 @@ COMPONENT_CYTO_MAIN = cyto.Cytoscape(
         'align': 'UL',
     },
     style={'width': '100%', 'height': '100%', 'min-height': '600px'},
-    stylesheet=CYTO_STYLE_SHEET,
+    stylesheet=CYTO_STYLE_SHEET_MTT,
     elements=[],
 )
 
@@ -52,7 +53,7 @@ layout = html.Div(
         dbc.Row(
             [
                 dbc.Card(
-                    COMPONENT_CYTO_MAIN,
+                    COMPONENT_CYTO_MTT,
                     className="col-lg-8"
                 ),
                 html.Div(
@@ -83,19 +84,69 @@ layout = html.Div(
     ]
 )
 
+
 @app.callback(
-    Output(DASH_CID_CYTO, "stylesheet"),
-    Input(DASH_CID_MTT_SWITCHES, "value")
+    Output(DASH_CID_MTT_CYTO, "stylesheet"),
+    Input(DASH_CID_MTT_SELECTOR, "value"),
+    Input(DASH_CID_MTT_SWITCHES, "value"),
+    Input(DASH_CID_MTT_CYTO, "selectedNodeData"),
 )
-def update_cyto_stylesheet(switch_values):
-    style_sheet = deepcopy(CYTO_STYLE_SHEET)
+def update_cyto_stylesheet(mtt_name, switch_values, node_data):
+    style_sheet = deepcopy(CYTO_STYLE_SHEET_MTT)
+    if not mtt_name:
+        return style_sheet
     if 'Relation Label' in switch_values:
         assert style_sheet[1]['selector'] == 'node'
         style_sheet[1]['style']['content'] = 'data(relation)'
+
+    # highlight path to selected nodes
+    path_style = []
+
+    # method 2 use node name (path)
+    if node_data:
+        for d in node_data:
+            node_name = d['id']
+            p = node_name.split(NodePathDelimiter)
+            for i in range(len(p)):
+                v = NodePathDelimiter.join(p[:i + 1])
+                path_style.append(
+                    {
+                        'selector': f'edge[target="{v}"]',
+                        'style': {
+                            'line-color': 'blue',
+                            'z-index': 1000,
+                        }
+                    }
+                )
+    style_sheet += path_style
     return style_sheet
 
+    # # method 1 use mtt
+    # mtt_data = _MttDataDict[mtt_name]
+    # mtt = mtt_from_dict(mtt_data['mtt_dict'])
+    # root = get_root(mtt)
+    # if node_data:
+    #     for d in node_data:
+    #         node_name = d['id']
+    #         p = nx.shortest_path(mtt, source=root, target=node_name)
+    #         n_edges = len(p) - 1
+    #         for i in range(n_edges):
+    #             u, v = p[i], p[i+1]
+    #             path_style.append(
+    #                 {
+    #                     'selector': f'edge[target="{v}"]',
+    #                     'style': {
+    #                         'line-color': 'blue',
+    #                         'z-index': 1000,
+    #                     }
+    #                 }
+    #             )
+    # style_sheet += path_style
+    # return style_sheet
+
+
 @app.callback(
-    Output(DASH_CID_CYTO, "elements"),
+    Output(DASH_CID_MTT_CYTO, "elements"),
     Input(DASH_CID_MTT_SELECTOR, "value"),
     Input(DASH_CID_MTT_SWITCHES, "value")
 )
@@ -114,8 +165,8 @@ def update_cyto_elements(mtt_name, switch_values):
 
 @app.callback(
     Output(DASH_CID_MTT_DIV_INFO_ELEMENT, "children"),
-    Input(DASH_CID_CYTO, "selectedNodeData"),
-    Input(DASH_CID_CYTO, "selectedEdgeData"),
+    Input(DASH_CID_MTT_CYTO, "selectedNodeData"),
+    Input(DASH_CID_MTT_CYTO, "selectedEdgeData"),
     State(DASH_CID_MTT_SELECTOR, "value"),
 )
 def update_div_info(node_data, edge_data, mtt_name):
@@ -146,7 +197,6 @@ def update_div_info(node_data, edge_data, mtt_name):
 
 
 def get_edge_attr_block(u: str, v: str, mtt: nx.DiGraph):
-
     u_attrs = MttNodeAttr(**mtt.nodes[u])
     v_attrs = MttNodeAttr(**mtt.nodes[v])
 
@@ -159,14 +209,12 @@ def get_edge_attr_block(u: str, v: str, mtt: nx.DiGraph):
         item_path = dbc.ListGroupItem([html.H6(st), path])
         items.append(item_path)
 
-
     list_group = dbc.ListGroup(items)
-
 
     relation = v_attrs['mtt_relation_to_parent']
     block = dbc.Card(
         [
-            dbc.CardHeader([html.B(relation, className="text-primary"),]),
+            dbc.CardHeader([html.B(relation, className="text-primary"), ]),
             dbc.CardBody(list_group),
         ],
         className="mb-3"
