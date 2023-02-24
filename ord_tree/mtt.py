@@ -87,11 +87,11 @@ def get_mtt(message: Type) -> nx.DiGraph:
     return g
 
 
-def mtt_to_dict(mtt: nx.DiGraph):
+def mtt_to_dict(mtt: nx.DiGraph) -> dict:
     return nx.node_link_data(mtt)
 
 
-def mtt_from_dict(d: dict):
+def mtt_from_dict(d: dict) -> nx.DiGraph:
     return nx.node_link_graph(d, directed=True)
 
 
@@ -107,6 +107,22 @@ def get_mtt_root_class(mtt: nx.DiGraph) -> Type:
 
 
 if __name__ == '__main__':
-    from ord_betterproto import Reaction
+    from ord_tree.utils import write_file, get_tree_depth
+    import json
 
-    get_mtt(Reaction)
+    for m in OrdMessageClasses:
+        mtt = get_mtt(m)
+        data = {
+            "mtt_dict": mtt_to_dict(mtt),
+            "depth": get_tree_depth(mtt),
+            "name": m.__name__,
+            "doc": m.__doc__,
+            "n_literals": len(
+                [
+                    n for n in mtt.nodes if
+                    import_string(mtt.nodes[n]['mtt_class_string']) in BuiltinLiteralClasses + OrdEnumClasses
+                ]
+            ),
+        }
+        j = json.dumps(data)
+        write_file(j, f"json_mtt/{m.__name__}.json")

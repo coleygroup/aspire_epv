@@ -153,3 +153,14 @@ def get_type_hints_without_private(obj):
             continue
         d[k] = v
     return d
+
+
+def get_tree_depth(tree: nx.DiGraph):
+    r = get_root(tree)
+    deep = 0
+    for n in tree.nodes:
+        p = nx.shortest_path(tree, source=r, target=n)
+        d = len(p) - 1
+        if d > deep:
+            deep = d
+    return deep
