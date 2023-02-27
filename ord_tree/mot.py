@@ -6,6 +6,7 @@ import betterproto
 import networkx as nx
 from loguru import logger
 
+from ord_betterproto import Reaction
 from ord_tree import ord_classes
 from ord_tree.mtt import get_mtt
 from ord_tree.utils import NodePathDelimiter, RootNodePath, PrefixListIndex, PrefixDictKey, get_root, \
@@ -307,14 +308,19 @@ def pt_remove_node(mot_original: nx.DiGraph, node_to_remove: int, inplace=False)
     for off in nx.descendants(mot, node_to_remove):
         mot.remove_node(off)
     mot.remove_node(node_to_remove)
-    return mot
+    if not inplace:
+        return mot
 
 
-def pt_detach_node(mot: nx.DiGraph, new_root: int):
+def pt_detach_node(mot: nx.DiGraph, new_root: int, inplace=False):
     new_tree = list(nx.descendants(mot, new_root))
     new_tree.append(new_root)
-    new_tree = deepcopy(mot.subgraph(new_tree))
-    return new_tree
+    if inplace:
+        nodes_to_remove = [n for n in mot.nodes if n not in new_tree]
+        for n in nodes_to_remove:
+            mot.remove_node(n)
+    else:
+        return deepcopy(mot.subgraph(new_tree))
 
 
 def pt_extend_node(mot_original: nx.DiGraph, from_node: int, inplace=False):
@@ -322,7 +328,10 @@ def pt_extend_node(mot_original: nx.DiGraph, from_node: int, inplace=False):
         mot = mot_original
     else:
         mot = deepcopy(mot_original)
-    mtt = get_mtt(import_string(mot.nodes[get_root(mot)]['mot_class_string']))
+    # TODO if we are to extend a node in a detached tree,
+    #  mtt_element_name field can have <ROOT> points to `Reaction` which is not present in the current mtt
+    # mtt = get_mtt(import_string(mot.nodes[get_root(mot)]['mot_class_string']))
+    mtt = get_mtt(Reaction)
     assert len(mot.nodes) > 0
     logger.info(
         f"extending node: {from_node} {mot_get_path(mot, from_node)}, current tree size: {len(mot.nodes)}"
@@ -335,7 +344,7 @@ def pt_extend_node(mot_original: nx.DiGraph, from_node: int, inplace=False):
 
     # otherwise, add children
     else:
-        from_node_mtt = mot.nodes[from_node]['mtt_element_name']
+        from_node_mtt = mot.nodes[from_node]['mtt_element_name']  # in which <ROOT> is Reaction!
         children_mtt = list(mtt.successors(from_node_mtt))
         for child_mtt in children_mtt:
             child_class_string = mtt.nodes[child_mtt]['mtt_class_string']
@@ -388,3 +397,5 @@ def pt_extend_node(mot_original: nx.DiGraph, from_node: int, inplace=False):
             mot.add_node(new_child, **child_attr)
             mot.add_edge(from_node, new_child, **edge_attr)
             logger.info(f"edge added, current tree size: {len(mot.nodes)}")
+    if not inplace:
+        return mot
