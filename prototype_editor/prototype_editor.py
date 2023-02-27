@@ -6,6 +6,9 @@ from dash import Dash, dcc, html
 
 from cyto_app.components import get_navbar, navbar_callback
 from cyto_app.cyto_config import DASH_CID_NAVBAR
+import os
+
+os.environ['LOGURU_LEVEL'] = 'WARNING'
 
 app_folder = os.path.dirname(os.path.abspath(__file__))
 
