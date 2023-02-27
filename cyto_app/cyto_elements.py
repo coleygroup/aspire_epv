@@ -198,8 +198,7 @@ class CytoElementNode(CytoElement):
 
     @classmethod
     def from_mot_node(cls, mot: nx.DiGraph, mot_node: int):
-        node_attrs = mot.nodes[mot_node]
-        node_attrs: MotEleAttr
+        node_attrs = MotEleAttr(**mot.nodes[mot_node])
         node_class = import_string(node_attrs['mot_class_string'])
         cyto_classes = CytoElementNode.derive_cyto_classes_from_node_class(node_class)
 
@@ -385,8 +384,8 @@ def cyto_to_mot(elements: list[dict]):
     mot = nx.DiGraph()
     for node, node_dict in node_element_dict.items():
         node_id = int(node)
-        data_ele_attrs = node_dict['data']['ele_attrs']
-        data_ele_attrs: MotEleAttr
+        # make a copy for bytes
+        data_ele_attrs = MotEleAttr(**node_dict['data']['ele_attrs'])
         # this can only happen for nodes, not edges
         if import_string(data_ele_attrs['mot_class_string']) == bytes:
             data_ele_attrs['mot_value'] = base64.b64decode(data_ele_attrs['mot_value'])

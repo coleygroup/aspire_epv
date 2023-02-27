@@ -1,4 +1,5 @@
 from copy import deepcopy
+from copy import deepcopy
 from typing import Type, Any, Union
 
 import dash_bootstrap_components as dbc
@@ -100,19 +101,29 @@ layout = html.Div(
 @app.callback(
     Output(DASH_CID_MOT_CYTO, 'stylesheet'),
     Input(DASH_CID_MOT_SWITCHES, "value"),
+    State(DASH_CID_MOT_CYTO, 'stylesheet'),
 )
-def update_cyto_stylesheet(switch_values):
-    style_sheet = deepcopy(CYTO_STYLE_SHEET_MTT)
+def update_cyto_stylesheet(switch_values, current_stylesheet):
+    # style_sheet = deepcopy(CYTO_STYLE_SHEET_MTT)
+    style_sheet = current_stylesheet
+    selector_to_sty_index = {s['selector']: i for i, s in enumerate(style_sheet)}
+
+    i_literal = selector_to_sty_index[CYTO_LITERAL_NODE_CLASS]
     if 'Hide Literals' in switch_values:
-        style_sheet += [
+        style_sheet[i_literal]['style'].update(
             {
-                'selector': CYTO_MESSAGE_NODE_LITERAL_CLASS,
-                'style': {
-                    'display': 'none',
-                    'visibility': 'hidden',
-                }
+                'display': 'none',
+                'visibility': 'hidden',
             }
-        ]
+        )
+    else:
+        style_sheet[i_literal]['style'].update(
+            {
+                'display': 'element',
+                'visibility': 'visible',
+            }
+        )
+
     return style_sheet
 
 
@@ -135,14 +146,23 @@ def update_cyto_stylesheet(switch_values):
     Input({'type': DASH_CID_MOT_BTN_PT_DELETE, 'index': ALL}, 'n_clicks'),
     State({'type': DASH_CID_MOT_BTN_PT_DELETE, 'index': ALL}, 'id'),
 
+    Input({'type': DASH_CID_MOT_BTN_PT_HIDE, 'index': ALL}, 'n_clicks'),
+    State({'type': DASH_CID_MOT_BTN_PT_HIDE, 'index': ALL}, 'id'),
+
+    Input({'type': DASH_CID_MOT_BTN_PT_SHOWONLY, 'index': ALL}, 'n_clicks'),
+    State({'type': DASH_CID_MOT_BTN_PT_SHOWONLY, 'index': ALL}, 'id'),
+
     State(DASH_CID_MOT_CYTO, 'elements'),
     # prevent_initial_call=True,
 )
 def update_cyto_elements(
-        state_values, state_ids, value_values, value_ids,
+        state_values, state_ids,
+        value_values, value_ids,
         to_extend_btn_n_clicks, to_extend_btn_ids,
         to_detach_btn_n_clicks, to_detach_btn_ids,
         to_delete_btn_n_clicks, to_delete_btn_ids,
+        to_hide_btn_n_clicks, to_hide_btn_ids,
+        to_showonly_btn_n_clicks, to_showonly_btn_ids,
         current_elements,
 ):
     try:
@@ -213,6 +233,30 @@ def update_cyto_elements(
                 pt_operation(current_mot, target_node_id, inplace=True)
                 current_elements = mot_to_cyto_element_list(current_mot)
 
+        elif triggered_type in (DASH_CID_MOT_BTN_PT_HIDE, DASH_CID_MOT_BTN_PT_SHOWONLY):
+            if triggered_type == DASH_CID_MOT_BTN_PT_HIDE:
+                btn_ids = to_hide_btn_ids
+                btn_n_clicks = to_hide_btn_n_clicks
+                hide_desc = True
+            elif triggered_type == DASH_CID_MOT_BTN_PT_SHOWONLY:
+                btn_ids = to_showonly_btn_ids
+                btn_n_clicks = to_showonly_btn_n_clicks
+                hide_desc = False
+            else:
+                raise TypeError
+            cid_to_n_clicks = dict(zip([si['index'] for si in btn_ids], btn_n_clicks))
+            if cid_to_n_clicks[triggered_cid]:
+                target_node_id = triggered_cid
+                current_mot = cyto_to_mot(current_elements)
+                desc = nx.descendants(current_mot, target_node_id)
+                if hide_desc:
+                    hide_nodes = [*desc]
+                else:
+                    hide_nodes = [n for n in current_mot.nodes if n not in desc and n != target_node_id]
+                for e in current_elements:
+                    if e['group'] == 'nodes' and int(e['data']['id']) in hide_nodes:
+                        e['classes'].replace(CYTO_MESSAGE_NODE_TMP_HIDE[1:], "")
+                        e['classes'] += " " + CYTO_MESSAGE_NODE_TMP_HIDE[1:]
     return current_elements
 
 
@@ -325,6 +369,8 @@ def get_cards_from_selected_nodes(node_data, mot: nx.DiGraph, hide_literals=True
                                    id={'type': DASH_CID_MOT_BTN_PT_DETACH, 'index': node_id}, ),
                         dbc.Button("Delete", outline=True, color='primary',
                                    id={'type': DASH_CID_MOT_BTN_PT_DELETE, 'index': node_id}, ),
+
+                        # TODO better to have a selector for 'hide' 'showonly' 'showall'
                         dbc.Button("Hide", outline=True, color='primary',
                                    id={'type': DASH_CID_MOT_BTN_PT_HIDE, 'index': node_id}, ),
                         dbc.Button("ShowOnly", outline=True, color='primary',
