@@ -5,6 +5,7 @@ import dash_cytoscape as cyto
 import networkx as nx
 from dash import html, Input, Output, State, dcc
 from dash import register_page, get_app
+from dash.dependencies import ClientsideFunction
 
 from cyto_app.cyto_config import *
 from cyto_app.cyto_elements import mtt_to_cyto, MttNodeAttr
@@ -24,7 +25,7 @@ COMPONENT_CYTO_MTT = cyto.Cytoscape(
     id=DASH_CID_MTT_CYTO,
     zoomingEnabled=True,
     maxZoom=2,
-    minZoom=0.5,
+    minZoom=0.1,
     layout={
         'name': 'dagre',
         'nodeDimensionsIncludeLabels': True,
@@ -32,7 +33,8 @@ COMPONENT_CYTO_MTT = cyto.Cytoscape(
         'animationDuration': 1000,
         'align': 'UL',
     },
-    style={'width': '100%', 'height': '100%', 'min-height': '600px'},
+    # style={'width': '100%', 'height': '100%', 'min-height': '600px', 'max-height': '100vh'},
+    style={'width': '100%', 'height': '100%', 'min-height': '300px'},
     stylesheet=CYTO_STYLE_SHEET_MTT,
     elements=[],
 )
@@ -47,13 +49,17 @@ COMPONENT_MTT_SELECTOR = dcc.Dropdown(
 # page layout
 layout = html.Div(
     [
-        # html.H2("Tree Visualization"),
-        # html.Hr(),
+        # dummies for client-side callbacks
+        html.Div(id="dummy", style={'display': 'none'}),
+        html.Div(id="dummy-1", style={'display': 'none'}),
+
         dbc.Row(
             [
                 dbc.Card(
                     COMPONENT_CYTO_MTT,
-                    className="col-lg-8"
+                    className="col-lg-8",
+                    # style={'max-height': '100vh'},
+                    style={'height': 'calc(100vh - 100px)'},  # minus header bar height
                 ),
                 html.Div(
                     [
@@ -63,19 +69,37 @@ layout = html.Div(
                             [html.H6("ORD message type", className="text-center"), COMPONENT_MTT_SELECTOR],
                             className="mb-3 mt-3"
                         ),
-                        dbc.Checklist(
-                            options=[
-                                {"label": "Hide Literals", "value": 'Hide Literals'},
-                                {"label": "Relation Label", "value": 'Relation Label'},
+                        dbc.Card(
+                            [
+                                dbc.CardHeader(html.H6("Viewport Control")),
+                                dbc.CardBody(
+                                    [
+                                        dbc.Checklist(
+                                            options=[
+                                                {"label": "Hide Literals", "value": 'Hide Literals'},
+                                                {"label": "Relation Label", "value": 'Relation Label'},
+                                            ],
+                                            input_class_name="mx-2",
+                                            label_class_name="mx-2",
+                                            class_name="mtt-switch",
+                                            value=['Hide Literals'],
+                                            id=DASH_CID_MTT_SWITCHES,
+                                            switch=True,
+                                        ),
+                                        html.Div(
+                                            [
+                                                dbc.Button("Fit Graph", id=DASH_CID_MTT_BTN_CYTO_FIT,
+                                                           className="me-3 mt-3"),
+                                                dbc.Button("Center Selected", id=DASH_CID_MTT_BTN_CYTO_CENTER_SELECTED,
+                                                           className="me-3 mt-3"),
+                                            ],
+                                            className="text-center"
+                                        )
+                                    ]
+                                ),
                             ],
-                            input_class_name="mx-2",
-                            label_class_name="mx-2",
-                            class_name="mtt-switch",
-                            value=['Hide Literals'],
-                            id=DASH_CID_MTT_SWITCHES,
-                            switch=True,
                         ),
-                        html.Div(id=DASH_CID_MTT_DIV_INFO_ELEMENT, className="mt-2"),
+                        html.Div(id=DASH_CID_MTT_DIV_INFO_ELEMENT, className="mt-3"),
                     ],
                     className="col-lg-4",
                 ),
@@ -283,3 +307,22 @@ def get_node_attr_block(mtt_node_attr: MttNodeAttr, mtt: nx.DiGraph):
         className="mb-3"
     )
     return block
+
+
+app.clientside_callback(
+    ClientsideFunction(
+        namespace='clientside',
+        function_name='cy_center_selected',
+    ),
+    Output('dummy', 'children'),
+    Input(DASH_CID_MTT_BTN_CYTO_CENTER_SELECTED, 'n_clicks'),
+)
+
+app.clientside_callback(
+    ClientsideFunction(
+        namespace='clientside',
+        function_name='cy_fit',
+    ),
+    Output('dummy-1', 'children'),
+    Input(DASH_CID_MTT_BTN_CYTO_FIT, 'n_clicks'),
+)
