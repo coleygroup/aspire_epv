@@ -1,12 +1,11 @@
-import os.path
+import os
 
 import dash
 import dash_bootstrap_components as dbc
-from dash import Dash, dcc, html
+from dash import Dash, dcc, html, get_asset_url
 
 from cyto_app.components import get_navbar, navbar_callback
 from cyto_app.cyto_config import DASH_CID_NAVBAR
-import os
 
 os.environ['LOGURU_LEVEL'] = 'WARNING'
 
@@ -19,10 +18,12 @@ app = Dash(
     use_pages=True,
     # url_base_pathname='/prototype_editor/',
 )
+app._favicon = os.path.join(app_folder, "assets/favicon.ico")
 
 navlinks = [
     dbc.NavLink(
-        f"{page['description']}", href=page["relative_path"], className="mx-2", active='exact', style={"color": "#ffffff"}
+        f"{page['description']}", href=page["relative_path"], className="mx-2", active='exact',
+        style={"color": "#ffffff"}
     ) for page in dash.page_registry.values()
 ]
 
@@ -42,7 +43,9 @@ app.layout = html.Div(
         navbar,
         content,
         dcc.Markdown("dummy", style={"display": "none"}, id="dummy"),
-    ]
+    ],
+    # trick from https://stackoverflow.com/questions/35513264
+    style={"width": "100vw"}
 )
 
 server = app.server
