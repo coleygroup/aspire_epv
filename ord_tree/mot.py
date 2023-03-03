@@ -264,7 +264,7 @@ def mot_from_dict(d):
     return get_mot(m)
 
 
-def mot_get_path(mot: nx.DiGraph, node: int):
+def mot_get_path(mot: nx.DiGraph, node: int, arrow=False):
     root = get_root(mot)
     p = nx.shortest_path(mot, source=root, target=node)
     if len(p) == 1:
@@ -283,7 +283,10 @@ def mot_get_path(mot: nx.DiGraph, node: int):
         str_p = str(mot.edges[(u, v)]["mot_value"])
         str_p = prefix + str_p
         str_path.append(str_p)
-    return NodePathDelimiter.join(str_path)
+    r = NodePathDelimiter.join(str_path)
+    if arrow:
+        r = r.replace(NodePathDelimiter, " \u2192 ")
+    return r
 
 
 # prototype operations
@@ -399,3 +402,9 @@ def pt_extend_node(mot_original: nx.DiGraph, from_node: int, inplace=False):
             logger.info(f"edge added, current tree size: {len(mot.nodes)}")
     if not inplace:
         return mot
+
+
+def get_literal_nodes(mot: nx.DiGraph):
+    literal_classes = ord_classes.BuiltinLiteralClasses + ord_classes.OrdEnumClasses
+    return [n for n in mot.nodes if
+            import_string(mot.nodes[n]['mot_class_string']) in literal_classes]

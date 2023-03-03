@@ -335,21 +335,10 @@ def mot_to_cyto(mot: nx.DiGraph) -> Tuple[
         node_class = n_to_class[n]
         if node_class in BuiltinLiteralClasses + OrdEnumClasses:
             e._classes = [*e._classes] + [CYTO_MESSAGE_NODE_LITERAL_CLASS[1:]]
-
-        # check class related to literals
-        has_literal_children = False
-        has_literal_children_placeholder = False
-        for c in mot.successors(n):
-            if n_to_class[c] in BuiltinLiteralClasses + OrdEnumClasses:
-                has_literal_children = True
-                if mot.nodes[c]['mot_state'] == PT_PLACEHOLDER:
-                    has_literal_children_placeholder = True
-        if has_literal_children:
-            e._classes = [*e._classes] + [CYTO_MESSAGE_NODE_HAS_LITERAL_CHILDREN_CLASS[1:]]
-            if has_literal_children_placeholder:
-                e._classes = [*e._classes] + [CYTO_MESSAGE_NODE_HAS_LITERAL_CHILDREN_PLACEHOLDER_CLASS[1:]]
+            if mot.nodes[n]['mot_state'] == PT_PLACEHOLDER:
+                e._classes = [*e._classes] + [CYTO_MESSAGE_NODE_LITERAL_PLACEHOLDER_CLASS[1:]]
             else:
-                e._classes = [*e._classes] + [CYTO_MESSAGE_NODE_HAS_LITERAL_CHILDREN_PRESET_CLASS[1:]]
+                e._classes = [*e._classes] + [CYTO_MESSAGE_NODE_LITERAL_PRESET_CLASS[1:]]
         elements_node[n] = e
 
     elements_edge = dict()

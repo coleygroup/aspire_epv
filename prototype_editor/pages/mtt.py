@@ -18,7 +18,8 @@ cyto.load_extra_layouts()
 app = get_app()
 
 # only visualize non-trivial mtt
-_MttDataDict = {k: v for k, v in MttDataDict.items() if v['depth'] > 3}
+# _MttDataDict = {k: v for k, v in MttDataDict.items() if v['depth'] > 3}
+_MttDataDict = {k: v for k, v in MttDataDict.items()}
 
 # define components
 COMPONENT_CYTO_MTT = cyto.Cytoscape(
@@ -50,8 +51,8 @@ COMPONENT_MTT_SELECTOR = dcc.Dropdown(
 layout = html.Div(
     [
         # dummies for client-side callbacks
-        html.Div(id="dummy", style={'display': 'none'}),
-        html.Div(id="dummy-1", style={'display': 'none'}),
+        html.Div(id="mtt-dummy-0", style={'display': 'none'}),
+        html.Div(id="mtt-dummy-1", style={'display': 'none'}),
 
         dbc.Row(
             [
@@ -314,7 +315,7 @@ app.clientside_callback(
         namespace='clientside',
         function_name='cy_center_selected',
     ),
-    Output('dummy', 'children'),
+    Output('mtt-dummy-0', 'children'),
     Input(DASH_CID_MTT_BTN_CYTO_CENTER_SELECTED, 'n_clicks'),
 )
 
@@ -323,6 +324,6 @@ app.clientside_callback(
         namespace='clientside',
         function_name='cy_fit',
     ),
-    Output('dummy-1', 'children'),
+    Output('mtt-dummy-1', 'children'),
     Input(DASH_CID_MTT_BTN_CYTO_FIT, 'n_clicks'),
 )
