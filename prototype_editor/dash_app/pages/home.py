@@ -6,6 +6,8 @@ from dash import html, get_app, Output, Input
 from dash import register_page, dash_table
 from pymongo import MongoClient
 
+# TODO version history
+
 MONGO_DB = MongoClient()['ord_prototype']
 register_page(__name__, path='/', description="Home")
 TABLE_PAGE_SIZE = 10
@@ -58,23 +60,6 @@ layout = html.Div(
 app = get_app()
 
 
-def get_prototype_dataframe(db, collection="prototypes", page=1, page_size=10):
-    records = []
-    to_skip = (page - 1) * page_size
-    projection = {
-        "_id": 1,
-        "name": 1,
-        "root_message_type": 1,
-        "version": 1,
-        "time_modified": 1,
-    }
-    for doc in db[collection].find({}, projection).skip(to_skip).limit(page_size):
-        doc['_id'] = str(doc['_id'])
-        records.append(doc)
-    df = pd.DataFrame.from_records(records)
-    return df
-
-
 @app.callback(
     Output(PCI.PROTOTYPE_LIST, "data"),
     Output(PCI.PROTOTYPE_LIST, "columns"),
@@ -95,3 +80,20 @@ def change_page(page, n_clicks):
         d['_id'] = object_id_link
     columns = [{"name": i, "id": i, "presentation": "markdown"} for i in df.columns]
     return data, columns, f"\u27F3 updated {datetime.now().strftime('%H:%M:%S')}", n // page_size + 1
+
+
+def get_prototype_dataframe(db, collection="prototypes", page=1, page_size=10):
+    records = []
+    to_skip = (page - 1) * page_size
+    projection = {
+        "_id": 1,
+        "name": 1,
+        "root_message_type": 1,
+        "version": 1,
+        "time_modified": 1,
+    }
+    for doc in db[collection].find({}, projection).skip(to_skip).limit(page_size):
+        doc['_id'] = str(doc['_id'])
+        records.append(doc)
+    df = pd.DataFrame.from_records(records)
+    return df
