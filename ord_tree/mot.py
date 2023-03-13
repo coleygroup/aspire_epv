@@ -249,6 +249,7 @@ def message_from_mot(tree: nx.DiGraph) -> betterproto.Message:
     return working_tree.nodes[root_node]['mot_value']
 
 
+# TODO this is not actually pt
 def mot_to_dict(mot: nx.DiGraph):
     m = message_from_mot(mot)
     root_class_string = get_class_string(m.__class__)
@@ -262,6 +263,10 @@ def mot_from_dict(d):
     m = m_class()
     m.from_dict(d['message'])
     return get_mot(m)
+
+
+def pt_to_dict(mot: nx.DiGraph):
+    return nx.node_link_data(mot)
 
 
 def mot_get_path(mot: nx.DiGraph, node: int, arrow=False):

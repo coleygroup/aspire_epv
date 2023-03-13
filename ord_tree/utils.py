@@ -164,3 +164,10 @@ def get_tree_depth(tree: nx.DiGraph):
         if d > deep:
             deep = d
     return deep
+
+
+def enum_class_to_options(enum_class):
+    options = [
+        {"label": e.name, "value": e.value} for e in enum_class
+    ]
+    return options
