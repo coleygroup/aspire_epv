@@ -4,6 +4,7 @@ import dash_bootstrap_components as dbc
 import pandas as pd
 from dash import html, get_app, Output, Input
 from dash import register_page, dash_table
+from dateutil.parser import parse
 from pymongo import MongoClient
 
 # TODO version history
@@ -94,6 +95,10 @@ def get_prototype_dataframe(db, collection="prototypes", page=1, page_size=10):
     }
     for doc in db[collection].find({}, projection).skip(to_skip).limit(page_size):
         doc['_id'] = str(doc['_id'])
+        d = doc['time_modified']
+        if isinstance(d, str):
+            d = parse(d)
+        doc['time_modified'] = d.strftime("%Y-%m-%d %H:%M:%S")
         records.append(doc)
     df = pd.DataFrame.from_records(records)
     return df
