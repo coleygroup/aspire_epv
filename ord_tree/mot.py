@@ -358,10 +358,16 @@ def pt_extend_node(mot_original: nx.DiGraph, from_node: int, inplace=False):
             child_class_string = mtt.nodes[child_mtt]['mtt_class_string']
             child_class = import_string(child_class_string)
             new_child = max(mot.nodes) + 1
+
+            # if child is non-literal, set its state as preset, otherwise placeholder
+            child_attr_mot_state = PT_PRESET
+            child_class_is_literal = child_class in ord_classes.BuiltinLiteralClasses + ord_classes.OrdEnumClasses
+            if child_class_is_literal:
+                child_attr_mot_state = PT_PLACEHOLDER
             child_attr = MotEleAttr(
                 mot_element_id=new_child,
-                mot_can_edit=child_class in ord_classes.BuiltinLiteralClasses + ord_classes.OrdEnumClasses,
-                mot_state=PT_PLACEHOLDER,
+                mot_can_edit=child_class_is_literal,
+                mot_state=child_attr_mot_state,
                 mot_value=None,
                 mtt_element_name=child_mtt,
                 mot_class_string=child_class_string,
