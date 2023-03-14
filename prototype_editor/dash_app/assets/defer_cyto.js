@@ -1,3 +1,8 @@
+window.cy.wheelSensitivity = 0.1
+
+// // force single select: https://github.com/cytoscape/cytoscape.js/issues/2101
+// window.cy.on('select', 'node, edge', e => window.cy.elements().not(e.target).unselect())
+
 window.cy.on('cxttap', 'node', function (evt) {
     const hide_class = "CYTO_MESSAGE_NODE_TMP_HIDE"
     let node = evt.target
