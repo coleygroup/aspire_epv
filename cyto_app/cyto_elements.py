@@ -1,4 +1,5 @@
 import base64
+import json
 from abc import ABCMeta, abstractmethod
 from collections import Counter
 from typing import Any, Iterable, Tuple, Type
@@ -8,7 +9,7 @@ import networkx as nx
 from ord_tree.mot import MotEleAttr, PT_PLACEHOLDER
 from ord_tree.mtt import MttNodeAttr
 from ord_tree.ord_classes import OrdMessageClasses, BuiltinLiteralClasses, OrdEnumClasses
-from ord_tree.utils import import_string
+from ord_tree.utils import import_string, RootNodePath
 from .cyto_config import *
 
 CYTO_COLORS = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"]
@@ -189,7 +190,10 @@ class CytoElementNode(CytoElement):
         cyto_classes = CytoElementNode.derive_cyto_classes_from_node_class(node_class)
 
         oneof_color_dict = CytoElementNode.derive_oneof_color_mtt(mtt, mtt_node)
-        oneof_color_dict.update({"relation": node_attr['mtt_relation_to_parent']})  # this is for label switch
+        if node_attr['mtt_relation_to_parent'] is None:
+            oneof_color_dict.update({"relation": RootNodePath})
+        else:
+            oneof_color_dict.update({"relation": node_attr['mtt_relation_to_parent']})  # this is for node label switch
         return cls(
             data_id=mtt_node, data_label=node_class.__name__, data_kwargs=oneof_color_dict,
             data_ele_attrs=node_attr,
@@ -292,7 +296,7 @@ class CytoElementEdge(CytoElement):
         mtt_u, mtt_v = edge_attrs['mtt_element_name']
         relation = mtt_v.replace(mtt_u, '')
         return cls(
-            data_id=str(edge_attrs['mot_element_id']),
+            data_id=f"{u} {v}",
             data_label=relation,
             data_source=str(u),
             data_target=str(v),
@@ -325,20 +329,24 @@ def mtt_to_cyto(mtt: nx.DiGraph, hide_literal=True) -> Tuple[
 
 
 def mot_to_cyto(mot: nx.DiGraph) -> Tuple[
-    dict[str, CytoElementNode],
-    dict[Tuple[str, str], CytoElementEdge],
+    dict[int, CytoElementNode],
+    dict[Tuple[int, int], CytoElementEdge],
 ]:
     elements_node = dict()
     n_to_class = {n: import_string(mot.nodes[n]['mot_class_string']) for n in mot.nodes}
     for n in mot.nodes:
         e = CytoElementNode.from_mot_node(mot, n)
         node_class = n_to_class[n]
+        # TODO make _classes a set so no duplicates
         if node_class in BuiltinLiteralClasses + OrdEnumClasses:
-            e._classes = [*e._classes] + [CYTO_MESSAGE_NODE_LITERAL_CLASS[1:]]
+            e._classes = [*e._classes] + [CYTO_LITERAL_NODE_CLASS[1:]]
             if mot.nodes[n]['mot_state'] == PT_PLACEHOLDER:
-                e._classes = [*e._classes] + [CYTO_MESSAGE_NODE_LITERAL_PLACEHOLDER_CLASS[1:]]
+                e._classes = [*e._classes] + [CYTO_PLACEHOLDER_CLASS[1:]]
             else:
-                e._classes = [*e._classes] + [CYTO_MESSAGE_NODE_LITERAL_PRESET_CLASS[1:]]
+                e._classes = [*e._classes] + [CYTO_PRESET_CLASS[1:]]
+        else:
+            if mot.nodes[n]['mot_state'] == PT_PLACEHOLDER:
+                e._classes = [*e._classes] + [CYTO_PLACEHOLDER_CLASS[1:]]
         elements_node[n] = e
 
     elements_edge = dict()
@@ -348,9 +356,9 @@ def mot_to_cyto(mot: nx.DiGraph) -> Tuple[
         if e.data_ele_attrs['mot_can_edit']:
             e._classes = [*e._classes] + [CYTO_MESSAGE_EDGE_CAN_EDIT_CLASS[1:]]
             if e.data_ele_attrs['mot_state'] == PT_PLACEHOLDER:
-                e._classes = [*e._classes] + [CYTO_MESSAGE_EDGE_PLACEHOLDER_CLASS[1:]]
+                e._classes = [*e._classes] + [CYTO_PLACEHOLDER_CLASS[1:]]
             else:
-                e._classes = [*e._classes] + [CYTO_MESSAGE_EDGE_PRESET_CLASS[1:]]
+                e._classes = [*e._classes] + [CYTO_PRESET_CLASS[1:]]
         elements_edge[(u, v)] = e
     return elements_node, elements_edge
 
@@ -385,3 +393,10 @@ def cyto_to_mot(elements: list[dict]):
         data_ele_attrs = edge_dict['data']['ele_attrs']
         mot.add_edge(u, v, **data_ele_attrs)
     return mot
+
+
+class BytesDump(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, bytes):  # deal with bytes
+            return obj.decode()
+        return json.JSONEncoder.default(self, obj)  # everything else

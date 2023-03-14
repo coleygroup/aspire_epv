@@ -1,61 +1,20 @@
-# plotly component ID
-DASH_CID_NAVBAR = "CID_NAVBAR"
-
-DASH_CID_MTT_CYTO = "CID_MTT_CYTO"
-DASH_CID_MTT_DIV_INFO_ELEMENT = "CID_MTT_DIV_INFO_ELEMENT"
-DASH_CID_MTT_DIV_INFO_TREE = "CID_MTT_DIV_INFO_TREE"
-DASH_CID_MTT_SELECTOR = "CID_MTT_SELECTOR"
-DASH_CID_MTT_SWITCHES = "CID_MTT_SWITCHES"
-DASH_CID_MTT_BTN_CYTO_CENTER_SELECTED = "CID_MTT_BTN_CYTO_CENTER_SELECTED"
-DASH_CID_MTT_BTN_CYTO_FIT = "CID_MTT_BTN_CYTO_FIT"
-
-DASH_CID_MOT_CYTO = "CID_MOT_CYTO"
-DASH_CID_MOT_DIV_EDITOR = "CID_MOT_DIV_EDITOR"
-DASH_CID_MOT_DIV_EDITOR_ELEMENT_STATE = "CID_MOT_DIV_EDITOR_ELEMENT_STATE"
-DASH_CID_MOT_SWITCHES = "CID_MOT_SWITCHES"
-DASH_CID_MOT_EDITABLE_PATH_SELECTOR = "CID_MOT_EDITABLE_CLASS_SELECTOR"
-DASH_CID_MOT_EDITABLE_ID_SELECTOR = "CID_MOT_EDITABLE_ID_SELECTOR"
-DASH_CID_MOT_BTN_DOWNLOAD = "CID_MOT_BTN_DOWNLOAD"
-DASH_CID_MOT_BTN_SAVETODB = "CID_MOT_BTN_SAVETODB"
-DASH_CID_MOT_BTN_RELOAD_LAYOUT = "CID_MOT_BTN_RELOAD_LAYOUT"
-DASH_CID_MOT_BTN_CYTO_CENTER_SELECTED = "CID_MOT_BTN_CYTO_CENTER_SELECTED"
-DASH_CID_MOT_BTN_CYTO_FIT = "CID_MOT_BTN_CYTO_FIT"
-
-DASH_CID_MOT_BTN_PT_EXTEND = "CID_MOT_BTN_PT_EXTEND"
-DASH_CID_MOT_BTN_PT_DETACH = "CID_MOT_BTN_PT_DETACH"
-DASH_CID_MOT_BTN_PT_DELETE = "CID_MOT_BTN_PT_DELETE"
-DASH_CID_MOT_SWITCH_SHOW_HIDE_BRANCH = "CID_MOT_BTN_PT_HIDE"
-DASH_CID_MOT_BTN_PT_SHOWONLY = "CID_MOT_BTN_PT_SHOWONLY"
-DASH_CID_MOT_INPUT_PT_ELEMENT_STATE = "CID_MOT_INPUT_PT_ELEMENT_STATE"
-DASH_CID_MOT_INPUT_PT_ELEMENT_VALUE = "CID_MOT_INPUT_PT_ELEMENT_VALUE"
-DASH_CID_MOT_STORE_INIT = "CID_MOT_STORE_INIT"
-DASH_CID_MOT_STORE_LIVE = "CID_MOT_STORE_LIVE"
-DASH_CID_MOT_STORE_LAYOUT_OPTIONS = "CID_MOT_STORE_LAYOUT_OPTIONS"
-
 # cyto element classes for style sheet
 CYTO_LITERAL_NODE_CLASS = ".CYTO_LITERAL_NODE_CLASS"
 CYTO_MUTABLE_NODE_CLASS = ".CYTO_MUTABLE_NODE_CLASS"
 CYTO_MESSAGE_NODE_CLASS = ".CYTO_MESSAGE_NODE_CLASS"
-# CYTO_ONEOF_EDGE_CLASS = ".CYTO_ONEOF_EDGE_CLASS"
-
-CYTO_MESSAGE_NODE_LITERAL_CLASS = ".CYTO_MESSAGE_NODE_LITERAL_CLASS"
-# CYTO_MESSAGE_NODE_HAS_LITERAL_CHILDREN_CLASS = ".CYTO_MESSAGE_NODE_HAS_LITERAL_CHILDREN_CLASS"
-# CYTO_MESSAGE_NODE_HAS_LITERAL_CHILDREN_PRESET_CLASS = ".CYTO_MESSAGE_NODE_HAS_LITERAL_CHILDREN_PRESET_CLASS"
-# CYTO_MESSAGE_NODE_HAS_LITERAL_CHILDREN_PLACEHOLDER_CLASS = ".CYTO_MESSAGE_NODE_HAS_LITERAL_CHILDREN_PLACEHOLDER_CLASS"
-CYTO_MESSAGE_NODE_LITERAL_PRESET_CLASS = ".CYTO_MESSAGE_NODE_LITERAL_PRESET_CLASS"
-CYTO_MESSAGE_NODE_LITERAL_PLACEHOLDER_CLASS = ".CYTO_MESSAGE_NODE_LITERAL_PLACEHOLDER_CLASS"
-CYTO_MESSAGE_NODE_TMP_HIDE = ".CYTO_MESSAGE_NODE_TMP_HIDE"
 
 CYTO_MESSAGE_EDGE_CAN_EDIT_CLASS = ".CYTO_MESSAGE_EDGE_CAN_EDIT_CLASS"
-CYTO_MESSAGE_EDGE_PRESET_CLASS = ".CYTO_MESSAGE_EDGE_PRESET_CLASS"
-CYTO_MESSAGE_EDGE_PLACEHOLDER_CLASS = ".CYTO_MESSAGE_EDGE_PLACEHOLDER_CLASS"
+
+CYTO_MESSAGE_NODE_TMP_HIDE = ".CYTO_MESSAGE_NODE_TMP_HIDE"
+CYTO_MESSAGE_NODE_NAV_FOCUS = ".CYTO_MESSAGE_NODE_NAV_FOCUS"
+
+CYTO_PRESET_CLASS = ".CYTO_PRESET_CLASS"
+CYTO_PLACEHOLDER_CLASS = ".CYTO_PLACEHOLDER_CLASS"
 
 CYTO_STYLE_SHEET_MTT = [
     {
         'selector': 'edge',
         'style': {
-            # 'content': 'data(label)',
-            'color': 'data(edge_color)',
             'opacity': 1,
             'curve-style': 'taxi',
             # 'curve-style': 'unbundled-bezier',  # this also works
@@ -63,14 +22,27 @@ CYTO_STYLE_SHEET_MTT = [
         }
     },
     {
+        'selector': 'edge[edge_color]',
+        'style': {
+            'color': 'data(edge_color)',
+        }
+    },
+    {
         'selector': 'node',
         'style': {
             'content': 'data(label)',
-            'border-color': 'data(oneof_color)',
             'border-width': 2,
-            # 'text-halign': 'right',
-            # 'text-valign': 'center',
-            # 'text-margin-x': 2,
+            'text-valign': 'center',
+            'padding': "10px",
+            'width': 'label',
+            'height': '18px',
+            'font-size': '18px'
+        }
+    },
+    {
+        'selector': '[oneof_color]',
+        'style': {
+            'border-color': 'data(oneof_color)',
         }
     },
 
@@ -78,25 +50,95 @@ CYTO_STYLE_SHEET_MTT = [
     {
         'selector': CYTO_LITERAL_NODE_CLASS,
         'style': {
-            'shape': 'triangle',
+            'shape': 'rectangle',
+            # 'background-color': 'none',
+            'text-background-color': 'black',
         }
     },
     {
         'selector': CYTO_MUTABLE_NODE_CLASS,
         'style': {
-            'shape': 'rectangle',
+            'shape': 'round-octagon',
+            'background-color': 'white',
         }
     },
     {
         'selector': CYTO_MESSAGE_NODE_CLASS,
         'style': {
-            'shape': 'round-octagon',
+            'shape': 'rectangle',
+            'background-color': 'white',
         }
     },
 
+    {
+        'selector': CYTO_MESSAGE_EDGE_CAN_EDIT_CLASS,
+        'style': {
+            'width': '10',
+        }
+    },
+    {
+        'selector': CYTO_MESSAGE_NODE_TMP_HIDE,
+        'style': {
+            'display': 'none',
+            'visibility': 'hidden',
+        }
+    },
 
     {
-        'selector': CYTO_MESSAGE_NODE_LITERAL_PLACEHOLDER_CLASS,
+        'selector': ':selected',
+        'style': {
+            'z-index': 1000,
+            'background-color': 'SteelBlue',
+            'line-color': 'SteelBlue',
+        }
+    },
+]
+
+CYTO_STYLE_SHEET_MOT = [
+    {
+        'selector': 'edge',
+        'style': {
+            'opacity': 1,
+            'curve-style': 'taxi',
+            'taxi-direction': 'vertical',
+        }
+    },
+    {
+        'selector': 'node',
+        'style': {
+            'content': 'data(label)',
+            'border-width': 2,
+            'font-size': "30px",
+            'text-valign': 'bottom',
+            'text-margin-y': "4px",
+        }
+    },
+
+    # class selectors
+    {
+        'selector': CYTO_LITERAL_NODE_CLASS,
+        'style': {
+            'shape': 'rectangle',
+            'text-background-color': 'black',
+        }
+    },
+    {
+        'selector': CYTO_MUTABLE_NODE_CLASS,
+        'style': {
+            'shape': 'round-octagon',
+            'background-color': 'white',
+        }
+    },
+    {
+        'selector': CYTO_MESSAGE_NODE_CLASS,
+        'style': {
+            'shape': 'rectangle',
+            'background-color': 'white',
+        }
+    },
+
+    {
+        'selector': f'node{CYTO_PLACEHOLDER_CLASS}',
         'style': {
             'border-width': '5',
             'border-color': 'red',
@@ -104,7 +146,7 @@ CYTO_STYLE_SHEET_MTT = [
     },
 
     {
-        'selector': CYTO_MESSAGE_NODE_LITERAL_PRESET_CLASS,
+        'selector': f'node{CYTO_PRESET_CLASS}',
         'style': {
             'border-width': '5',
             'border-color': 'green',
@@ -118,14 +160,14 @@ CYTO_STYLE_SHEET_MTT = [
         }
     },
     {
-        'selector': CYTO_MESSAGE_EDGE_PLACEHOLDER_CLASS,
+        'selector': f"edge{CYTO_PLACEHOLDER_CLASS}",
         'style': {
             'line-color': 'red',
         }
     },
 
     {
-        'selector': CYTO_MESSAGE_EDGE_PRESET_CLASS,
+        'selector': f"edge{CYTO_PRESET_CLASS}",
         'style': {
             'line-color': 'green',
         }
@@ -136,6 +178,21 @@ CYTO_STYLE_SHEET_MTT = [
         'style': {
             'display': 'none',
             'visibility': 'hidden',
+        }
+    },
+
+    {
+        'selector': f'node{CYTO_MESSAGE_NODE_NAV_FOCUS}',
+        'style': {
+            'background-color': 'yellow',
+        }
+    },
+
+    {
+        'selector': f'edge{CYTO_MESSAGE_NODE_NAV_FOCUS}',
+        'style': {
+            'line-color': 'yellow',
+            'width': 10,
         }
     },
 
