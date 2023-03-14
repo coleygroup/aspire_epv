@@ -14,7 +14,7 @@ print(dd)
 """
 Data(float_value=2, integer_value=0, bytes_value=b'', description='sdf')
 Data(bytes_value=b'', description='lalala')  # ???
-#  because it is `oneof` field......
+#  because it is `oneof` field...... so the latter way to construct a message is preferred!
 """
 
 # print(d.to_json(indent=2))
