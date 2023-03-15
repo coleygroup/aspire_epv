@@ -360,7 +360,7 @@ def render_union_list(is_open, node_cid, elements):
         cursor = MONGO_DB[COLLECTION].find({'root_message_type': message_type}, {'_id': 1, "root_message_type": 1})
         docs = list(cursor)
         if len(docs) == 0:
-            return dbc.Alert('No type matching prototypes.')
+            return dbc.Alert('No matching prototypes found.')
 
         table_header = [
             html.Thead(html.Tr([html.Th("_id"), html.Th("Node Class")]))
@@ -386,7 +386,6 @@ def render_union_list(is_open, node_cid, elements):
             striped=True,
         )
         return table
-    print("no up")
     return no_update
 
 
@@ -529,7 +528,7 @@ def update_current_prototype_document(elements, name, version, inherit, init_dat
     Output(PCI_MOT.MOT_DIV_EDITOR, 'children'),
     Input(PCI_MOT.MOT_CYTO, 'selectedNodeData'),
     Input(PCI_MOT.MOT_CYTO, 'selectedEdgeData'),
-    Input(PCI_MOT.MOT_CYTO, "elements"),
+    State(PCI_MOT.MOT_CYTO, "elements"),
 )
 def update_element_editor(node_data, edge_data, elements):
     if node_data is None:
@@ -709,7 +708,8 @@ app.clientside_callback(
     State({'type': PCI_MOT.MOT_INPUT_PT_ELEMENT_STATE, 'index': ALL}, 'id'),
     State({'type': PCI_MOT.MOT_INPUT_PT_ELEMENT_VALUE, 'index': ALL}, 'id'),
 
-    Input(PCI_MOT.MOT_CYTO, 'elements'),
+    # TODO should this be input?
+    State(PCI_MOT.MOT_CYTO, 'elements'),
     State(PCI_MOT.MOT_BTN_RELOAD_LAYOUT, 'n_clicks'),
     State(PCI_MOT.MOT_BTN_CYTO_CENTER_SELECTED, 'n_clicks'),
     prevent_initial_call=True,
