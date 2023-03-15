@@ -1,5 +1,8 @@
-## dev dependencies (ubuntu)
-Some packages in `requirements.txt` depends on the following:
+# Experiment Planning and Visualization module
+
+
+## dev dependencies (debian)
+Some packages in `requirements.txt` depend on the following:
 ```shell
 # graphviz
 sudo apt install -y python3-dev graphviz libgraphviz-dev
