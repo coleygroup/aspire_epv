@@ -2,7 +2,7 @@ import dash_bootstrap_components as dbc
 import networkx as nx
 from dash import html, dcc
 
-from cyto_app.cyto_elements import MttNodeAttr
+from dash_app_support.cyto_elements import MttNodeAttr
 from ord_tree.mtt import OrdEnumClasses, BuiltinLiteralClasses, OrdMessageClasses
 from ord_tree.utils import import_string, NodePathDelimiter
 
@@ -69,8 +69,7 @@ def get_node_attr_block(mtt_node_attr: MttNodeAttr, mtt: nx.DiGraph):
     item_children.append(dcc.Markdown(markdown_text))
     item_children = dbc.ListGroupItem(item_children)
 
-    list_items = []
-    list_items.append(item_path)
+    list_items = [item_path]
     if show_children:
         list_items.append(item_children)
 

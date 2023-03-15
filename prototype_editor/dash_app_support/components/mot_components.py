@@ -4,11 +4,10 @@ import dash_bootstrap_components as dbc
 import networkx as nx
 from dash import html, dcc
 
-from ord_tree.mot import MotEleAttr, PT_STATES, \
-    mot_get_path, get_literal_nodes, PT_PLACEHOLDER, PT_PRESET
+from ord_tree.mot import MotEleAttr, mot_get_path, get_literal_nodes, PT_PLACEHOLDER
 from ord_tree.mtt import OrdEnumClasses
-from ord_tree.utils import import_string, NodePathDelimiter, enum_class_to_options, RootNodePath
-from cyto_app.cyto_elements import cyto_to_mot
+from ord_tree.utils import import_string, NodePathDelimiter, enum_class_to_options
+
 
 # page component ids
 class PCI:
@@ -19,6 +18,7 @@ class PCI:
     MOT_STORE_ALL_EDGES = "MOT_STORE_ALL_EDGES"
     MOT_STORE_PROTOTYPE_DOC = "MOT_STORE_PROTOTYPE_DOC"
     MOT_STORE_INIT_PROTOTYPE_DOC = "MOT_STORE_INIT_PROTOTYPE_DOC"
+    MOT_STORE_UPDATE_ELEMENTS = "MOT_STORE_UPDATE_ELEMENTS"
 
     # main cyto
     MOT_CYTO = "MOT_CYTO"
@@ -68,7 +68,6 @@ class PCI:
     MOT_LIST_GROUP_PT_UNION = "MOT_LIST_GROUP_PT_UNION"
     MOT_MODAL_UNION = "MOT_MODAL_UNION"
 
-
     # buttons to save
     MOT_BTN_DOWNLOAD = "CID_MOT_BTN_DOWNLOAD"
     MOT_BTN_SAVETODB = "CID_MOT_BTN_SAVETODB"
@@ -110,7 +109,8 @@ def get_literal_node_value_input(node_class: Type, node_value: Any, cid: dict[st
         raise TypeError(f"illegal literal class: {node_class}")
     return value_input
 
-def get_non_literal_editor_node(node_id: int, node_state: str, node_class: Type,):
+
+def get_non_literal_editor_node(node_id: int, node_state: str, node_class: Type, ):
     editor = dbc.ListGroupItem(
         [
             dbc.InputGroup(
@@ -120,13 +120,14 @@ def get_non_literal_editor_node(node_id: int, node_state: str, node_class: Type,
                         id={
                             'type': PCI.MOT_INPUT_PT_ELEMENT_STATE,
                             'index': node_id
-                        }, value = node_state == PT_PLACEHOLDER
+                        }, value=node_state == PT_PLACEHOLDER
                     )),
                 ]
             ),
         ],
     )
     return editor
+
 
 def get_literal_editor_node(node_id: int, node_state: str, node_value: Any, node_class: Type,
                             relation_to_parent: str, ):
@@ -140,7 +141,7 @@ def get_literal_editor_node(node_id: int, node_state: str, node_value: Any, node
                         id={
                             'type': PCI.MOT_INPUT_PT_ELEMENT_STATE,
                             'index': node_id
-                        }, value = node_state == PT_PLACEHOLDER
+                        }, value=node_state == PT_PLACEHOLDER
                     )),
                     get_literal_node_value_input(node_class, node_value,
                                                  {'type': PCI.MOT_INPUT_PT_ELEMENT_VALUE, 'index': node_id}
@@ -168,20 +169,25 @@ def get_cards_from_selected_nodes(node_data, mot: nx.DiGraph):
                 [
                     html.Div(
                         [
-                            dbc.Button("Extend", outline=True, color='primary', className="mx-2", id={'type': PCI.MOT_BTN_PT_EXTEND, 'index': node_id}, ),
-                            dbc.Button("Detach", outline=True, color='primary', className="mx-2", id={'type': PCI.MOT_BTN_PT_DETACH, 'index': node_id}, ),
-                            dbc.Button("Delete", outline=True, color='primary', className="mx-2", id={'type': PCI.MOT_BTN_PT_DELETE, 'index': node_id}, ),
-                            dbc.Button("Union", outline=True, color='primary', className="mx-2", id={'type': PCI.MOT_BTN_PT_UNION_OPEN_MODAL, 'index': node_id}, n_clicks=0),
+                            dbc.Button("Extend", outline=True, color='primary', className="mx-2",
+                                       id={'type': PCI.MOT_BTN_PT_EXTEND, 'index': node_id}, ),
+                            dbc.Button("Detach", outline=True, color='primary', className="mx-2",
+                                       id={'type': PCI.MOT_BTN_PT_DETACH, 'index': node_id}, ),
+                            dbc.Button("Delete", outline=True, color='primary', className="mx-2",
+                                       id={'type': PCI.MOT_BTN_PT_DELETE, 'index': node_id}, ),
+                            dbc.Button("Union", outline=True, color='primary', className="mx-2",
+                                       id={'type': PCI.MOT_BTN_PT_UNION_OPEN_MODAL, 'index': node_id}, n_clicks=0),
                             dbc.Modal(
-                                [dbc.ModalHeader('Union with an existing prototype'), dbc.ModalBody(dbc.ListGroup(id={'type': PCI.MOT_LIST_GROUP_PT_UNION, 'index': node_id}))],
+                                [dbc.ModalHeader('Union with an existing prototype'), dbc.ModalBody(
+                                    dbc.ListGroup(id={'type': PCI.MOT_LIST_GROUP_PT_UNION, 'index': node_id}))],
                                 id={'type': PCI.MOT_MODAL_UNION, 'index': node_id},
                                 is_open=False
                             ),
                         ],
                         className="mt-1 text-center",
                     ),
-                    ],
-                className="text-center",),
+                ],
+                className="text-center", ),
         ]
 
         node_attr = mot.nodes[node_id]
@@ -280,7 +286,6 @@ def get_cards_from_selected_edges(edge_data, mot: nx.DiGraph):
         else:
             lines.append(dbc.Alert("This is not an editable edge.", color="warning", className="text-center mt-3"))
 
-
         card = dbc.Card(
             [
                 dbc.CardHeader([html.B("TO: " + v_path, className="text-primary"), ]),
@@ -290,7 +295,6 @@ def get_cards_from_selected_edges(edge_data, mot: nx.DiGraph):
         )
         cards.append(card)
     return cards
-
 
 # def derive_relation(elements, mot=None):
 #     if mot is None:
@@ -308,7 +312,3 @@ def get_cards_from_selected_edges(edge_data, mot: nx.DiGraph):
 #         else:
 #             e['data']['relation'] = RootNodePath
 #     return elements
-
-
-
-

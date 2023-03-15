@@ -144,11 +144,11 @@ class CytoElementNode(CytoElement):
     def derive_cyto_classes_from_node_class(node_class: Type) -> [str]:
         cyto_classes = []
         if node_class in (dict, list):
-            cyto_classes.append(CYTO_MUTABLE_NODE_CLASS[1:])
+            cyto_classes.append(CYTO_MUTABLE_NODE_CLASS)
         elif node_class in BuiltinLiteralClasses + OrdEnumClasses:
-            cyto_classes.append(CYTO_LITERAL_NODE_CLASS[1:])
+            cyto_classes.append(CYTO_LITERAL_NODE_CLASS)
         elif node_class in OrdMessageClasses:
-            cyto_classes.append(CYTO_MESSAGE_NODE_CLASS[1:])
+            cyto_classes.append(CYTO_MESSAGE_NODE_CLASS)
         else:
             raise TypeError(f"illegal node class: {node_class}")
         return cyto_classes
@@ -339,14 +339,14 @@ def mot_to_cyto(mot: nx.DiGraph) -> Tuple[
         node_class = n_to_class[n]
         # TODO make _classes a set so no duplicates
         if node_class in BuiltinLiteralClasses + OrdEnumClasses:
-            e._classes = [*e._classes] + [CYTO_LITERAL_NODE_CLASS[1:]]
+            e._classes = [*e._classes] + [CYTO_LITERAL_NODE_CLASS]
             if mot.nodes[n]['mot_state'] == PT_PLACEHOLDER:
-                e._classes = [*e._classes] + [CYTO_PLACEHOLDER_CLASS[1:]]
+                e._classes = [*e._classes] + [CYTO_PLACEHOLDER_CLASS]
             else:
-                e._classes = [*e._classes] + [CYTO_PRESET_CLASS[1:]]
+                e._classes = [*e._classes] + [CYTO_PRESET_CLASS]
         else:
             if mot.nodes[n]['mot_state'] == PT_PLACEHOLDER:
-                e._classes = [*e._classes] + [CYTO_PLACEHOLDER_CLASS[1:]]
+                e._classes = [*e._classes] + [CYTO_PLACEHOLDER_CLASS]
         elements_node[n] = e
 
     elements_edge = dict()
@@ -354,11 +354,11 @@ def mot_to_cyto(mot: nx.DiGraph) -> Tuple[
         u, v = e
         e = CytoElementEdge.from_mot_edge(mot, e)
         if e.data_ele_attrs['mot_can_edit']:
-            e._classes = [*e._classes] + [CYTO_MESSAGE_EDGE_CAN_EDIT_CLASS[1:]]
+            e._classes = [*e._classes] + [CYTO_MESSAGE_EDGE_CAN_EDIT_CLASS]
             if e.data_ele_attrs['mot_state'] == PT_PLACEHOLDER:
-                e._classes = [*e._classes] + [CYTO_PLACEHOLDER_CLASS[1:]]
+                e._classes = [*e._classes] + [CYTO_PLACEHOLDER_CLASS]
             else:
-                e._classes = [*e._classes] + [CYTO_PRESET_CLASS[1:]]
+                e._classes = [*e._classes] + [CYTO_PRESET_CLASS]
         elements_edge[(u, v)] = e
     return elements_node, elements_edge
 
