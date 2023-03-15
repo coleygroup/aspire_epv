@@ -5,11 +5,13 @@ import pandas as pd
 from dash import html, get_app, Output, Input
 from dash import register_page, dash_table
 from dateutil.parser import parse
+from dash_app_support.db import ENV_MONGO_COLLECTION, ENV_MONGO_DB, ENV_MONGO_URI
 from pymongo import MongoClient
 
 # TODO version history
 
-MONGO_DB = MongoClient()['ord_prototype']
+MONGO_DB = MongoClient(ENV_MONGO_URI)[ENV_MONGO_DB]
+
 register_page(__name__, path='/', description="Editor Home")
 TABLE_PAGE_SIZE = 10
 
@@ -70,10 +72,9 @@ app = get_app()
     Input(PCI.PROTOTYPE_LIST_REFRESH_BTN, "n_clicks"),
 )
 def change_page(page, n_clicks):
-    collection = "prototypes"
     page_size = TABLE_PAGE_SIZE
-    n = MONGO_DB[collection].count_documents({})
-    df = get_prototype_dataframe(db=MONGO_DB, collection=collection, page=page, page_size=page_size)
+    n = MONGO_DB[ENV_MONGO_COLLECTION].count_documents({})
+    df = get_prototype_dataframe(db=MONGO_DB, collection=ENV_MONGO_COLLECTION, page=page, page_size=page_size)
     data = df.to_dict('records')
     prefix = app.config['url_base_pathname']
     for d in data:
@@ -84,7 +85,7 @@ def change_page(page, n_clicks):
     return data, columns, f"\u27F3 updated {datetime.now().strftime('%H:%M:%S')}", n // page_size + 1
 
 
-def get_prototype_dataframe(db, collection="prototypes", page=1, page_size=10):
+def get_prototype_dataframe(db, collection=ENV_MONGO_COLLECTION, page=1, page_size=10):
     records = []
     to_skip = (page - 1) * page_size
     projection = {

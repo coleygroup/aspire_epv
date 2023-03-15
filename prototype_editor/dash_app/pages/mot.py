@@ -17,6 +17,7 @@ from pymongo import MongoClient
 
 from dash_app_support.components import simple_open, PCI_MOT, get_cards_from_selected_nodes, \
     get_cards_from_selected_edges, JsonTheme
+from dash_app_support.db import ENV_MONGO_COLLECTION,ENV_MONGO_DB,ENV_MONGO_URI
 from dash_app_support.cyto_config import CYTO_STYLE_SHEET_MOT, CYTO_PLACEHOLDER_CLASS, CYTO_PRESET_CLASS
 from dash_app_support.cyto_elements import cyto_to_mot, mot_to_cyto_element_list, BytesDump
 from dash_app_support.fixtures import SampleReactionInstance
@@ -35,8 +36,8 @@ register_page(__name__, path_template="/edit/<prototype_id>", description="Proto
 cyto.load_extra_layouts()
 
 # TODO auth
-MONGO_DB = MongoClient()['ord_prototype']
-COLLECTION = "prototypes"
+MONGO_DB = MongoClient(ENV_MONGO_URI)[ENV_MONGO_DB]
+COLLECTION = ENV_MONGO_COLLECTION
 
 
 def get_sample_elements():
