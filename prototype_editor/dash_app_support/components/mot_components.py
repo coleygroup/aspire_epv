@@ -10,7 +10,7 @@ from ord_tree.utils import import_string, NodePathDelimiter, enum_class_to_optio
 
 
 # page component ids
-class PCI:
+class PCI_MOT:
     # intermediates
     MOT_STORE_EDITABLE_NODES = "MOT_STORE_EDITABLE_NODES"
     MOT_STORE_EDITABLE_EDGES = "MOT_STORE_EDITABLE_EDGES"
@@ -118,7 +118,7 @@ def get_non_literal_editor_node(node_id: int, node_state: str, node_class: Type,
                     dbc.InputGroupText("Is placeholder:"),
                     dbc.InputGroupText(dbc.Checkbox(
                         id={
-                            'type': PCI.MOT_INPUT_PT_ELEMENT_STATE,
+                            'type': PCI_MOT.MOT_INPUT_PT_ELEMENT_STATE,
                             'index': node_id
                         }, value=node_state == PT_PLACEHOLDER
                     )),
@@ -139,12 +139,12 @@ def get_literal_editor_node(node_id: int, node_state: str, node_value: Any, node
                     dbc.InputGroupText("Is placeholder:"),
                     dbc.InputGroupText(dbc.Checkbox(
                         id={
-                            'type': PCI.MOT_INPUT_PT_ELEMENT_STATE,
+                            'type': PCI_MOT.MOT_INPUT_PT_ELEMENT_STATE,
                             'index': node_id
                         }, value=node_state == PT_PLACEHOLDER
                     )),
                     get_literal_node_value_input(node_class, node_value,
-                                                 {'type': PCI.MOT_INPUT_PT_ELEMENT_VALUE, 'index': node_id}
+                                                 {'type': PCI_MOT.MOT_INPUT_PT_ELEMENT_VALUE, 'index': node_id}
                                                  )
                 ]
             ),
@@ -170,18 +170,18 @@ def get_cards_from_selected_nodes(node_data, mot: nx.DiGraph):
                     html.Div(
                         [
                             dbc.Button("Extend", outline=True, color='primary', className="mx-2",
-                                       id={'type': PCI.MOT_BTN_PT_EXTEND, 'index': node_id}, ),
+                                       id={'type': PCI_MOT.MOT_BTN_PT_EXTEND, 'index': node_id}, ),
                             dbc.Button("Detach", outline=True, color='primary', className="mx-2",
-                                       id={'type': PCI.MOT_BTN_PT_DETACH, 'index': node_id}, ),
+                                       id={'type': PCI_MOT.MOT_BTN_PT_DETACH, 'index': node_id}, ),
                             dbc.Button("Delete", outline=True, color='primary', className="mx-2",
-                                       id={'type': PCI.MOT_BTN_PT_DELETE, 'index': node_id}, ),
+                                       id={'type': PCI_MOT.MOT_BTN_PT_DELETE, 'index': node_id}, ),
                             dbc.Button("Union", outline=True, color='primary', className="mx-2",
-                                       id={'type': PCI.MOT_BTN_PT_UNION_OPEN_MODAL, 'index': node_id}, n_clicks=0),
+                                       id={'type': PCI_MOT.MOT_BTN_PT_UNION_OPEN_MODAL, 'index': node_id}, n_clicks=0),
                             dbc.Modal(
                                 [dbc.ModalHeader('Union with an existing prototype'), dbc.ModalBody(
-                                    dbc.ListGroup(id={'type': PCI.MOT_LIST_GROUP_PT_UNION, 'index': node_id}))],
-                                id={'type': PCI.MOT_MODAL_UNION, 'index': node_id},
-                                is_open=False
+                                    dbc.ListGroup(id={'type': PCI_MOT.MOT_LIST_GROUP_PT_UNION, 'index': node_id}))],
+                                id={'type': PCI_MOT.MOT_MODAL_UNION, 'index': node_id},
+                                is_open=False,
                             ),
                         ],
                         className="mt-1 text-center",
@@ -239,14 +239,14 @@ def get_literal_editor_edge(edge_header: str, u_id: int, v_id: int, edge_state: 
                     dbc.InputGroupText("Is placeholder:"),
                     dbc.InputGroupText(dbc.Checkbox(
                         id={
-                            'type': PCI.MOT_INPUT_PT_ELEMENT_STATE,
+                            'type': PCI_MOT.MOT_INPUT_PT_ELEMENT_STATE,
                             'index': f"{u_id} {v_id}"
                         }, value=edge_state == PT_PLACEHOLDER
                     )),
                     dbc.Textarea(
                         value=edge_value,
                         id={
-                            'type': PCI.MOT_INPUT_PT_ELEMENT_VALUE,
+                            'type': PCI_MOT.MOT_INPUT_PT_ELEMENT_VALUE,
                             'index': f"{u_id} {v_id}"
                         }
                     ),

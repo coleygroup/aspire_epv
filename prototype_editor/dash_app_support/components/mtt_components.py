@@ -7,6 +7,18 @@ from ord_tree.mtt import OrdEnumClasses, BuiltinLiteralClasses, OrdMessageClasse
 from ord_tree.utils import import_string, NodePathDelimiter
 
 
+class PCI_MTT:  # page component ids
+    MTT_CYTO = "MTT_CYTO"
+    MTT_DIV_INFO_ELEMENT = "MTT_DIV_INFO_ELEMENT"
+    MTT_DIV_INFO_TREE = "MTT_DIV_INFO_TREE"
+    MTT_SELECTOR = "MTT_SELECTOR"
+    MTT_BTN_HIDE_LITERALS = "MTT_BTN_HIDE_LITERALS"
+    MTT_BTN_SHOW_RELATIONS = "MTT_BTN_SHOW_RELATIONS"
+    MTT_BTN_CYTO_CENTER_SELECTED = "MTT_BTN_CYTO_CENTER_SELECTED"
+    MTT_BTN_CYTO_FIT = "MTT_BTN_CYTO_FIT"
+    MTT_BTN_CYTO_RUN_LAYOUT = "MTT_BTN_CYTO_RUN_LAYOUT"
+
+
 def get_edge_attr_block(u: str, v: str, mtt: nx.DiGraph):
     u_attrs = MttNodeAttr(**mtt.nodes[u])
     v_attrs = MttNodeAttr(**mtt.nodes[v])
