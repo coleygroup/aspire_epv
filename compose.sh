@@ -1,0 +1,1 @@
+sudo docker compose --env-file ./prototype_editor/.env up  --build --force-recreate
