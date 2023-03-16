@@ -7,33 +7,20 @@ from dash import html, Input, Output, State, dcc, register_page, get_app, get_as
 from dash.dependencies import ClientsideFunction
 from dash_iconify import DashIconify
 
-from cyto_app.cyto_config import CYTO_STYLE_SHEET_MTT
-from cyto_app.cyto_elements import mtt_to_cyto
-from cyto_app.fixtures import MttDataDict, MttData
-from cyto_app.mtt_components import get_node_attr_block, get_edge_attr_block
+from dash_app_support.components import simple_open, PCI_MTT, get_node_attr_block, get_edge_attr_block
+from dash_app_support.cyto_config import CYTO_STYLE_SHEET_MTT
+from dash_app_support.cyto_elements import mtt_to_cyto
+from dash_app_support.fixtures import MttData, MttDataDict
 from ord_tree.mtt import mtt_from_dict
 from ord_tree.utils import NodePathDelimiter
 
-register_page(__name__, path="/mtt", description="Message")
+register_page(__name__, path="/data_model", description="Data Model")
 cyto.load_extra_layouts()
 app = get_app()
 
-
-class PCI:  # page component ids
-    MTT_CYTO = "MTT_CYTO"
-    MTT_DIV_INFO_ELEMENT = "MTT_DIV_INFO_ELEMENT"
-    MTT_DIV_INFO_TREE = "MTT_DIV_INFO_TREE"
-    MTT_SELECTOR = "MTT_SELECTOR"
-    MTT_BTN_HIDE_LITERALS = "MTT_BTN_HIDE_LITERALS"
-    MTT_BTN_SHOW_RELATIONS = "MTT_BTN_SHOW_RELATIONS"
-    MTT_BTN_CYTO_CENTER_SELECTED = "MTT_BTN_CYTO_CENTER_SELECTED"
-    MTT_BTN_CYTO_FIT = "MTT_BTN_CYTO_FIT"
-    MTT_BTN_CYTO_RUN_LAYOUT = "MTT_BTN_CYTO_RUN_LAYOUT"
-
-
-# define components
+# region define components
 COMPONENT_CYTO_MTT = cyto.Cytoscape(
-    id=PCI.MTT_CYTO,
+    id=PCI_MTT.MTT_CYTO,
     zoomingEnabled=True,
     maxZoom=2,
     minZoom=0.1,
@@ -50,7 +37,7 @@ COMPONENT_CYTO_MTT = cyto.Cytoscape(
 )
 
 COMPONENT_MTT_SELECTOR = dcc.Dropdown(
-    id=PCI.MTT_SELECTOR,
+    id=PCI_MTT.MTT_SELECTOR,
     options=sorted([{"label": c, "value": c} for c in MttDataDict], key=lambda x: x["label"]),
     value="Compound",
     placeholder="Select an ORD message type...",
@@ -67,17 +54,17 @@ DUMMIES = [
 
 COMPONENT_VIEWPORT_BUTTONS = html.Div(
     [
-        dbc.Button("Hide Literals", id=PCI.MTT_BTN_HIDE_LITERALS, active=True, outline=True,
+        dbc.Button("Hide Literals", id=PCI_MTT.MTT_BTN_HIDE_LITERALS, active=True, outline=True,
                    color="primary",
                    className="me-3 mt-3"),
-        dbc.Button("Show Relations", id=PCI.MTT_BTN_SHOW_RELATIONS, active=False, outline=True,
+        dbc.Button("Show Relations", id=PCI_MTT.MTT_BTN_SHOW_RELATIONS, active=False, outline=True,
                    color="primary",
                    className="me-3 mt-3"),
-        dbc.Button("Fit Graph", id=PCI.MTT_BTN_CYTO_FIT,
+        dbc.Button("Fit Graph", id=PCI_MTT.MTT_BTN_CYTO_FIT,
                    className="me-3 mt-3"),
-        dbc.Button("Center Selected", id=PCI.MTT_BTN_CYTO_CENTER_SELECTED,
+        dbc.Button("Center Selected", id=PCI_MTT.MTT_BTN_CYTO_CENTER_SELECTED,
                    className="me-3 mt-3"),
-        dbc.Button("Run Layout", id=PCI.MTT_BTN_CYTO_RUN_LAYOUT, n_clicks=0,
+        dbc.Button("Run Layout", id=PCI_MTT.MTT_BTN_CYTO_RUN_LAYOUT, n_clicks=0,
                    className="me-3 mt-3"),
     ],
     className="text-center"
@@ -110,8 +97,9 @@ COMPONENT_LEGEND = html.Div(
     ],
     className="mt-3 d-flex justify-content-center"
 )
+# endregion
 
-# page layout
+# region page layout
 layout = html.Div(
     [
         dji.Import(src=get_asset_url("defer_cyto.js")),
@@ -137,7 +125,7 @@ layout = html.Div(
                             [html.H6("ORD message type", className="text-center"), COMPONENT_MTT_SELECTOR],
                             className="mb-3 mt-3"
                         ),
-                        html.Div(id=PCI.MTT_DIV_INFO_ELEMENT, className="mt-3"),
+                        html.Div(id=PCI_MTT.MTT_DIV_INFO_ELEMENT, className="mt-3"),
                     ],
                     className="col-lg-4",
                 ),
@@ -146,67 +134,64 @@ layout = html.Div(
 
     ]
 )
+# endregion
 
+# region clienside callback
 app.clientside_callback(
     ClientsideFunction(
-        namespace='clientside',
+        namespace='clientside_viewport',
         function_name='cy_run_mtt_layout',
     ),
     Output('mtt-dummy-0', 'children'),
-    Input(PCI.MTT_BTN_CYTO_RUN_LAYOUT, 'n_clicks'),
+    Input(PCI_MTT.MTT_BTN_CYTO_RUN_LAYOUT, 'n_clicks'),
 )
 
 app.clientside_callback(
     ClientsideFunction(
-        namespace='clientside',
+        namespace='clientside_viewport',
         function_name='cy_center_selected',
     ),
     Output('mtt-dummy-1', 'children'),
-    Input(PCI.MTT_BTN_CYTO_CENTER_SELECTED, 'n_clicks'),
+    Input(PCI_MTT.MTT_BTN_CYTO_CENTER_SELECTED, 'n_clicks'),
 )
 
 app.clientside_callback(
     ClientsideFunction(
-        namespace='clientside',
+        namespace='clientside_viewport',
         function_name='cy_fit',
     ),
     Output('mtt-dummy-2', 'children'),
-    Input(PCI.MTT_BTN_CYTO_FIT, 'n_clicks'),
+    Input(PCI_MTT.MTT_BTN_CYTO_FIT, 'n_clicks'),
 )
+# endregion
 
-
-@app.callback(
-    Output(PCI.MTT_BTN_HIDE_LITERALS, 'active'),
-    Input(PCI.MTT_BTN_HIDE_LITERALS, 'n_clicks'),
-    State(PCI.MTT_BTN_HIDE_LITERALS, 'active'),
+# region static simple callbacks
+app.callback(
+    Output(PCI_MTT.MTT_BTN_HIDE_LITERALS, 'active'),
+    Input(PCI_MTT.MTT_BTN_HIDE_LITERALS, 'n_clicks'),
+    State(PCI_MTT.MTT_BTN_HIDE_LITERALS, 'active'),
     prevent_initial_call=True,
-)
-def click_btn_hide_literals(n_clicks, active):
-    if n_clicks:
-        return not active
-    return active
+)(simple_open)
 
-
-@app.callback(
-    Output(PCI.MTT_BTN_SHOW_RELATIONS, 'active'),
-    Input(PCI.MTT_BTN_SHOW_RELATIONS, 'n_clicks'),
-    State(PCI.MTT_BTN_SHOW_RELATIONS, 'active'),
+app.callback(
+    Output(PCI_MTT.MTT_BTN_SHOW_RELATIONS, 'active'),
+    Input(PCI_MTT.MTT_BTN_SHOW_RELATIONS, 'n_clicks'),
+    State(PCI_MTT.MTT_BTN_SHOW_RELATIONS, 'active'),
     prevent_initial_call=True,
-)
-def click_btn_show_relations(n_clicks, active):
-    if n_clicks:
-        return not active
-    return active
+)(simple_open)
 
 
+# endregion
+
+# region server callbacks
 @app.callback(
-    Output(PCI.MTT_CYTO, "stylesheet"),
-    Input(PCI.MTT_BTN_SHOW_RELATIONS, "active"),
-    Input(PCI.MTT_CYTO, "selectedNodeData"),
+    Output(PCI_MTT.MTT_CYTO, "stylesheet"),
+    Input(PCI_MTT.MTT_BTN_SHOW_RELATIONS, "active"),
+    Input(PCI_MTT.MTT_CYTO, "selectedNodeData"),
     prevent_initial_call=True,
 )
 def update_cyto_stylesheet(show_relations, node_data):
-    style_sheet = deepcopy(CYTO_STYLE_SHEET_MTT)
+    style_sheet = deepcopy(CYTO_STYLE_SHEET_MTT)  # TODO necessary?
 
     for style in style_sheet:
         if style['selector'] == 'node':
@@ -240,9 +225,9 @@ def update_cyto_stylesheet(show_relations, node_data):
 
 
 @app.callback(
-    Output(PCI.MTT_CYTO, "elements"),
-    Input(PCI.MTT_SELECTOR, "value"),
-    Input(PCI.MTT_BTN_HIDE_LITERALS, "active"),
+    Output(PCI_MTT.MTT_CYTO, "elements"),
+    Input(PCI_MTT.MTT_SELECTOR, "value"),
+    Input(PCI_MTT.MTT_BTN_HIDE_LITERALS, "active"),
 )
 def update_cyto_elements(mtt_name, hide_literals):
     if not mtt_name:
@@ -257,10 +242,10 @@ def update_cyto_elements(mtt_name, hide_literals):
 
 
 @app.callback(
-    Output(PCI.MTT_DIV_INFO_ELEMENT, "children"),
-    Input(PCI.MTT_CYTO, "selectedNodeData"),
-    Input(PCI.MTT_CYTO, "selectedEdgeData"),
-    State(PCI.MTT_SELECTOR, "value"),
+    Output(PCI_MTT.MTT_DIV_INFO_ELEMENT, "children"),
+    Input(PCI_MTT.MTT_CYTO, "selectedNodeData"),
+    Input(PCI_MTT.MTT_CYTO, "selectedEdgeData"),
+    State(PCI_MTT.MTT_SELECTOR, "value"),
 )
 def update_div_info(node_data, edge_data, mtt_name):
     if not mtt_name:
@@ -287,3 +272,4 @@ def update_div_info(node_data, edge_data, mtt_name):
     for attrs in edge_attrs:
         blocks.append(get_edge_attr_block(attrs['source'], attrs['target'], mtt))
     return blocks
+# endregion

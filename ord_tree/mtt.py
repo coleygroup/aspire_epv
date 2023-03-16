@@ -106,23 +106,3 @@ def get_mtt_root_class(mtt: nx.DiGraph) -> Type:
     return get_mtt_node_class(mtt, root)
 
 
-if __name__ == '__main__':
-    from ord_tree.utils import write_file, get_tree_depth
-    import json
-
-    for m in OrdMessageClasses:
-        mtt = get_mtt(m)
-        data = {
-            "mtt_dict": mtt_to_dict(mtt),
-            "depth": get_tree_depth(mtt),
-            "name": m.__name__,
-            "doc": m.__doc__,
-            "n_literals": len(
-                [
-                    n for n in mtt.nodes if
-                    import_string(mtt.nodes[n]['mtt_class_string']) in BuiltinLiteralClasses + OrdEnumClasses
-                ]
-            ),
-        }
-        j = json.dumps(data)
-        write_file(j, f"json_mtt/{m.__name__}.json")
