@@ -31,7 +31,7 @@ with open(f"{_this_dir}/sample_prototype.json", "r") as f:
 if __name__ == '__main__':
     # generate mtt json in `json_mtt`
     from ord_tree.utils import write_file, get_tree_depth
-    from ord_tree.ord_classes import OrdMessageClasses
+    from ord_tree.ord_classes import OrdMessageClasses, BuiltinLiteralClasses, OrdEnumClasses
     from ord_tree.mtt import get_mtt, mtt_to_dict, import_string
     import json
 
