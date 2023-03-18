@@ -6,6 +6,7 @@ from fastapi import FastAPI, Body, HTTPException, status
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import Response, JSONResponse
 from api_models import OrdPrototypeModel, UpdateOrdPrototypeModel
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="ORD Prototype API",
@@ -18,6 +19,21 @@ app = FastAPI(
         "name": "Apache 2.0",
         "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
     },
+)
+
+origins = [
+    "http://localhost",
+    "http://localhost:8000",
+    "http://3.144.235.89",
+    "http://3.144.235.89:8000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGO_URI"])
