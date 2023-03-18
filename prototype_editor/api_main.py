@@ -1,5 +1,5 @@
 from typing import List
-
+import os
 import motor.motor_asyncio
 from bson import ObjectId
 from fastapi import FastAPI, Body, HTTPException, status
@@ -20,8 +20,8 @@ app = FastAPI(
     },
 )
 
-# client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGODB_URL"])
-client = motor.motor_asyncio.AsyncIOMotorClient()
+client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGO_URI"])
+# client = motor.motor_asyncio.AsyncIOMotorClient()
 db = client['ord_prototype']
 
 
