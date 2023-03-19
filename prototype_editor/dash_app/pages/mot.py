@@ -371,9 +371,8 @@ def render_union_list(is_open, node_cid, elements):
             mid = str(doc['_id'])
             mtype = doc['root_message_type']
             rows.append(html.Tr([html.Td(
-                # TODO distinguish different rows with unique ids
                 dbc.Button(mid, id={
-                    'type': PCI_MOT.MOT_BTN_PT_UNION, 'index': node_id
+                    'type': PCI_MOT.MOT_BTN_PT_UNION, 'index': f"{node_id}@@{mid}",
                 })
             ), html.Td(mtype)]))
         table_body = [html.Tbody(rows)]
@@ -747,7 +746,7 @@ def update_cyto_elements(
 
     triggered_type = triggered_types[0]
 
-    triggered_cid: Union[int, str]  # int for node_id, str for edge of "u v"
+    triggered_cid: Union[int, str]  # int for node_id, str for edge of "u v" or union "{node_id}@@{mid}"
 
     do_union = False
     pt_operation = None
@@ -820,9 +819,10 @@ def update_cyto_elements(
             target_node_id = triggered_cid
             if do_union:
                 # do not do union if it has existing children
-                if len([*current_mot.successors(triggered_cid)]) > 0:
+                target_node_id, mid = target_node_id.split("@@")
+                target_node_id = int(target_node_id)
+                if len([*current_mot.successors(target_node_id)]) > 0:
                     return current_elements, current_n_clicks_reload_layout, current_n_clicks_center
-
                 other_graph = MONGO_DB[COLLECTION].find_one({"_id": ObjectId(to_union_mid[0])})
                 other_graph = other_graph['node_link_data']
                 other_graph = nx.node_link_graph(other_graph, directed=True)
