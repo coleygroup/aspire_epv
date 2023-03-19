@@ -61,6 +61,9 @@ def create_dashapp(prefix="/"):
 
 
 if __name__ == '__main__':
+    os.environ['MONGO_URI'] = "mongodb://0.0.0.0:27017/?retryWrites=true&w=majority"
+    os.environ['MONGO_DB'] = "ord_prototype"
+    os.environ['MONGO_COLLECTION'] = "prototypes"
     APP = create_dashapp()
     APP.run(host="0.0.0.0", port=8070, debug=True)
     # APP.run(host="0.0.0.0", port=8070, debug=False)
