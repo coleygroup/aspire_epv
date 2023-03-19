@@ -7,6 +7,7 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.responses import Response, JSONResponse
 from api_models import OrdPrototypeModel, UpdateOrdPrototypeModel
 from fastapi.middleware.cors import CORSMiddleware
+from dash_app_support.db import ENV_MONGO_DB, ENV_MONGO_COLLECTION
 
 app = FastAPI(
     title="ORD Prototype API",
@@ -38,36 +39,40 @@ app.add_middleware(
 )
 
 client = motor.motor_asyncio.AsyncIOMotorClient(os.environ["MONGO_URI"])
-# client = motor.motor_asyncio.AsyncIOMotorClient()
-db = client['ord_prototype']
+db = client[ENV_MONGO_DB]
 
 
 @app.post("/prototype", response_description="Add new ORD prototype", response_model=OrdPrototypeModel)
 async def create_prototype(ord_prototype: OrdPrototypeModel = Body(...)):
     ord_prototype = jsonable_encoder(ord_prototype)  # this makes `_id` to be string which is inconsistent with dash app
     ord_prototype['_id'] = ObjectId(ord_prototype['_id'])
-    new = await db["prototypes"].insert_one(ord_prototype)
-    created = await db["prototypes"].find_one({"_id": str(new.inserted_id)})
+    new = await db[ENV_MONGO_COLLECTION].insert_one(ord_prototype)
+    created = await db[ENV_MONGO_COLLECTION].find_one({"_id": str(new.inserted_id)})
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=created)
 
 
 @app.get("/prototype", response_description="List all prototypes", response_model=List[OrdPrototypeModel])
 async def list_prototypes():
     # TODO pagination
-    prototypes = [doc async for doc in db["prototypes"].find()]
+    prototypes = [doc async for doc in db[ENV_MONGO_COLLECTION].find()]
+    return prototypes
+
+@app.get("/compound", response_description="List all compounds", response_model=List[OrdPrototypeModel])
+async def list_compounds():
+    prototypes = [doc async for doc in db[ENV_MONGO_COLLECTION].find({'root_message_type': ''})]
     return prototypes
 
 
 @app.get("/prototype_ids", response_description="List all prototype ids", response_model=List[str])
 async def list_prototypes():
     # TODO pagination
-    prototypes = [str(doc['_id']) async for doc in db["prototypes"].find()]
+    prototypes = [str(doc['_id']) async for doc in db[ENV_MONGO_COLLECTION].find()]
     return prototypes
 
 
 @app.get("/prototype/{id}", response_description="Get a single prototype", response_model=OrdPrototypeModel)
 async def show_prototype(id: str):
-    if (pt := await db["prototypes"].find_one({"_id": ObjectId(id)})) is not None:
+    if (pt := await db[ENV_MONGO_COLLECTION].find_one({"_id": ObjectId(id)})) is not None:
         return pt
     raise HTTPException(status_code=404, detail=f"Prototype {id} not found")
 
@@ -77,15 +82,15 @@ async def update_prototype(id: str, prototype: UpdateOrdPrototypeModel = Body(..
     prototype = {k: v for k, v in prototype.dict().items() if v is not None}
 
     if len(prototype) >= 1:
-        update_result = await db["prototypes"].update_one({"_id": ObjectId(id)}, {"$set": prototype})
+        update_result = await db[ENV_MONGO_COLLECTION].update_one({"_id": ObjectId(id)}, {"$set": prototype})
 
         if update_result.modified_count == 1:
             if (
-                    updated_student := await db["prototypes"].find_one({"_id": ObjectId(id)})
+                    updated_student := await db[ENV_MONGO_COLLECTION].find_one({"_id": ObjectId(id)})
             ) is not None:
                 return updated_student
 
-    if (existing_prototype := await db["prototypes"].find_one({"_id": ObjectId(id)})) is not None:
+    if (existing_prototype := await db[ENV_MONGO_COLLECTION].find_one({"_id": ObjectId(id)})) is not None:
         return existing_prototype
 
     raise HTTPException(status_code=404, detail=f"Prototype {id} not found")
@@ -93,7 +98,7 @@ async def update_prototype(id: str, prototype: UpdateOrdPrototypeModel = Body(..
 
 @app.delete("/prototype/{id}", response_description="Delete a prototype")
 async def delete_prototype(id: str):
-    delete_result = await db["prototypes"].delete_one({"_id": ObjectId(id)})
+    delete_result = await db[ENV_MONGO_COLLECTION].delete_one({"_id": ObjectId(id)})
 
     if delete_result.deleted_count == 1:
         return Response(status_code=status.HTTP_204_NO_CONTENT)
