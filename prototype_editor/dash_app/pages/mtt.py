@@ -31,7 +31,7 @@ COMPONENT_CYTO_MTT = cyto.Cytoscape(
         'animationDuration': 1000,
         'align': 'UL',
     },
-    style={'width': '100%', 'height': '100%', 'min-height': '300px'},
+    style={'width': '100%', 'height': '100%', 'minHeight': '300px'},
     stylesheet=CYTO_STYLE_SHEET_MTT,
     elements=[],
 )
@@ -40,7 +40,7 @@ COMPONENT_MTT_SELECTOR = dcc.Dropdown(
     id=PCI_MTT.MTT_SELECTOR,
     options=sorted([{"label": c, "value": c} for c in MttDataDict], key=lambda x: x["label"]),
     value="Compound",
-    placeholder="Select an ORD message type...",
+    placeholder="Select an ORD message class...",
 )
 
 # dummies for client-side callbacks
@@ -117,7 +117,7 @@ layout = html.Div(
                 ),
                 html.Div(
                     [
-                        html.H5("Visualizing ORD Data Model", className="text-center mt-3"),
+                        html.H5("ORD Syntax Trees", className="text-center mt-3"),
                         html.Hr(),
                         COMPONENT_LEGEND,
                         html.Hr(),
