@@ -269,7 +269,7 @@ def pt_to_dict(mot: nx.DiGraph):
     return nx.node_link_data(mot)
 
 
-def mot_get_path(mot: nx.DiGraph, node: int, arrow=False):
+def mot_get_path(mot: nx.DiGraph, node: int, delimiter: str = "default"):
     root = get_root(mot)
     p = nx.shortest_path(mot, source=root, target=node)
     if len(p) == 1:
@@ -289,8 +289,14 @@ def mot_get_path(mot: nx.DiGraph, node: int, arrow=False):
         str_p = prefix + str_p
         str_path.append(str_p)
     r = NodePathDelimiter.join(str_path)
-    if arrow:
+    if delimiter == "arrow":
         r = r.replace(NodePathDelimiter, " \u2192 ")
+    elif delimiter == "dot":
+        r = r.replace(NodePathDelimiter, ".")
+    elif delimiter == 'default':
+        pass
+    else:
+        raise ValueError('unknown delimiter')
     return r
 
 

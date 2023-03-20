@@ -455,11 +455,11 @@ def update_navigator_selector_options(
         nx_ids = class_to_nx_ids[element_class]
         for i in nx_ids:
             if isinstance(i, int):
-                label = mot_get_path(mot, i, arrow=True)
+                label = mot_get_path(mot, i, delimiter='arrow')
                 value = str(i)
             else:
                 u, v = i
-                label_v = mot_get_path(mot, v, arrow=True)
+                label_v = mot_get_path(mot, v, delimiter='arrow')
                 label = label_v
                 value = f"{u} {v}"
             options_2.append({"label": label, "value": value})
