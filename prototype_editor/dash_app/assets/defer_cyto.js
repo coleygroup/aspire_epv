@@ -1,7 +1,7 @@
-window.cy.wheelSensitivity = 0.1
-
 // // force single select: https://github.com/cytoscape/cytoscape.js/issues/2101
 // window.cy.on('select', 'node, edge', e => window.cy.elements().not(e.target).unselect())
+
+// window.cy.wheelSensitivity = 0.1  // this is available in cytoscape.js but not in dash-cytoscape :(
 
 window.cy.on('cxttap', 'node', function (evt) {
     const hide_class = "CYTO_MESSAGE_NODE_TMP_HIDE";
@@ -16,7 +16,7 @@ window.cy.on('cxttap', 'node', function (evt) {
     }
 
     let child_already_hidden = children[0].hasClass(hide_class)
-    if (child_already_hidden){
+    if (child_already_hidden) {
         node.removeClass(has_child_hidden_class)
     } else {
         node.addClass(has_child_hidden_class)
