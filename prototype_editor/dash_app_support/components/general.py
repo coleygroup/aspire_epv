@@ -3,7 +3,7 @@ import plotly.graph_objects as go
 from dash import Input, Output, State, html
 
 BAR_STYLE = {
-    "z-index": "1",
+    "zIndex": "1",
 }
 
 

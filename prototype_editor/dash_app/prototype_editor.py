@@ -8,7 +8,7 @@ from dash_app_support.components import get_navbar, navbar_callback
 
 os.environ['LOGURU_LEVEL'] = 'WARNING'
 
-
+#TODO hotkeys https://github.com/jaywcjlove/hotkeys
 def create_dashapp(prefix="/"):
     server = flask.Flask(__name__)
 
@@ -23,6 +23,7 @@ def create_dashapp(prefix="/"):
         url_base_pathname=prefix,
     )
 
+
     app_folder = os.path.dirname(os.path.abspath(__file__))
     app._favicon = os.path.join(app_folder, "assets/favicon.ico")
 
@@ -31,6 +32,8 @@ def create_dashapp(prefix="/"):
         description = page['description']
         href = page['relative_path']
         if '/edit/' in href:
+            continue
+        elif "/instantiate/" in href:
             continue
         nav_link = dbc.NavLink(
             description, href=href, className="mx-2", active="exact", style={"color": "#ffffff"}
@@ -41,10 +44,10 @@ def create_dashapp(prefix="/"):
     navbar_callback(app, "DASH_CID_NAVBAR")
 
     CONTENT_STYLE = {
-        "margin-left": "2rem",
-        "margin-right": "2rem",
+        "marginLeft": "2rem",
+        "marginRight": "2rem",
         "padding": "1rem 1rem",
-        "z-index": "0",
+        "zIndex": "0",
     }
 
     content = html.Div(id="page-content", children=[page_container], style=CONTENT_STYLE)
