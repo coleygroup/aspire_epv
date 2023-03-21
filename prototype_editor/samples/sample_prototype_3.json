@@ -1,0 +1,642 @@
+{
+  "name": "Two Compound Reaction Input",
+  "version": "0",
+  "node_link_data": {
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "mot_element_id": 11,
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|inputs|<DictKey>",
+        "mot_class_string": "ord_betterproto.ReactionInput",
+        "id": 11
+      },
+      {
+        "mot_element_id": 12,
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|inputs|<DictKey>|components",
+        "mot_class_string": "builtins.list",
+        "id": 12
+      },
+      {
+        "mot_element_id": 14,
+        "mot_can_edit": true,
+        "mot_state": "PT_PLACEHOLDER",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|inputs|<DictKey>|addition_order",
+        "mot_class_string": "builtins.int",
+        "id": 14
+      },
+      {
+        "mot_element_id": 24,
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|inputs|<DictKey>|components|<ListIndex>",
+        "mot_class_string": "ord_betterproto.Compound",
+        "id": 24
+      },
+      {
+        "mot_element_id": 25,
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|inputs|<DictKey>|components|<ListIndex>|identifiers",
+        "mot_class_string": "builtins.list",
+        "id": 25
+      },
+      {
+        "mot_element_id": 26,
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|inputs|<DictKey>|components|<ListIndex>|amount",
+        "mot_class_string": "ord_betterproto.Amount",
+        "id": 26
+      },
+      {
+        "mot_element_id": 27,
+        "mot_can_edit": true,
+        "mot_state": "PT_PLACEHOLDER",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|inputs|<DictKey>|components|<ListIndex>|reaction_role",
+        "mot_class_string": "ord_betterproto.ReactionRoleType",
+        "id": 27
+      },
+      {
+        "mot_element_id": 28,
+        "mot_can_edit": true,
+        "mot_state": "PT_PLACEHOLDER",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|inputs|<DictKey>|components|<ListIndex>|is_limiting",
+        "mot_class_string": "builtins.bool",
+        "id": 28
+      },
+      {
+        "mot_element_id": 34,
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|inputs|<DictKey>|components|<ListIndex>|amount|moles",
+        "mot_class_string": "ord_betterproto.Moles",
+        "id": 34
+      },
+      {
+        "mot_element_id": 38,
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|inputs|<DictKey>|components|<ListIndex>|identifiers|<ListIndex>",
+        "mot_class_string": "ord_betterproto.CompoundIdentifier",
+        "id": 38
+      },
+      {
+        "mot_element_id": 39,
+        "mot_can_edit": true,
+        "mot_state": "PT_PRESET",
+        "mot_value": "2",
+        "mtt_element_name": "<ROOT>|inputs|<DictKey>|components|<ListIndex>|identifiers|<ListIndex>|type",
+        "mot_class_string": "ord_betterproto.CompoundIdentifierType",
+        "id": 39
+      },
+      {
+        "mot_element_id": 41,
+        "mot_can_edit": true,
+        "mot_state": "PT_PLACEHOLDER",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|inputs|<DictKey>|components|<ListIndex>|identifiers|<ListIndex>|value",
+        "mot_class_string": "builtins.str",
+        "id": 41
+      },
+      {
+        "mot_element_id": 42,
+        "mot_can_edit": true,
+        "mot_state": "PT_PLACEHOLDER",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|inputs|<DictKey>|components|<ListIndex>|amount|moles|value",
+        "mot_class_string": "builtins.float",
+        "id": 42
+      },
+      {
+        "mot_element_id": 44,
+        "mot_can_edit": true,
+        "mot_state": "PT_PRESET",
+        "mot_value": "2",
+        "mtt_element_name": "<ROOT>|inputs|<DictKey>|components|<ListIndex>|amount|moles|units",
+        "mot_class_string": "ord_betterproto.MolesUnit",
+        "id": 44
+      },
+      {
+        "mot_element_id": 45,
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>",
+        "mot_class_string": "ord_betterproto.Compound",
+        "id": 45
+      },
+      {
+        "mot_element_id": 255,
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|identifiers",
+        "mot_class_string": "builtins.list",
+        "id": 255
+      },
+      {
+        "mot_element_id": 259,
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|identifiers|<ListIndex>",
+        "mot_class_string": "ord_betterproto.CompoundIdentifier",
+        "id": 259
+      },
+      {
+        "mot_element_id": 260,
+        "mot_can_edit": true,
+        "mot_state": "PT_PRESET",
+        "mot_value": "2",
+        "mtt_element_name": "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|identifiers|<ListIndex>|type",
+        "mot_class_string": "ord_betterproto.CompoundIdentifierType",
+        "id": 260
+      },
+      {
+        "mot_element_id": 261,
+        "mot_can_edit": true,
+        "mot_state": "PT_PLACEHOLDER",
+        "mot_value": "",
+        "mtt_element_name": "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|identifiers|<ListIndex>|value",
+        "mot_class_string": "builtins.str",
+        "id": 261
+      },
+      {
+        "mot_element_id": 266,
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|source",
+        "mot_class_string": "ord_betterproto.Source",
+        "id": 266
+      },
+      {
+        "mot_element_id": 267,
+        "mot_can_edit": true,
+        "mot_state": "PT_PLACEHOLDER",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|source|vendor",
+        "mot_class_string": "builtins.str",
+        "id": 267
+      },
+      {
+        "mot_element_id": 268,
+        "mot_can_edit": true,
+        "mot_state": "PT_PLACEHOLDER",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|source|catalog_id",
+        "mot_class_string": "builtins.str",
+        "id": 268
+      },
+      {
+        "mot_element_id": 269,
+        "mot_can_edit": true,
+        "mot_state": "PT_PLACEHOLDER",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|source|lot",
+        "mot_class_string": "builtins.str",
+        "id": 269
+      }
+    ],
+    "links": [
+      {
+        "mot_element_id": [
+          11,
+          12
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "components",
+        "mtt_element_name": [
+          "<ROOT>|inputs|<DictKey>",
+          "<ROOT>|inputs|<DictKey>|components"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.ReactionInput",
+          "builtins.list"
+        ],
+        "source": 11,
+        "target": 12
+      },
+      {
+        "mot_element_id": [
+          11,
+          14
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "addition_order",
+        "mtt_element_name": [
+          "<ROOT>|inputs|<DictKey>",
+          "<ROOT>|inputs|<DictKey>|addition_order"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.ReactionInput",
+          "builtins.int"
+        ],
+        "source": 11,
+        "target": 14
+      },
+      {
+        "mot_element_id": [
+          12,
+          24
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": 0,
+        "mtt_element_name": [
+          "<ROOT>|inputs|<DictKey>|components",
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>"
+        ],
+        "mot_class_string": [
+          "builtins.list",
+          "ord_betterproto.Compound"
+        ],
+        "source": 12,
+        "target": 24
+      },
+      {
+        "mot_element_id": [
+          12,
+          45
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": 1,
+        "mtt_element_name": [
+          "<ROOT>|inputs|<DictKey>|components",
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>"
+        ],
+        "mot_class_string": [
+          "builtins.list",
+          "ord_betterproto.Compound"
+        ],
+        "source": 12,
+        "target": 45
+      },
+      {
+        "mot_element_id": [
+          24,
+          25
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "identifiers",
+        "mtt_element_name": [
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>",
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|identifiers"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.Compound",
+          "builtins.list"
+        ],
+        "source": 24,
+        "target": 25
+      },
+      {
+        "mot_element_id": [
+          24,
+          26
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "amount",
+        "mtt_element_name": [
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>",
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|amount"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.Compound",
+          "ord_betterproto.Amount"
+        ],
+        "source": 24,
+        "target": 26
+      },
+      {
+        "mot_element_id": [
+          24,
+          27
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "reaction_role",
+        "mtt_element_name": [
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>",
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|reaction_role"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.Compound",
+          "ord_betterproto.ReactionRoleType"
+        ],
+        "source": 24,
+        "target": 27
+      },
+      {
+        "mot_element_id": [
+          24,
+          28
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "is_limiting",
+        "mtt_element_name": [
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>",
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|is_limiting"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.Compound",
+          "builtins.bool"
+        ],
+        "source": 24,
+        "target": 28
+      },
+      {
+        "mot_element_id": [
+          25,
+          38
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": 0,
+        "mtt_element_name": [
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|identifiers",
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|identifiers|<ListIndex>"
+        ],
+        "mot_class_string": [
+          "builtins.list",
+          "ord_betterproto.CompoundIdentifier"
+        ],
+        "source": 25,
+        "target": 38
+      },
+      {
+        "mot_element_id": [
+          26,
+          34
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "moles",
+        "mtt_element_name": [
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|amount",
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|amount|moles"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.Amount",
+          "ord_betterproto.Moles"
+        ],
+        "source": 26,
+        "target": 34
+      },
+      {
+        "mot_element_id": [
+          34,
+          42
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "value",
+        "mtt_element_name": [
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|amount|moles",
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|amount|moles|value"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.Moles",
+          "builtins.float"
+        ],
+        "source": 34,
+        "target": 42
+      },
+      {
+        "mot_element_id": [
+          34,
+          44
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "units",
+        "mtt_element_name": [
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|amount|moles",
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|amount|moles|units"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.Moles",
+          "ord_betterproto.MolesUnit"
+        ],
+        "source": 34,
+        "target": 44
+      },
+      {
+        "mot_element_id": [
+          38,
+          39
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "type",
+        "mtt_element_name": [
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|identifiers|<ListIndex>",
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|identifiers|<ListIndex>|type"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.CompoundIdentifier",
+          "ord_betterproto.CompoundIdentifierType"
+        ],
+        "source": 38,
+        "target": 39
+      },
+      {
+        "mot_element_id": [
+          38,
+          41
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "value",
+        "mtt_element_name": [
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|identifiers|<ListIndex>",
+          "<ROOT>|inputs|<DictKey>|components|<ListIndex>|identifiers|<ListIndex>|value"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.CompoundIdentifier",
+          "builtins.str"
+        ],
+        "source": 38,
+        "target": 41
+      },
+      {
+        "mot_element_id": [
+          45,
+          255
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "identifiers",
+        "mtt_element_name": [
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>",
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|identifiers"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.Compound",
+          "builtins.list"
+        ],
+        "source": 45,
+        "target": 255
+      },
+      {
+        "mot_element_id": [
+          45,
+          266
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "source",
+        "mtt_element_name": [
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>",
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|source"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.Compound",
+          "ord_betterproto.Source"
+        ],
+        "source": 45,
+        "target": 266
+      },
+      {
+        "mot_element_id": [
+          255,
+          259
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": 0,
+        "mtt_element_name": [
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|identifiers",
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|identifiers|<ListIndex>"
+        ],
+        "mot_class_string": [
+          "builtins.list",
+          "ord_betterproto.CompoundIdentifier"
+        ],
+        "source": 255,
+        "target": 259
+      },
+      {
+        "mot_element_id": [
+          259,
+          260
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "type",
+        "mtt_element_name": [
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|identifiers|<ListIndex>",
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|identifiers|<ListIndex>|type"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.CompoundIdentifier",
+          "ord_betterproto.CompoundIdentifierType"
+        ],
+        "source": 259,
+        "target": 260
+      },
+      {
+        "mot_element_id": [
+          259,
+          261
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "value",
+        "mtt_element_name": [
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|identifiers|<ListIndex>",
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|identifiers|<ListIndex>|value"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.CompoundIdentifier",
+          "builtins.str"
+        ],
+        "source": 259,
+        "target": 261
+      },
+      {
+        "mot_element_id": [
+          266,
+          267
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "vendor",
+        "mtt_element_name": [
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|source",
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|source|vendor"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.Source",
+          "builtins.str"
+        ],
+        "source": 266,
+        "target": 267
+      },
+      {
+        "mot_element_id": [
+          266,
+          268
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "catalog_id",
+        "mtt_element_name": [
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|source",
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|source|catalog_id"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.Source",
+          "builtins.str"
+        ],
+        "source": 266,
+        "target": 268
+      },
+      {
+        "mot_element_id": [
+          266,
+          269
+        ],
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": "lot",
+        "mtt_element_name": [
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|source",
+          "<ROOT>|workups|<ListIndex>|input|components|<ListIndex>|source|lot"
+        ],
+        "mot_class_string": [
+          "ord_betterproto.Source",
+          "builtins.str"
+        ],
+        "source": 266,
+        "target": 269
+      }
+    ]
+  },
+  "root_message_type": "ord_betterproto.ReactionInput",
+  "time_modified": "2023-03-21T06:07:55.363350",
+  "time_created": "2023-03-21T06:07:55.363362",
+  "from_version": null
+}
