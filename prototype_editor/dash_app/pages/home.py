@@ -54,6 +54,21 @@ layout = html.Div(
                 page_action='native',
                 page_current=0,
                 page_size=TABLE_PAGE_SIZE,
+                css=[dict(selector= "p", rule= "margin: 0; text-align: center")],
+
+                style_as_list_view=True,
+                style_cell={'padding': '5px'},
+                style_header={
+                    'backgroundColor': 'white',
+                    'fontWeight': 'bold'
+                },
+                style_cell_conditional=[
+                    {
+                        'if': {'column_id': c},
+                        'textAlign': 'left'
+                    } for c in ['Date', 'Region']
+                ],
+
             ),
             className="mt-3"
         ),
@@ -79,8 +94,10 @@ def change_page(page, n_clicks):
     prefix = app.config['url_base_pathname']
     for d in data:
         object_id = d['_id']
-        object_id_link = f"[{object_id}]({prefix}/edit/{object_id})".replace("//", "/")
-        d['_id'] = object_id_link
+        object_id_link_edit = f"[edit]({prefix}/edit/{object_id})".replace("//", "/")
+        object_id_link_ins = f"[instantiate]({prefix}/instantiate/{object_id})".replace("//", "/")
+        d['action'] = object_id_link_edit + " / " + object_id_link_ins
+    df = pd.DataFrame.from_records(data)
     columns = [{"name": i, "id": i, "presentation": "markdown"} for i in df.columns]
     return data, columns, f"\u27F3 updated {datetime.now().strftime('%H:%M:%S')}", n // page_size + 1
 
