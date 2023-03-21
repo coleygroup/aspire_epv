@@ -36,7 +36,7 @@ def create_dashapp(prefix="/"):
         elif "/instantiate/" in href:
             continue
         nav_link = dbc.NavLink(
-            description, href=href, className="mx-2", active="exact", style={"color": "#ffffff"}
+            description, href=href, className="mx-2 text-dark", active="exact", # style={"color": "#ffffff"}
         )
         nav_links.append(nav_link)
 
