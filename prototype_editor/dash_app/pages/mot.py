@@ -20,7 +20,6 @@ from dash_app_support.components import simple_open, PCI_MOT, get_cards_from_sel
 from dash_app_support.db import ENV_MONGO_COLLECTION,ENV_MONGO_DB,ENV_MONGO_URI
 from dash_app_support.cyto_config import CYTO_STYLE_SHEET_MOT, CYTO_PLACEHOLDER_CLASS, CYTO_PRESET_CLASS
 from dash_app_support.cyto_elements import cyto_to_mot, mot_to_cyto_element_list, BytesDump
-from dash_app_support.fixtures import SampleReactionInstance
 from ord_tree.mot import get_mot, pt_extend_node, pt_detach_node, pt_remove_node, mot_get_path, pt_to_dict, \
     PT_PLACEHOLDER, PT_PRESET
 from ord_tree.ord_classes import BuiltinLiteralClasses, OrdEnumClasses
@@ -38,11 +37,6 @@ cyto.load_extra_layouts()
 # TODO auth
 MONGO_DB = MongoClient(ENV_MONGO_URI)[ENV_MONGO_DB]
 COLLECTION = ENV_MONGO_COLLECTION
-
-
-def get_sample_elements():
-    init_mot = get_mot(SampleReactionInstance)
-    return mot_to_cyto_element_list(init_mot)
 
 
 def get_init_doc(pid):
@@ -230,6 +224,14 @@ def layout(prototype_id=None):
                                         id=PCI_MOT.MOT_SAVE_BTN,
                                         className="me-3",
                                         color="primary",
+                                        n_clicks=0,
+                                    ),
+                                    dbc.Button(
+                                        "to Instantiate",
+                                        id=PCI_MOT.MOT_TO_INSTANTIATE_BTN,
+                                        className="me-3",
+                                        color="primary",
+                                        href=f"/instantiate/{prototype_id}",
                                         n_clicks=0,
                                     ),
                                     dbc.Collapse(
@@ -552,7 +554,7 @@ def update_element_editor(node_data, edge_data, elements):
 )
 def download_json(n_clicks, data):
     if n_clicks:
-        s = json.dumps(data, cls=BytesDump)
+        s = json.dumps(data, indent=2, cls=BytesDump)
         return dict(content=s, filename="prototype.json")
     return no_update
 
@@ -788,7 +790,8 @@ def update_cyto_elements(
                     e['classes'] = e['classes'].replace(CYTO_PRESET_CLASS, "")
                     # remove successors if a non-literal is marked as placeholder
                     # TODO make this work without importing
-                    if import_string(
+                    is_e_edge = " " in e['data']['id']
+                    if not is_e_edge and import_string(
                             e['data']['ele_attrs']['mot_class_string']) not in OrdEnumClasses + BuiltinLiteralClasses:
                         mot = cyto_to_mot(current_elements)
                         successors = [nn for nn in nx.descendants(mot, triggered_cid) if nn != triggered_cid]
