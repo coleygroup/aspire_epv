@@ -1,5 +1,5 @@
 from typing import Type, Any
-
+from dash_app_support.components import path_to_path_md
 import dash_bootstrap_components as dbc
 import networkx as nx
 from dash import html, dcc
@@ -54,6 +54,8 @@ class PCI_MOT:
     MOT_SAVE_VERSION_INHERIT = "MOT_SAVE_VERSION_INHERIT"
     MOT_SAVE_VERSION_INPUT = "MOT_SAVE_VERSION_INPUT"
 
+    MOT_TO_INSTANTIATE_BTN = "MOT_TO_INSTANTIATE_BTN"
+
     # the div holds all inputs
     MOT_DIV_EDITOR = "CID_MOT_DIV_EDITOR"
     # under this div
@@ -89,22 +91,30 @@ class PCI_MOT:
     # MOT_STORE_INIT = "CID_MOT_STORE_INIT"
 
 
-def get_literal_node_value_input(node_class: Type, node_value: Any, cid: dict[str, Any]):
+def get_literal_node_value_input(node_class: Type, node_value: Any, cid: dict[str, Any], disabled=False):
     if node_class == str:
         # value_input = dbc.Input(type='text', value=node_value, id=cid)
-        value_input = dbc.Textarea(value=node_value, id=cid)
+        value_input = dbc.Textarea(value=node_value, id=cid, disabled=disabled)
     elif node_class == bool:
         value_input = dbc.InputGroupText(
-            dbc.Switch(value=node_value, id=cid, className="position-absolute top-50 start-50 translate-middle"),
+            dbc.Switch(value=node_value, id=cid, className="position-absolute top-50 start-50 translate-middle", disabled=disabled),
             className="position-relative flex-fill")
     elif node_class in (int, float):
-        value_input = dbc.Input(type='number', value=node_value, id=cid)
+        value_input = dbc.Input(type='number', value=node_value, id=cid, disabled=disabled)
     elif node_class in OrdEnumClasses:
-        value_input = dbc.Select(options=enum_class_to_options(node_class),
-                                 value=node_value, id=cid)
+        # # in `dbc.Select` docstring it says "everything is string"??? this breaks enum
+        # value_input = dbc.Select(options=enum_class_to_options(node_class),
+        #                          value=node_value, id=cid)
+        value_input = dbc.RadioItems(
+            options=enum_class_to_options(node_class), value=node_value, id=cid, inline=True
+        )
+        # # TODO use https://github.com/tcbegley/dash-bootstrap-css
+        # value_input = html.Div(dcc.Dropdown(options=enum_class_to_options(node_class),
+        #                      value=node_value, id=cid,), className="dash-bootstrap")
+
     elif node_class == bytes:
         # TODO make this better
-        value_input = dbc.Textarea(value=str(node_value), id=cid)
+        value_input = dbc.Textarea(value=str(node_value), id=cid, disabled=disabled)
     else:
         raise TypeError(f"illegal literal class: {node_class}")
     return value_input
@@ -136,13 +146,17 @@ def get_literal_editor_node(node_id: int, node_state: str, node_value: Any, node
             html.H6(relation_to_parent),
             dbc.InputGroup(
                 [
-                    dbc.InputGroupText("Is placeholder:"),
-                    dbc.InputGroupText(dbc.Checkbox(
-                        id={
-                            'type': PCI_MOT.MOT_INPUT_PT_ELEMENT_STATE,
-                            'index': node_id
-                        }, value=node_state == PT_PLACEHOLDER
-                    )),
+                    dbc.InputGroup(
+                        [
+                            dbc.InputGroupText("Is placeholder:", ),
+                            dbc.InputGroupText(dbc.Checkbox(
+                                id={
+                                    'type': PCI_MOT.MOT_INPUT_PT_ELEMENT_STATE,
+                                    'index': node_id
+                                }, value=node_state == PT_PLACEHOLDER,
+                            )),
+                        ], className="mb-3"
+                    ),
                     get_literal_node_value_input(node_class, node_value,
                                                  {'type': PCI_MOT.MOT_INPUT_PT_ELEMENT_VALUE, 'index': node_id}
                                                  )
@@ -194,10 +208,8 @@ def get_cards_from_selected_nodes(node_data, mot: nx.DiGraph):
         node_attr: MotEleAttr
         node_class = import_string(node_attr['mot_class_string'])
 
-        path = mot_get_path(mot, node_id)
-        path = dcc.Markdown(
-            " &rarr; ".join([f"_{p}_" for p in path.split(NodePathDelimiter)])
-        )
+        path = mot_get_path(mot, node_id, with_node=True)
+        path = path_to_path_md(path, NodePathDelimiter)
 
         item_path = dbc.ListGroupItem([html.H6("Path"), path])
         list_items = [item_path, ]
@@ -233,7 +245,9 @@ def get_cards_from_selected_nodes(node_data, mot: nx.DiGraph):
 def get_literal_editor_edge(edge_header: str, u_id: int, v_id: int, edge_state: str, edge_value: Any):
     editor = html.Div(
         [
-            dbc.InputGroup(dbc.InputGroupText(edge_header, className="w-100 d-inline bg-dark text-white")),
+            dbc.InputGroup(
+                dbc.InputGroupText(edge_header, className="w-100 d-inline bg-dark text-white rounded-0"),
+            ),
             dbc.InputGroup(
                 [
                     dbc.InputGroupText("Is placeholder:"),
