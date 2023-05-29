@@ -1,6 +1,6 @@
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
-from dash import Input, Output, State, html
+from dash import Input, Output, State, html, dcc
 
 BAR_STYLE = {
     "zIndex": "1",
@@ -41,10 +41,10 @@ def get_navbar(nav_links: list[dbc.NavLink], navbar_id="pvis_navbar"):
                     is_open=False,
                     navbar=True,
                 ),
-            ],
+            ], className="m-0"
         ),
-        color="dark",
-        dark=True,
+        color="#C0C0C0",
+        dark=False,
         className="mb-3",
         style=BAR_STYLE,
     )
@@ -99,3 +99,15 @@ JsonTheme = {
     "base0E": "#ae81ff",
     "base0F": "#cc6633",
 }
+
+
+def path_to_path_md(path: str, delimiter: str):
+    path_md = []
+    for i, p in enumerate(path.split(delimiter)):
+        if i % 2:
+            path_md.append(f"_{p}_")
+        else:
+            path_md.append(f"__{p}__")
+    path_md = " &rarr; ".join(path_md)
+    path = dcc.Markdown(path_md)
+    return path

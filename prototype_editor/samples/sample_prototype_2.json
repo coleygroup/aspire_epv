@@ -1,0 +1,25 @@
+{
+  "name": "Reaction Node",
+  "version": "0",
+  "node_link_data": {
+    "directed": true,
+    "multigraph": false,
+    "graph": {},
+    "nodes": [
+      {
+        "mot_element_id": 0,
+        "mot_can_edit": false,
+        "mot_state": "PT_PRESET",
+        "mot_value": null,
+        "mtt_element_name": "<ROOT>",
+        "mot_class_string": "ord_betterproto.Reaction",
+        "id": 0
+      }
+    ],
+    "links": []
+  },
+  "root_message_type": "ord_betterproto.Reaction",
+  "time_modified": "2023-03-21T06:04:52.932596",
+  "time_created": "2023-03-21T06:04:52.932603",
+  "from_version": null
+}
