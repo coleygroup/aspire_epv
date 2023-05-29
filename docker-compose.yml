@@ -21,7 +21,7 @@ services:
       - mongodb
 
   mongodb:
-    image: mongo:latest
+    image: mongo:4.4.3
     env_file:
       - prototype_editor/.env
     ports:

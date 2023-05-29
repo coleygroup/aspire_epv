@@ -13,3 +13,8 @@ sudo apt install -y protobuf-compiler
 # pg_config for psycopg2 required by ord_schema
 sudo apt install -y libpq-dev
 ```
+
+## docker compose
+```shell
+sudo docker compose --env-file ./prototype_editor/.env up  --build --force-recreate
+```

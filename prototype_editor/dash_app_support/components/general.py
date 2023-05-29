@@ -41,7 +41,7 @@ def get_navbar(nav_links: list[dbc.NavLink], navbar_id="pvis_navbar"):
                     is_open=False,
                     navbar=True,
                 ),
-            ],
+            ], className="m-0"
         ),
         color="#C0C0C0",
         dark=False,

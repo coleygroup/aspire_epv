@@ -1,12 +1,14 @@
-from typing import List
 import os
+from typing import List
+
 import motor.motor_asyncio
 from bson import ObjectId
 from fastapi import FastAPI, Body, HTTPException, status
 from fastapi.encoders import jsonable_encoder
-from fastapi.responses import Response, JSONResponse
-from api_models import OrdPrototypeModel, UpdateOrdPrototypeModel
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response, JSONResponse
+
+from api_models import OrdPrototypeModel, UpdateOrdPrototypeModel
 from dash_app_support.db import ENV_MONGO_DB, ENV_MONGO_COLLECTION
 
 app = FastAPI(
@@ -56,6 +58,7 @@ async def list_prototypes():
     # TODO pagination
     prototypes = [doc async for doc in db[ENV_MONGO_COLLECTION].find()]
     return prototypes
+
 
 @app.get("/compound", response_description="List all compounds", response_model=List[OrdPrototypeModel])
 async def list_compounds():

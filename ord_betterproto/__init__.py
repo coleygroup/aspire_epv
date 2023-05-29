@@ -22,7 +22,7 @@ class ReactionIdentifierType(betterproto.Enum):
     REACTION_CXSMILES = 6
     RDFILE = 3
     RINCHI = 4
-    NAME = 5
+    REACTION_TYPE = 5
 
 
 class AdditionSpeedType(betterproto.Enum):
@@ -1032,14 +1032,17 @@ class Vessel(betterproto.Message):
     volume: "Volume" = betterproto.message_field(6)
     """Size (volume) of the vessel."""
 
-    plate_id: str = betterproto.string_field(7)
+    vessel_id: str = betterproto.string_field(7)
     """Identifier number for a microtiter plate or parallel reactor run."""
 
-    plate_position: str = betterproto.string_field(8)
+    position: str = betterproto.string_field(8)
     """
     If a well-plate was used, the position of the well for this experiment,
     e.g., "A4".
     """
+
+    row: str = betterproto.string_field(9)
+    col: str = betterproto.string_field(10)
 
 
 @dataclass(eq=False, repr=False)
@@ -1214,8 +1217,8 @@ class ElectrochemistryConditions(betterproto.Message):
 @dataclass(eq=False, repr=False)
 class ElectrochemistryMeasurement(betterproto.Message):
     time: "Time" = betterproto.message_field(1)
-    current: "Current" = betterproto.message_field(2, group="kind")
-    voltage: "Voltage" = betterproto.message_field(3, group="kind")
+    current: "Current" = betterproto.message_field(2)
+    voltage: "Voltage" = betterproto.message_field(3)
 
 
 @dataclass(eq=False, repr=False)
@@ -1593,6 +1596,13 @@ class ReactionProvenance(betterproto.Message):
     publication_url: str = betterproto.string_field(6)
     record_created: "RecordEvent" = betterproto.message_field(7)
     record_modified: List["RecordEvent"] = betterproto.message_field(8)
+    reaction_metadata: Dict[str, "Data"] = betterproto.map_field(
+        9, betterproto.TYPE_STRING, betterproto.TYPE_MESSAGE
+    )
+    """
+    Container for arbitrary reaction metadata; e.g., an internal project
+    identifier.
+    """
 
 
 @dataclass(eq=False, repr=False)

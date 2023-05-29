@@ -117,7 +117,7 @@ layout = html.Div(
                 ),
                 html.Div(
                     [
-                        html.H5("ORD Syntax Trees", className="text-center mt-3"),
+                        html.H5("ORD Schema Tree", className="text-center mt-3"),
                         html.Hr(),
                         COMPONENT_LEGEND,
                         html.Hr(),
