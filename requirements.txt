@@ -7,7 +7,7 @@ loguru
 dash-bootstrap-components==1.3.1
 pymongo==3.12.3
 dash==2.7.0
-fastapi==0.92.0
+fastapi==0.95.2
 pandas
 Flask==2.2.3
 motor
@@ -15,3 +15,6 @@ dash-renderjson
 dash_defer_js_import
 dash-iconify
 uvicorn
+python-multipart
+passlib[bcrypt]
+python-jose[cryptography]

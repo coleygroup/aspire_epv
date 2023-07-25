@@ -76,7 +76,7 @@ COMPONENT_LEGEND = html.Div(
         html.B(
             [
                 DashIconify(icon="mdi:octagon-outline", width=30, className="me-1"),
-                "Mutable"
+                "Resizable"
             ],
             className="me-3"
         ),
