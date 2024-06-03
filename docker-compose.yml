@@ -10,6 +10,7 @@ services:
       - prototype_editor/.env
     command: bash -c "
       python insert_samples.py;
+      python insert_user.py;
       uvicorn api_main:app
       --host 0.0.0.0 --port 8000
       --lifespan=on --use-colors 
